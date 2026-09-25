@@ -3,38 +3,39 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="theme-color" content="#0b3d91" />
-<title>GRUPO SYNERGIES — Superagente Comercial Multimarca con IA</title>
+<meta name="theme-color" content="#ea580c" />
+<title>GRUPO SINERGYS — Superagente Comercial Multimarca con IA</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
-:root{--brand:#0b3d91;--brand-2:#1e6feb;--accent:#ff7a1a;--bg:#f4f6fb;--card:#fff;--text:#1a2236;--muted:#6b7280;--border:#e5e7eb;--ok:#16a34a;--warn:#f59e0b;--danger:#dc2626;--info:#2563eb;--shadow:0 4px 14px rgba(11,61,145,.08);--radius:14px;--radius-sm:10px}
+:root{--brand:#ea580c;--brand-2:#f97316;--brand-dark:#c2410c;--brand-light:#fff7ed;--bg:#f4f6fb;--card:#fff;--text:#1a2236;--muted:#6b7280;--border:#e5e7eb;--ok:#16a34a;--warn:#f59e0b;--danger:#dc2626;--info:#2563eb;--shadow:0 4px 14px rgba(234,88,12,.08);--radius:14px;--radius-sm:10px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.45}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,select,textarea{font-family:inherit;font-size:15px}
 .hidden{display:none!important}
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#0b3d91 0%,#1e6feb 100%)}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#ea580c 0%,#f97316 100%)}
 .login-card{background:#fff;border-radius:20px;padding:32px 24px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
 .brand-logo{display:flex;flex-direction:column;align-items:center;margin-bottom:24px}
-.brand-logo .logo-mark{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:28px;margin-bottom:12px;box-shadow:0 8px 24px rgba(11,61,145,.3)}
+.brand-logo .logo-mark{width:64px;height:64px;margin-bottom:12px}
+.brand-logo .logo-mark svg{width:100%;height:100%}
 .brand-logo h1{margin:0;font-size:20px;color:var(--brand);text-align:center}
 .brand-logo p{margin:4px 0 0;color:var(--muted);font-size:13px;text-align:center}
 .form-group{margin-bottom:14px}
 .form-group label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:#374151}
 .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:#fff}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--brand-2);box-shadow:0 0 0 3px rgba(30,111,235,.15)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(234,88,12,.15)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:600;font-size:14px;transition:transform .05s,background .15s}
 .btn:active{transform:scale(.97)}
 .btn-primary{background:var(--brand);color:#fff;width:100%}
 .btn-primary:hover{background:var(--brand-2)}
 .btn-secondary{background:#f3f4f6;color:var(--text)}
-.btn-accent{background:var(--accent);color:#fff}
+.btn-accent{background:var(--brand);color:#fff}
 .btn-danger{background:var(--danger);color:#fff}
-.btn-ghost{background:transparent;color:var(--brand-2)}
+.btn-ghost{background:transparent;color:var(--brand)}
 .btn-sm{padding:8px 12px;font-size:13px}
 .login-demo{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
-.login-demo button{color:var(--brand-2);font-weight:600;text-decoration:underline}
+.login-demo button{color:var(--brand);font-weight:600;text-decoration:underline}
 .login-error{background:#fee2e2;color:#991b1b;padding:10px 12px;border-radius:8px;margin-bottom:12px;font-size:13px}
 .login-reset{text-align:center;margin-top:10px}
 .login-reset button{font-size:12px;color:var(--muted);text-decoration:underline}
@@ -42,7 +43,8 @@ input,select,textarea{font-family:inherit;font-size:15px}
 .app.active{display:block}
 .topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:10px}
 .topbar .brand-mini{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
-.topbar .brand-mini .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0}
+.topbar .brand-mini .mark{width:34px;height:34px;flex-shrink:0}
+.topbar .brand-mini .mark svg{width:100%;height:100%}
 .topbar .brand-mini .txt .n{font-weight:700;font-size:14px;color:var(--brand);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .topbar .brand-mini .txt .s{font-size:11px;color:var(--muted)}
 .icon-btn{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;font-size:18px}
@@ -52,7 +54,7 @@ input,select,textarea{font-family:inherit;font-size:15px}
 .search-results{position:absolute;top:44px;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);max-height:360px;overflow:auto;z-index:60}
 .search-results .sr-item{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;display:flex;gap:10px;align-items:center}
 .search-results .sr-item:hover{background:#f9fafb}
-.sr-tag{font-size:10px;padding:2px 6px;border-radius:4px;background:#e0e7ff;color:var(--brand);font-weight:600;text-transform:uppercase}
+.sr-tag{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--brand-light);color:var(--brand);font-weight:600;text-transform:uppercase}
 .main{padding:14px;padding-bottom:90px;max-width:1300px;margin:0 auto}
 .page-title{display:flex;align-items:center;justify-content:space-between;margin:6px 0 14px;flex-wrap:wrap;gap:10px}
 .page-title h2{margin:0;font-size:22px}
@@ -87,11 +89,11 @@ input,select,textarea{font-family:inherit;font-size:15px}
 .tile.green{border-left-color:var(--ok)}.tile.green .n{color:var(--ok)}
 .list{display:flex;flex-direction:column;gap:8px}
 .list-item{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:border-color .15s}
-.list-item:hover{border-color:var(--brand-2)}
+.list-item:hover{border-color:var(--brand)}
 .list-item .li-main{flex:1;min-width:0}
 .list-item .li-title{font-weight:600;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .list-item .li-sub{font-size:13px;color:var(--muted);margin-top:2px}
-.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:#e0e7ff;color:var(--brand)}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:var(--brand-light);color:var(--brand)}
 .badge.ok{background:#dcfce7;color:#166534}
 .badge.warn{background:#fef3c7;color:#92400e}
 .badge.danger{background:#fee2e2;color:#991b1b}
@@ -119,7 +121,8 @@ input,select,textarea{font-family:inherit;font-size:15px}
 .sidebar{display:none;width:260px;background:#fff;border-right:1px solid var(--border);padding:16px 12px;flex-shrink:0;position:sticky;top:0;height:100vh;overflow:auto}
 @media(min-width:900px){.sidebar{display:block}}
 .side-brand{display:flex;gap:10px;align-items:center;padding:4px 8px 16px;border-bottom:1px solid var(--border);margin-bottom:12px}
-.side-brand .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.side-brand .mark{width:38px;height:38px;flex-shrink:0}
+.side-brand .mark svg{width:100%;height:100%}
 .side-brand .n{font-weight:700;color:var(--brand);font-size:14px}
 .side-brand .s{font-size:10px;color:var(--muted)}
 .side-sep{font-size:11px;text-transform:uppercase;color:var(--muted);padding:14px 12px 6px;letter-spacing:.5px;font-weight:700}
@@ -151,8 +154,8 @@ input,select,textarea{font-family:inherit;font-size:15px}
 details{background:#f9fafb;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:8px}
 details summary{cursor:pointer;font-weight:600;font-size:14px}
 .sector-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;transition:all .15s;display:flex;gap:12px;align-items:center}
-.sector-card:hover{border-color:var(--brand-2);transform:translateY(-2px);box-shadow:var(--shadow)}
-.sector-card .sec-icon{font-size:32px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(135deg,#eff6ff,#dbeafe)}
+.sector-card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:var(--shadow)}
+.sector-card .sec-icon{font-size:32px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(135deg,var(--brand-light),#fed7aa)}
 .sector-card .sec-info{flex:1;min-width:0}
 .sector-card .sec-name{font-weight:700;font-size:15px}
 .sector-card .sec-count{font-size:12px;color:var(--muted)}
@@ -169,7 +172,7 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
 .msg.ai{align-self:flex-start;background:#f3f4f6;border-bottom-left-radius:4px}
 .chat-input{display:flex;gap:8px;padding-top:10px;border-top:1px solid var(--border)}
 .chat-input input{flex:1;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:#f9fafb}
-.mic-btn{width:46px;height:46px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.mic-btn{width:46px;height:46px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .mic-btn.recording{background:var(--danger);animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .invoice-preview{background:#fff;border:2px solid var(--border);border-radius:12px;padding:24px;font-size:13px}
@@ -212,13 +215,14 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
 .column-mapper .cm-item label{font-size:12px;font-weight:600;color:var(--muted);display:block;margin-bottom:4px}
 .column-mapper .cm-item select{width:100%;padding:6px;font-size:13px}
 .drop-zone{border:2px dashed var(--border);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
-.drop-zone:hover,.drop-zone.drag{border-color:var(--brand-2);background:#eff6ff}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--brand);background:var(--brand-light)}
 .drop-zone .ic{font-size:48px;margin-bottom:8px}
 .drop-zone .t{font-weight:600;font-size:15px}
 .drop-zone .s{color:var(--muted);font-size:13px;margin-top:4px}
 .chart-box{width:100%;height:180px}
 .admin-mode-banner{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;padding:10px 14px;border-radius:10px;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-size:13px}
 .admin-mode-banner .ic{font-size:22px}
+.role-badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;background:var(--brand-light);color:var(--brand);margin-left:6px}
 </style>
 </head>
 <body>
@@ -226,8 +230,14 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
 <div id="loginScreen" class="login-wrap">
   <div class="login-card">
     <div class="brand-logo">
-      <div class="logo-mark">GS</div>
-      <h1>GRUPO SYNERGIES</h1>
+      <div class="logo-mark">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 100 L80 60 L120 100 L160 60 L180 80 L140 120 L100 80 L60 120 Z" fill="#f5f0e8" stroke="#3d4a7a" stroke-width="8" stroke-linejoin="round"/>
+          <path d="M60 120 L100 160 L140 120" fill="none" stroke="#3d4a7a" stroke-width="8" stroke-linecap="round"/>
+          <path d="M80 100 L100 120 L120 100" fill="none" stroke="#3d4a7a" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1>GRUPO SINERGYS</h1>
       <p>Superagente Comercial Multimarca con IA</p>
     </div>
     <div id="loginError" class="login-error hidden"></div>
@@ -238,7 +248,7 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
     </form>
     <div class="login-demo">¿No tienes cuenta? <button id="btnDemoAccess">Entrar en modo DEMO</button></div>
     <div class="login-reset"><button id="btnEmergencyReset">🔧 Reset de emergencia</button></div>
-    <div class="text-muted" style="text-align:center;margin-top:14px;font-size:11px">v2.1 · 14 sectores · Admin Global</div>
+    <div class="text-muted" style="text-align:center;margin-top:14px;font-size:11px">v3.0 · 14 sectores · 7 roles · Territorios</div>
   </div>
 </div>
 
@@ -248,9 +258,15 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
     <div class="content">
       <div class="topbar">
         <div class="brand-mini">
-          <div class="mark">GS</div>
+          <div class="mark">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path d="M40 100 L80 60 L120 100 L160 60 L180 80 L140 120 L100 80 L60 120 Z" fill="#f5f0e8" stroke="#3d4a7a" stroke-width="8" stroke-linejoin="round"/>
+              <path d="M60 120 L100 160 L140 120" fill="none" stroke="#3d4a7a" stroke-width="8" stroke-linecap="round"/>
+              <path d="M80 100 L100 120 L120 100" fill="none" stroke="#3d4a7a" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+          </div>
           <div class="txt">
-            <div class="n">GRUPO SYNERGIES</div>
+            <div class="n">GRUPO SINERGYS</div>
             <div class="s" id="topSub">Hoy</div>
           </div>
         </div>
@@ -283,7 +299,7 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
 const SECTORS = {
   energia: {id:"energia",name:"Energía",icon:"⚡",color:"#f59e0b",group:"Energía",fields:["supplyType","cups","company","tariff","power","consumption","contractDate","startDate","renewalDate"]},
   telefonia: {id:"telefonia",name:"Telefonía",icon:"📞",color:"#3b82f6",group:"Telecom",fields:["lineType","phoneNumber","operator","dataAllowance","minutesAllowance","startDate","renewalDate"]},
-  internet: {id:"internet",name:"Internet",icon:"🌐",color:"#06b6d4",group:"Telecom",fields:["connectionType","speed","fixedIP","installAddress","startDate","renewalDate"]},
+  internet: {id:"internet",name:"Internet",icon:"",color:"#06b6d4",group:"Telecom",fields:["connectionType","speed","fixedIP","installAddress","startDate","renewalDate"]},
   alarmas: {id:"alarmas",name:"Alarmas",icon:"🚨",color:"#ef4444",group:"Telecom",fields:["monitoringCompany","systemType","zones","installAddress","startDate","renewalDate"]},
   cursos: {id:"cursos",name:"Cursos Subvencionados",icon:"📚",color:"#8b5cf6",group:"Servicios",fields:["courseName","trainingEntity","hours","modality","startDate","endDate","subsidyAmount"]},
   seguros: {id:"seguros",name:"Seguros",icon:"🛡️",color:"#10b981",group:"Servicios",fields:["insuranceType","insurer","premium","coverages","startDate","renewalDate"]},
@@ -292,7 +308,7 @@ const SECTORS = {
   paqueteria: {id:"paqueteria",name:"Paquetería",icon:"📦",color:"#a855f7",group:"Logística",fields:["serviceType","carrier","accountCode","monthlyVolume","avgWeight","destinations","pickupFrequency"]},
   fotovoltaica: {id:"fotovoltaica",name:"Fotovoltaica",icon:"☀️",color:"#eab308",group:"Energía Avanzada",fields:["powerKWp","numPanels","installationType","estimatedSaving","installAddress","startDate"]},
   cargadores: {id:"cargadores",name:"Cargadores VE",icon:"🔌",color:"#22c55e",group:"Energía Avanzada",fields:["chargerType","power","numSlots","location","pricePerKwh"]},
-  asesoria_ia: {id:"asesoria_ia",name:"Asesoría IA",icon:"🤖",color:"#6366f1",group:"Tecnología",fields:["serviceType","technology","useCase","numUsers","duration","fees","phase"]},
+  asesoria_ia: {id:"asesoria_ia",name:"Asesoría IA",icon:"",color:"#6366f1",group:"Tecnología",fields:["serviceType","technology","useCase","numUsers","duration","fees","phase"]},
   ciberseguridad: {id:"ciberseguridad",name:"Ciberseguridad",icon:"🔐",color:"#dc2626",group:"Tecnología",fields:["serviceType","scope","numEmployees","numDevices","regulations","criticality","contractPeriod"]},
   asesoria: {id:"asesoria",name:"Asesoría Fiscal/Laboral",icon:"💼",color:"#78716c",group:"Servicios",fields:["advisoryType","services","monthlyFees","numEmployees"]}
 };
@@ -306,9 +322,21 @@ const SECTOR_GROUPS = {
   "Tecnología": ["asesoria_ia","ciberseguridad"]
 };
 
-const BRAND = {name:"GRUPO SYNERGIES",tagline:"Superagente Comercial Multimarca con IA"};
-const DB_KEY = "gs_db_v2";
-const SESSION_KEY = "gs_session_v2";
+const PROVINCES = ["Álava","Albacete","Alicante","Almería","Asturias","Ávila","Badajoz","Baleares","Barcelona","Burgos","Cáceres","Cádiz","Cantabria","Castellón","Ciudad Real","Córdoba","Cuenca","Girona","Granada","Guadalajara","Gipuzkoa","Huelva","Huesca","Jaén","La Rioja","Las Palmas","León","Lleida","Lugo","Madrid","Málaga","Murcia","Navarra","Ourense","Palencia","Pontevedra","Salamanca","Santa Cruz de Tenerife","Segovia","Sevilla","Soria","Tarragona","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza","Ceuta","Melilla"];
+
+const ROLES = {
+  admin: {name:"Administrador",icon:"",level:100,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
+  director_expansion: {name:"Director de Expansión y Formación",icon:"🎯",level:90,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
+  director_comercial: {name:"Director Comercial",icon:"💼",level:90,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
+  director_financiero: {name:"Director Financiero",icon:"💰",level:90,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
+  director_territorial: {name:"Director Territorial",icon:"🗺️",level:70,canCreateUsers:true,canViewAll:false,canManageTerritory:true},
+  backoffice: {name:"Backoffice",icon:"📋",level:50,canCreateUsers:false,canViewAll:false,canManageTerritory:false},
+  comercial: {name:"Comercial",icon:"",level:10,canCreateUsers:false,canViewAll:false,canManageTerritory:false}
+};
+
+const BRAND = {name:"GRUPO SINERGYS",tagline:"Superagente Comercial Multimarca con IA"};
+const DB_KEY = "gs_db_v3";
+const SESSION_KEY = "gs_session_v3";
 
 const DB = {
   load(){try{const r=localStorage.getItem(DB_KEY);if(!r)return null;return JSON.parse(r)}catch(e){return null}},
@@ -342,7 +370,7 @@ function initDB(){
   });
   if(!db.settings||typeof db.settings!=='object'){db.settings={demo:true};needsSave=true}
   if(!db.users.find(u=>u.username==="admin")){
-    db.users.push({id:uid(),role:"admin",name:"Administrador",surname:"",email:"admin@synergies.demo",phone:"",username:"admin",password:"admin123",status:"activo",createdAt:todayISO()});
+    db.users.push({id:uid(),role:"admin",name:"Administrador",surname:"",email:"admin@sinergys.demo",phone:"",username:"admin",password:"admin123",status:"activo",createdAt:todayISO(),province:null,territory:null});
     needsSave=true;
   }
   if(needsSave) DB.save(db);
@@ -377,10 +405,12 @@ function seedDemo(){
 
   const demoUser = {
     id:uid(),role:"comercial",name:"María",surname:"García López",
-    email:"maria@demo.synergies",phone:"600112233",
+    email:"maria@demo.sinergys",phone:"600112233",
     username:"demo",password:"demo123",status:"activo",createdAt:todayISO(),
     assignedSectors:Object.keys(SECTORS),
-    billing:{businessName:"María García López",taxId:"12345678Z",address:"Calle Demo 123, 28001 Madrid",email:"facturacion@demo.synergies",phone:"600112233",iban:"ES12 3456 7890 1234 5678 9012",regime:"autonomo",defaultTax:"iva",logo:null}
+    province:"Madrid",
+    territory:null,
+    billing:{businessName:"María García López",taxId:"12345678Z",address:"Calle Demo 123, 28001 Madrid",email:"facturacion@demo.sinergys",phone:"600112233",iban:"ES12 3456 7890 1234 5678 9012",regime:"autonomo",defaultTax:"iva",logo:null}
   };
 
   const firstNames = ["Juan","Pedro","Laura","Ana","Carlos","Marta","Luis","Elena","David","Sofía","Javier","Carmen","Miguel","Isabel","Raúl"];
@@ -609,11 +639,8 @@ let currentPage = "hoy";
 let adminViewMode = false;
 let adminViewUserId = null;
 
-// ✅ FUNCIÓN LOGIN CORREGIDA
 function login(username,password){
   console.log("Intentando login con:", username);
-  console.log("Usuarios en DB:", db.users.map(u=>({username:u.username, status:u.status})));
-  
   const u = db.users.find(x=>(x.username===username||x.email===username)&&x.password===password);
   
   if(!u){
@@ -655,12 +682,45 @@ function getActiveUserId(){
   if(session.role==="admin" && adminViewMode && adminViewUserId) return adminViewUserId;
   return session.userId;
 }
+
+// ✅ SISTEMA DE PERMISOS POR ROL
+function canViewAll(){
+  if(!session) return false;
+  const role = ROLES[session.role];
+  return role && role.canViewAll;
+}
+
+function getMyTerritoryProvinces(){
+  if(!session) return [];
+  const user = db.users.find(u=>u.id===session.userId);
+  if(!user) return [];
+  if(canViewAll()) return PROVINCES;
+  if(user.territory && user.territory.provinces) return user.territory.provinces;
+  return [];
+}
+
 function my(scope){
   if(!session) return [];
   const uid = getActiveUserId();
-  if(session.role==="admin" && !adminViewMode) return db[scope]||[];
+  if(canViewAll()) return db[scope]||[];
+  
+  const user = db.users.find(u=>u.id===uid);
+  if(!user) return [];
+  
+  // Director territorial: solo ve su territorio
+  if(user.role==="director_territorial" && user.territory && user.territory.provinces){
+    const territoryProvinces = user.territory.provinces;
+    const commercialIds = db.users.filter(u=>u.role==="comercial" && territoryProvinces.includes(u.province)).map(u=>u.id);
+    return (db[scope]||[]).filter(x=>x.userId===uid || commercialIds.includes(x.userId));
+  }
+  
+  // Backoffice: solo ve módulos de admin
+  if(user.role==="backoffice") return [];
+  
+  // Comercial: solo sus datos
   return (db[scope]||[]).filter(x=>x.userId===uid);
 }
+
 function myClients(){return my("clients")}
 function myContracts(){return my("contracts")}
 function myTasks(){return my("tasks")}
@@ -703,38 +763,53 @@ function navigate(page,opts={}){
   document.querySelectorAll(".side-item,.bn-item").forEach(el=>{
     el.classList.toggle("active",el.dataset.nav===page);
   });
-  const titles={hoy:"Hoy",clientes:"Clientes",sectores:"Sectores",tareas:"Tareas",comisiones:"Comisiones",facturacion:"Facturación",oportunidades:"Oportunidades",dormidos:"Clientes dormidos",documentos:"Documentos",copiloto:"Copiloto IA",voz:"Asistente de voz",dashboard:"Dashboard",admin:"Administración",ajustes:"Ajustes",admin_global:"Admin Global",contratos:"Contratos",renovaciones:"Renovaciones",catalogo:"Catálogo de Empresas",venta_cruzada:"Venta Cruzada"};
+  const titles={hoy:"Hoy",clientes:"Clientes",sectores:"Sectores",tareas:"Tareas",comisiones:"Comisiones",facturacion:"Facturación",oportunidades:"Oportunidades",dormidos:"Clientes dormidos",documentos:"Documentos",copiloto:"Copiloto IA",voz:"Asistente de voz",dashboard:"Dashboard",admin:"Administración",ajustes:"Ajustes",admin_global:"Admin Global",contratos:"Contratos",renovaciones:"Renovaciones",catalogo:"Catálogo de Empresas",venta_cruzada:"Venta Cruzada",territorios:"Territorios"};
   document.getElementById("topSub").textContent=titles[page]||"";
-  const renderers={hoy:renderHoy,clientes:renderClientes,sectores:renderSectores,contratos:renderContratos,renovaciones:renderRenovaciones,tareas:renderTareas,comisiones:renderComisiones,facturacion:renderFacturacion,oportunidades:renderOportunidades,dormidos:renderDormidos,documentos:renderDocumentos,copiloto:renderCopiloto,voz:renderVoz,dashboard:renderDashboard,admin:renderAdmin,ajustes:renderAjustes,admin_global:renderAdminGlobal,catalogo:renderCatalogo,venta_cruzada:renderVentaCruzada};
+  const renderers={hoy:renderHoy,clientes:renderClientes,sectores:renderSectores,contratos:renderContratos,renovaciones:renderRenovaciones,tareas:renderTareas,comisiones:renderComisiones,facturacion:renderFacturacion,oportunidades:renderOportunidades,dormidos:renderDormidos,documentos:renderDocumentos,copiloto:renderCopiloto,voz:renderVoz,dashboard:renderDashboard,admin:renderAdmin,ajustes:renderAjustes,admin_global:renderAdminGlobal,catalogo:renderCatalogo,venta_cruzada:renderVentaCruzada,territorios:renderTerritorios};
   (renderers[page]||renderHoy)(opts);
   window.scrollTo(0,0);
 }
 
 function renderSidebar(){
   const sb = document.getElementById("sidebar");
-  const isAdmin = session.role==="admin";
-  let html = `<div class="side-brand"><div class="mark">GS</div><div><div class="n">GRUPO SYNERGIES</div><div class="s">14 sectores · Admin Global</div></div></div>`;
-  html += `<div class="side-item active" data-nav="hoy"><span class="ic">🏠</span> Hoy</div>`;
-  html += `<div class="side-item" data-nav="clientes"><span class="ic">👥</span> Clientes</div>`;
-  html += `<div class="side-item" data-nav="contratos"><span class="ic">📄</span> Contratos</div>`;
-  html += `<div class="side-item" data-nav="renovaciones"><span class="ic">🔄</span> Renovaciones</div>`;
-  html += `<div class="side-item" data-nav="sectores"><span class="ic">📊</span> Sectores</div>`;
-  html += `<div class="side-item" data-nav="catalogo"><span class="ic">🏢</span> Catálogo Empresas</div>`;
-  html += `<div class="side-item" data-nav="venta_cruzada"><span class="ic">🎯</span> Venta Cruzada</div>`;
-  html += `<div class="side-item" data-nav="tareas"><span class="ic">✅</span> Tareas</div>`;
-  html += `<div class="side-item" data-nav="comisiones"><span class="ic">💰</span> Comisiones</div>`;
-  html += `<div class="side-item" data-nav="facturacion"><span class="ic">🧾</span> Facturación</div>`;
-  html += `<div class="side-item" data-nav="oportunidades"><span class="ic">⭐</span> Oportunidades</div>`;
-  html += `<div class="side-item" data-nav="dormidos"><span class="ic">😴</span> Clientes dormidos</div>`;
-  html += `<div class="side-sep">Inteligencia</div>`;
-  html += `<div class="side-item" data-nav="copiloto"><span class="ic">🤖</span> Copiloto IA</div>`;
-  html += `<div class="side-item" data-nav="voz"><span class="ic">🎙️</span> Asistente de voz</div>`;
+  const user = db.users.find(u=>u.id===session.userId);
+  const role = user ? ROLES[user.role] : null;
+  const isAdmin = session.role==="admin" || ["director_expansion","director_comercial","director_financiero"].includes(session.role);
+  const isBackoffice = session.role==="backoffice";
+  
+  let html = `<div class="side-brand"><div class="mark"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M40 100 L80 60 L120 100 L160 60 L180 80 L140 120 L100 80 L60 120 Z" fill="#f5f0e8" stroke="#3d4a7a" stroke-width="8" stroke-linejoin="round"/><path d="M60 120 L100 160 L140 120" fill="none" stroke="#3d4a7a" stroke-width="8" stroke-linecap="round"/><path d="M80 100 L100 120 L120 100" fill="none" stroke="#3d4a7a" stroke-width="6" stroke-linecap="round"/></svg></div><div><div class="n">GRUPO SINERGYS</div><div class="s">14 sectores · 7 roles</div></div></div>`;
+  
+  if(!isBackoffice){
+    html += `<div class="side-item active" data-nav="hoy"><span class="ic">🏠</span> Hoy</div>`;
+    html += `<div class="side-item" data-nav="clientes"><span class="ic">👥</span> Clientes</div>`;
+    html += `<div class="side-item" data-nav="contratos"><span class="ic">📄</span> Contratos</div>`;
+    html += `<div class="side-item" data-nav="renovaciones"><span class="ic">🔄</span> Renovaciones</div>`;
+    html += `<div class="side-item" data-nav="sectores"><span class="ic">📊</span> Sectores</div>`;
+    html += `<div class="side-item" data-nav="catalogo"><span class="ic"></span> Catálogo Empresas</div>`;
+    html += `<div class="side-item" data-nav="venta_cruzada"><span class="ic">🎯</span> Venta Cruzada</div>`;
+    html += `<div class="side-item" data-nav="tareas"><span class="ic">✅</span> Tareas</div>`;
+    html += `<div class="side-item" data-nav="comisiones"><span class="ic">💰</span> Comisiones</div>`;
+    html += `<div class="side-item" data-nav="facturacion"><span class="ic">🧾</span> Facturación</div>`;
+    html += `<div class="side-item" data-nav="oportunidades"><span class="ic">⭐</span> Oportunidades</div>`;
+    html += `<div class="side-item" data-nav="dormidos"><span class="ic">😴</span> Clientes dormidos</div>`;
+    html += `<div class="side-sep">Inteligencia</div>`;
+    html += `<div class="side-item" data-nav="copiloto"><span class="ic">🤖</span> Copiloto IA</div>`;
+    html += `<div class="side-item" data-nav="voz"><span class="ic">🎙️</span> Asistente de voz</div>`;
+  }
+  
   html += `<div class="side-sep">Sistema</div>`;
   html += `<div class="side-item" data-nav="dashboard"><span class="ic">📊</span> Dashboard</div>`;
+  
   if(isAdmin){
     html += `<div class="side-item" data-nav="admin_global"><span class="ic">👑</span> Admin Global</div>`;
+    html += `<div class="side-item" data-nav="territorios"><span class="ic">🗺️</span> Territorios</div>`;
     html += `<div class="side-item" data-nav="admin"><span class="ic">⚙️</span> Administración</div>`;
   }
+  
+  if(isBackoffice){
+    html += `<div class="side-item" data-nav="admin"><span class="ic">📋</span> Administración</div>`;
+  }
+  
   html += `<div class="side-item" data-nav="ajustes"><span class="ic">🔧</span> Ajustes</div>`;
   html += `<div style="margin-top:20px;padding:10px 12px"><div class="text-muted" style="font-size:11px" id="sideUser"></div><button class="btn btn-secondary btn-sm mt" style="width:100%" id="btnLogout">Cerrar sesión</button></div>`;
   sb.innerHTML = html;
@@ -744,7 +819,8 @@ function renderSidebar(){
   });
   document.getElementById("btnLogout").addEventListener("click",logout);
   const u = db.users.find(x=>x.id===session.userId);
-  document.getElementById("sideUser").innerHTML = `<b>${esc(u?.name||"")}</b><br><span style="font-size:10px">@${esc(u?.username||"")} · ${esc(u?.role||"")}</span>`;
+  const roleInfo = ROLES[u?.role];
+  document.getElementById("sideUser").innerHTML = `<b>${esc(u?.name||"")}</b><br><span style="font-size:10px">@${esc(u?.username||"")} · ${roleInfo?.icon||""} ${roleInfo?.name||""}</span>`;
 }
 
 function renderHoy(){
@@ -855,7 +931,7 @@ function renderSectores(){
   contracts.forEach(c=>{if(bySector[c.sector]!==undefined) bySector[c.sector]++});
   
   const main = document.getElementById("mainContent");
-  let html = `<div class="page-title"><div><h2>📊 Mis Sectores</h2><div class="sub">14 sectores comerciales · ${contracts.length} contratos totales</div></div></div>`;
+  let html = `<div class="page-title"><div><h2> Mis Sectores</h2><div class="sub">14 sectores comerciales · ${contracts.length} contratos totales</div></div></div>`;
   
   Object.entries(SECTOR_GROUPS).forEach(([group,sectorIds])=>{
     html += `<h3 style="margin:20px 0 10px;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.5px">${group}</h3>`;
@@ -886,7 +962,7 @@ function renderClientes(){
     <div class="page-title">
       <div><h2>👥 Clientes</h2><div class="sub">${list.length} clientes</div></div>
       <div class="row" style="gap:8px">
-        <button class="btn btn-secondary" onclick="openImportWizard()">📥 Importar Excel</button>
+        <button class="btn btn-secondary" onclick="openImportWizard()"> Importar Excel</button>
         <button class="btn btn-accent" onclick="openClientForm()">+ Nuevo cliente</button>
       </div>
     </div>
@@ -1012,7 +1088,7 @@ function openClient(id){
     
     ${missingSectors.length?`
     <div class="divider"></div>
-    <h3>🎯 Oportunidades de venta cruzada</h3>
+    <h3> Oportunidades de venta cruzada</h3>
     <div class="text-muted mb">Este cliente aún no tiene estos servicios:</div>
     <div class="row">
       ${missingSectors.slice(0,8).map(sid=>{
@@ -1055,8 +1131,8 @@ function prepararLlamada(clientId){
   const bySector = {};
   contracts.forEach(co=>{if(!bySector[co.sector])bySector[co.sector]=[];bySector[co.sector].push(co)});
   
-  let resumen = `👤 CLIENTE: ${c.name} ${c.surname||""}\n📞 ${c.phone||"—"} · ✉️ ${c.email||"—"}\n📅 Último contacto: ${fmtDate(c.lastContact)}\n\n`;
-  resumen += `📊 SERVICIOS CONTRATADOS (${contracts.length}):\n`;
+  let resumen = `👤 CLIENTE: ${c.name} ${c.surname||""}\n📞 ${c.phone||"—"} · ✉️ ${c.email||"—"}\n Último contacto: ${fmtDate(c.lastContact)}\n\n`;
+  resumen += ` SERVICIOS CONTRATADOS (${contracts.length}):\n`;
   Object.entries(bySector).forEach(([sid,list])=>{
     const s = SECTORS[sid];
     resumen += `\n${s.icon} ${s.name}:\n`;
@@ -1128,7 +1204,7 @@ function renderContractList(filter){
     const b=renewalBucket(days);
     const s=SECTORS[c.sector];
     return `<div class="list-item" onclick="openContract('${c.id}')">
-      <div style="font-size:24px">${s?.icon||"📄"}</div>
+      <div style="font-size:24px">${s?.icon||""}</div>
       <div class="li-main">
         <div class="li-title">${esc(cl?.name||"—")} ${esc(cl?.surname||"")} · ${esc(s?.name||c.sector)} <span class="chip ${b.chip}">${days}d</span></div>
         <div class="li-sub">${esc(c.companyName)} · ${renderContractSummary(c)}</div>
@@ -1197,7 +1273,7 @@ function openContractForm(id,preSector=null,preClient=null){
     <div class="form-group mt"><label>Notas</label><textarea id="f_notes" rows="2">${esc(c?.notes||"")}</textarea></div>
   `;
   openModal(c?"Editar contrato":"Nuevo contrato · "+s.name,body,
-    `${c?`<button class="btn btn-danger" onclick("deleteContract('${c.id}')">Eliminar</button>`:""}
+    `${c?`<button class="btn btn-danger" onclick="deleteContract('${c.id}')">Eliminar</button>`:""}
      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
      <button class="btn btn-primary" style="width:auto" onclick="saveContract('${id||""}','${sector}')">Guardar</button>`);
 }
@@ -1785,8 +1861,8 @@ function renderVentaCruzada(){
 }
 
 function renderAdminGlobal(){
-  if(session.role!=="admin"){
-    document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>Solo admin</div>`;
+  if(!["admin","director_expansion","director_comercial","director_financiero"].includes(session.role)){
+    document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>Solo directivos</div>`;
     return;
   }
   const comercials = db.users.filter(u=>u.role==="comercial");
@@ -1797,7 +1873,7 @@ function renderAdminGlobal(){
   
   const main = document.getElementById("mainContent");
   main.innerHTML = `
-    <div class="admin-mode-banner"><span class="ic">👑</span><div><b>Modo Admin Global</b> — Ves los datos de todos los comerciales</div></div>
+    <div class="admin-mode-banner"><span class="ic">👑</span><div><b>Admin Global</b> — Ves los datos de todos los comerciales</div></div>
     
     <div class="page-title"><div><h2>👑 Admin Global</h2><div class="sub">${comercials.length} comerciales · ${totalClients} clientes · ${totalContracts} contratos</div></div></div>
     
@@ -1886,7 +1962,7 @@ function renderAdminTab(tab){
   }
   else if(tab==="clientes"){
     cont.innerHTML = `<div class="card">
-      <h3>👥 Todos los clientes (${db.clients.length})</h3>
+      <h3> Todos los clientes (${db.clients.length})</h3>
       <div class="list">
         ${db.clients.slice(0,50).map(c=>{
           const u = db.users.find(x=>x.id===c.userId);
@@ -2044,7 +2120,7 @@ function localCopilot(q){
     const ren=computeRenewals().filter(c=>c.daysToRenewal<=60).length;
     const tasks=myTasks().filter(t=>t.status!=="completada"&&t.date<=todayISO()).length;
     const com=myCommissions().filter(c=>c.status==="pendiente");
-    return `📋 Hoy: ${ren} renovaciones, ${tasks} tareas, ${com.length} comisiones pendientes (${fmtMoney(com.reduce((a,b)=>a+b.amount,0))})`;
+    return ` Hoy: ${ren} renovaciones, ${tasks} tareas, ${com.length} comisiones pendientes (${fmtMoney(com.reduce((a,b)=>a+b.amount,0))})`;
   }
   if(ql.includes("sector")){
     const contracts=myContracts();
@@ -2068,7 +2144,7 @@ function localCopilot(q){
 function renderVoz(){
   const supported='webkitSpeechRecognition' in window||'SpeechRecognition' in window;
   const main=document.getElementById("mainContent");
-  main.innerHTML=`<div class="page-title"><div><h2>🎙️ Asistente de voz</h2></div></div>${!supported?`<div class="alert-banner">⚠️ Navegador no compatible</div>`:""}<div class="card" style="text-align:center;padding:30px"><button id="bigMic" class="mic-btn" style="width:100px;height:100px;font-size:40px;margin:0 auto" ${supported?"":"disabled"}>🎙️</button><div class="mt" id="voiceStatus" style="font-size:14px;color:var(--muted)">Pulsa para hablar</div><div class="mt2" id="voiceTranscript" style="background:#f9fafb;padding:14px;border-radius:10px;min-height:60px;text-align:left;font-size:14px"></div><div class="mt2" id="voiceParsed" style="background:#fffbeb;padding:14px;border-radius:10px;min-height:40px;text-align:left;font-size:13px;color:#92400e"></div><div class="mt2 row" style="justify-content:center"><button class="btn btn-secondary" onclick="confirmVoice()" id="btnConfirmVoice" disabled>✅ Crear tarea</button></div></div>`;
+  main.innerHTML=`<div class="page-title"><div><h2>🎙️ Asistente de voz</h2></div></div>${!supported?`<div class="alert-banner">️ Navegador no compatible</div>`:""}<div class="card" style="text-align:center;padding:30px"><button id="bigMic" class="mic-btn" style="width:100px;height:100px;font-size:40px;margin:0 auto" ${supported?"":"disabled"}>🎙️</button><div class="mt" id="voiceStatus" style="font-size:14px;color:var(--muted)">Pulsa para hablar</div><div class="mt2" id="voiceTranscript" style="background:#f9fafb;padding:14px;border-radius:10px;min-height:60px;text-align:left;font-size:14px"></div><div class="mt2" id="voiceParsed" style="background:#fffbeb;padding:14px;border-radius:10px;min-height:40px;text-align:left;font-size:13px;color:#92400e"></div><div class="mt2 row" style="justify-content:center"><button class="btn btn-secondary" onclick="confirmVoice()" id="btnConfirmVoice" disabled>✅ Crear tarea</button></div></div>`;
   if(!supported) return;
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   const rec=new SR();rec.lang="es-ES";
@@ -2098,7 +2174,7 @@ function parseVoiceCommand(text){
   if(t.includes("mañana")) date=addDays(todayISO(),1);
   return {ok:!!client,text,client,type,date};
 }
-function renderParsed(p){if(!p.ok) return "⚠️ No he identificado el cliente.";return `👤 ${esc(p.client.name)} · 🎯 ${esc(p.type)} · 📅 ${fmtDate(p.date)}`}
+function renderParsed(p){if(!p.ok) return "️ No he identificado el cliente.";return ` ${esc(p.client.name)} · 🎯 ${esc(p.type)} · 📅 ${fmtDate(p.date)}`}
 function confirmVoice(){const p=window._parsedVoice;if(!p||!p.ok) return;db.tasks.push({id:uid(),userId:session.userId,clientId:p.client.id,contractId:null,type:p.type,date:p.date,time:"",priority:"media",description:"Por voz: "+p.text,status:"pendiente"});DB.save(db);toast("Tarea creada");navigate("tareas")}
 window.confirmVoice=confirmVoice;
 function startVoiceChat(){navigate("voz");setTimeout(()=>{const m=document.getElementById("bigMic");if(m) m.click()},200)}
@@ -2130,6 +2206,127 @@ function renderDashboard(){
       }).join("")}
     </div>`;
 }
+
+// ✅ NUEVA PÁGINA: TERRITORIOS
+function renderTerritorios(){
+  if(!["admin","director_expansion","director_comercial","director_financiero","director_territorial"].includes(session.role)){
+    document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>No tienes acceso</div>`;
+    return;
+  }
+  
+  const user = db.users.find(u=>u.id===session.userId);
+  const isDT = user.role==="director_territorial";
+  const myProvinces = isDT ? (user.territory?.provinces||[]) : PROVINCES;
+  
+  const main = document.getElementById("mainContent");
+  main.innerHTML = `
+    <div class="page-title">
+      <div><h2>🗺️ Territorios</h2><div class="sub">${myProvinces.length} provincias asignadas</div></div>
+      ${!isDT?`<button class="btn btn-accent" onclick="openTerritoryForm()">+ Nuevo Director Territorial</button>`:""}
+    </div>
+    
+    <div class="card">
+      <h3>📍 Mis provincias</h3>
+      <div class="grid grid-5">
+        ${myProvinces.map(p=>{
+          const commercials = db.users.filter(u=>u.role==="comercial" && u.province===p);
+          const clients = db.clients.filter(c=>commercials.some(u=>u.id===c.userId)).length;
+          return `<div class="sector-card" style="padding:10px">
+            <div class="sec-info">
+              <div class="sec-name" style="font-size:13px">${p}</div>
+              <div class="sec-count">${commercials.length} comerciales · ${clients} clientes</div>
+            </div>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>
+    
+    ${!isDT?`
+    <div class="card mt2">
+      <h3>👥 Directores Territoriales (${db.users.filter(u=>u.role==="director_territorial").length}/5)</h3>
+      <div class="list">
+        ${db.users.filter(u=>u.role==="director_territorial").map(u=>{
+          const provinces = u.territory?.provinces||[];
+          const commercials = db.users.filter(x=>x.role==="comercial" && provinces.includes(x.province));
+          return `<div class="list-item" onclick="openTerritoryForm('${u.id}')">
+            <div style="font-size:24px">🗺️</div>
+            <div class="li-main">
+              <div class="li-title">${esc(u.name)} ${esc(u.surname||"")} <span class="badge ${u.status==='activo'?'ok':'muted'}">${esc(u.status)}</span></div>
+              <div class="li-sub">${provinces.length} provincias · ${commercials.length} comerciales</div>
+            </div>
+          </div>`;
+        }).join("")||emptyHTML("Sin directores territoriales")}
+      </div>
+    </div>
+    `:""}
+  `;
+}
+
+function openTerritoryForm(id){
+  const u=id?db.users.find(x=>x.id===id):null;
+  const body=`
+    <div class="two-col">
+      <div class="form-group"><label>Nombre *</label><input id="f_name" value="${esc(u?.name||"")}" /></div>
+      <div class="form-group"><label>Apellidos</label><input id="f_surname" value="${esc(u?.surname||"")}" /></div>
+    </div>
+    <div class="two-col">
+      <div class="form-group"><label>Email</label><input id="f_email" value="${esc(u?.email||"")}" /></div>
+      <div class="form-group"><label>Teléfono</label><input id="f_phone" value="${esc(u?.phone||"")}" /></div>
+    </div>
+    <div class="two-col">
+      <div class="form-group"><label>Usuario *</label><input id="f_user" value="${esc(u?.username||"")}" /></div>
+      <div class="form-group"><label>Contraseña ${u?"(vacío=no cambiar)":"*"}</label><input type="password" id="f_pass" /></div>
+    </div>
+    <div class="form-group">
+      <label>Provincias asignadas (máximo 10)</label>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-height:300px;overflow:auto;padding:10px;background:#f9fafb;border-radius:8px">
+        ${PROVINCES.map(p=>`<label style="display:flex;gap:6px;align-items:center;padding:6px;background:#fff;border-radius:6px;cursor:pointer;font-size:12px">
+          <input type="checkbox" name="f_provinces" value="${p}" ${(u?.territory?.provinces||[]).includes(p)?"checked":""} />
+          ${p}
+        </label>`).join("")}
+      </div>
+    </div>
+  `;
+  openModal(u?"Editar Director Territorial":"Nuevo Director Territorial",body,
+    `${u?`<button class="btn btn-danger" onclick="deleteUser('${u.id}')">Eliminar</button>`:""}
+     <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+     <button class="btn btn-primary" style="width:auto" onclick="saveTerritory('${id||""}')">Guardar</button>`);
+}
+window.openTerritoryForm=openTerritoryForm;
+
+function saveTerritory(id){
+  const data={
+    name:document.getElementById("f_name").value.trim(),
+    surname:document.getElementById("f_surname").value.trim(),
+    email:document.getElementById("f_email").value.trim(),
+    phone:document.getElementById("f_phone").value.trim(),
+    username:document.getElementById("f_user").value.trim(),
+    role:"director_territorial",
+    status:"activo"
+  };
+  const pass=document.getElementById("f_pass").value;
+  const provinces=Array.from(document.querySelectorAll('input[name="f_provinces"]:checked')).map(i=>i.value);
+  
+  if(!data.name||!data.username){toast("️ Nombre y usuario obligatorios");return}
+  if(provinces.length>10){toast("⚠️ Máximo 10 provincias");return}
+  
+  const existingUser = db.users.find(u=>u.username===data.username && u.id!==id);
+  if(existingUser){toast("⚠️ El usuario ya existe");return}
+  
+  if(id){
+    const u=db.users.find(x=>x.id===id);
+    Object.assign(u,data);
+    u.territory={provinces};
+    if(pass) u.password=pass;
+  }
+  else{
+    if(!pass){toast("⚠️ Contraseña obligatoria");return}
+    db.users.push({id:uid(),...data,password:pass,createdAt:todayISO(),province:null,territory:{provinces}});
+  }
+  
+  DB.save(db);closeModal();toast("Director Territorial guardado");navigate("territorios");
+}
+window.saveTerritory=saveTerritory;
 
 function getCurrentUser(){return db.users.find(u=>u.id===session.userId)}
 function ensureUserBilling(user){if(!user.billing) user.billing={};const def={businessName:"",taxId:"",address:"",email:"",phone:"",iban:"",regime:"autonomo",defaultTax:"iva",logo:null};Object.keys(def).forEach(k=>{if(user.billing[k]===undefined) user.billing[k]=def[k]})}
@@ -2264,19 +2461,29 @@ function openInvoice(id){
 }
 window.openInvoice=openInvoice;
 
-// ✅ FUNCIÓN ADMIN CON DIAGNÓSTICO
 function renderAdmin(){
-  if(session.role!=="admin"){document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>Solo admin</div>`;return}
+  if(!["admin","director_expansion","director_comercial","director_financiero","backoffice"].includes(session.role)){
+    document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>Solo admin/directivos/backoffice</div>`;
+    return;
+  }
   const main=document.getElementById("mainContent");
+  const canCreateUsers = ["admin","director_expansion","director_comercial","director_financiero","director_territorial"].includes(session.role);
+  
   main.innerHTML=`<div class="page-title"><div><h2>⚙️ Administración</h2></div></div>
     <div class="card"><h3>🎭 Modo DEMO</h3><div class="row between"><div>Estado: ${db.settings.demo?"<span class='badge info'>ACTIVO</span>":"<span class='badge muted'>DESACTIVADO</span>"}</div><div>${db.settings.demo?`<button class="btn btn-danger" onclick="toggleDemo(false)">Desactivar</button>`:`<button class="btn btn-accent" onclick="toggleDemo(true)">Activar</button>`}</div></div></div>
-    <div class="card mt2"><h3>👥 Usuarios (${db.users.length})</h3><button class="btn btn-accent btn-sm mb" onclick="openUserForm()">+ Nuevo</button><div class="list">${db.users.map(u=>`<div class="list-item"><div class="li-main"><div class="li-title">${esc(u.name)} ${esc(u.surname||"")} <span class="badge ${u.role==='admin'?'danger':'info'}">${esc(u.role)}</span> <span class="badge ${u.status==='activo'?'ok':'muted'}">${esc(u.status)}</span></div><div class="li-sub">@${esc(u.username)} · ${esc(u.email||"—")}</div></div><button class="btn btn-secondary btn-sm" onclick="openUserForm('${u.id}')">Editar</button></div>`).join("")}</div></div>
+    <div class="card mt2"><h3>👥 Usuarios (${db.users.length})</h3>${canCreateUsers?`<button class="btn btn-accent btn-sm mb" onclick="openUserForm()">+ Nuevo</button>`:""}<div class="list">${db.users.map(u=>{
+      const roleInfo = ROLES[u.role];
+      return `<div class="list-item"><div class="li-main"><div class="li-title">${esc(u.name)} ${esc(u.surname||"")} <span class="badge ${u.role==='admin'?'danger':'info'}">${roleInfo?.icon||""} ${roleInfo?.name||u.role}</span> <span class="badge ${u.status==='activo'?'ok':'muted'}">${esc(u.status)}</span></div><div class="li-sub">@${esc(u.username)} · ${esc(u.email||"—")}${u.province?` · 📍 ${u.province}`:""}${u.territory?.provinces?` · 🗺️ ${u.territory.provinces.length} prov.`:""}</div></div><button class="btn btn-secondary btn-sm" onclick="openUserForm('${u.id}')">Editar</button></div>`;
+    }).join("")}</div></div>
     
     <div class="card mt2">
       <h3>🔍 Diagnóstico de usuarios</h3>
       <div class="text-muted mb">Lista de todos los usuarios en el sistema:</div>
       <div style="background:#f9fafb;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;max-height:300px;overflow:auto">
-        ${db.users.map(u=>`<div>✅ <b>${esc(u.username)}</b> · Role: ${esc(u.role)} · Status: ${esc(u.status)} · Password: ${u.password?'***'+u.password.slice(-2):'SIN PASSWORD'}</div>`).join("")}
+        ${db.users.map(u=>{
+          const roleInfo = ROLES[u.role];
+          return `<div>✅ <b>${esc(u.username)}</b> · ${roleInfo?.icon||""} ${roleInfo?.name||u.role} · Status: ${esc(u.status)} · Password: ${u.password?'***'+u.password.slice(-2):'SIN PASSWORD'}</div>`;
+        }).join("")}
       </div>
       <div class="mt">
         <button class="btn btn-secondary btn-sm" onclick="testAllUsers()">🧪 Probar todos los usuarios</button>
@@ -2313,10 +2520,12 @@ window.forceLogout=forceLogout;
 function toggleDemo(on){if(on){enableDemo(db);toast("DEMO activado")}else{if(!confirm("¿Desactivar DEMO?")) return;disableDemo(db);toast("DEMO desactivado")}navigate("admin")}
 window.toggleDemo=toggleDemo;
 
-// ✅ FUNCIÓN SAVEUSER CORREGIDA
 function openUserForm(id){
   const u=id?db.users.find(x=>x.id===id):null;
-  const body=`<div class="two-col"><div class="form-group"><label>Nombre *</label><input id="f_name" value="${esc(u?.name||"")}" /></div><div class="form-group"><label>Apellidos</label><input id="f_surname" value="${esc(u?.surname||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Email</label><input id="f_email" value="${esc(u?.email||"")}" /></div><div class="form-group"><label>Teléfono</label><input id="f_phone" value="${esc(u?.phone||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Usuario *</label><input id="f_user" value="${esc(u?.username||"")}" /></div><div class="form-group"><label>Contraseña ${u?"(vacío=no cambiar)":"*"}</label><input type="password" id="f_pass" /></div></div><div class="two-col"><div class="form-group"><label>Rol</label><select id="f_role"><option value="comercial" ${u?.role==="comercial"?"selected":""}>Comercial</option><option value="admin" ${u?.role==="admin"?"selected":""}>Admin</option></select></div><div class="form-group"><label>Estado</label><select id="f_status"><option ${u?.status==="activo"?"selected":""}>activo</option><option ${u?.status==="desactivado"?"selected":""}>desactivado</option></select></div></div>`;
+  const canAssignProvince = ["admin","director_expansion","director_comercial","director_financiero","director_territorial"].includes(session.role);
+  const myProvinces = getMyTerritoryProvinces();
+  
+  const body=`<div class="two-col"><div class="form-group"><label>Nombre *</label><input id="f_name" value="${esc(u?.name||"")}" /></div><div class="form-group"><label>Apellidos</label><input id="f_surname" value="${esc(u?.surname||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Email</label><input id="f_email" value="${esc(u?.email||"")}" /></div><div class="form-group"><label>Teléfono</label><input id="f_phone" value="${esc(u?.phone||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Usuario *</label><input id="f_user" value="${esc(u?.username||"")}" /></div><div class="form-group"><label>Contraseña ${u?"(vacío=no cambiar)":"*"}</label><input type="password" id="f_pass" /></div></div><div class="two-col"><div class="form-group"><label>Rol</label><select id="f_role">${Object.keys(ROLES).map(r=>`<option value="${r}" ${u?.role===r?"selected":""}>${ROLES[r].icon} ${ROLES[r].name}</option>`).join("")}</select></div><div class="form-group"><label>Estado</label><select id="f_status"><option ${u?.status==="activo"?"selected":""}>activo</option><option ${u?.status==="desactivado"?"selected":""}>desactivado</option></select></div></div>${canAssignProvince&&u?.role==="comercial"?`<div class="form-group"><label>Provincia</label><select id="f_province"><option value="">— Sin asignar —</option>${myProvinces.map(p=>`<option value="${p}" ${u?.province===p?"selected":""}>${p}</option>`).join("")}</select></div>`:""}`;
   openModal(u?"Editar usuario":"Nuevo usuario",body,`${u&&u.username!=="admin"?`<button class="btn btn-danger" onclick="deleteUser('${u.id}')">Eliminar</button>`:""}<button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" style="width:auto" onclick="saveUser('${id||""}')">Guardar</button>`);
 }
 window.openUserForm=openUserForm;
@@ -2332,9 +2541,11 @@ function saveUser(id){
     status:document.getElementById("f_status").value
   };
   const pass=document.getElementById("f_pass").value;
+  const provinceEl = document.getElementById("f_province");
+  const province = provinceEl ? provinceEl.value : null;
   
   if(!data.name||!data.username){
-    toast("⚠️ Nombre y usuario son obligatorios");
+    toast("️ Nombre y usuario son obligatorios");
     return;
   }
   
@@ -2347,6 +2558,7 @@ function saveUser(id){
   if(id){
     const u=db.users.find(x=>x.id===id);
     Object.assign(u,data);
+    if(province!==undefined) u.province=province;
     if(pass) u.password=pass;
     DB.save(db);
     closeModal();
@@ -2369,6 +2581,8 @@ function saveUser(id){
       password:pass,
       createdAt:todayISO(),
       assignedSectors:Object.keys(SECTORS),
+      province:province||null,
+      territory:null,
       billing:{
         businessName:data.name+" "+(data.surname||""),
         taxId:"",
@@ -2412,7 +2626,7 @@ function renderAjustes(){
 }
 function saveAI(){db.settings.aiProvider=document.getElementById("ai_provider").value||null;db.settings.aiModel=document.getElementById("ai_model").value.trim()||null;db.settings.aiEndpoint=document.getElementById("ai_endpoint").value.trim()||null;DB.save(db);toast("Guardado");navigate("ajustes")}
 window.saveAI=saveAI;
-function exportData(){const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="grupo-synergies-"+todayISO()+".json";a.click()}
+function exportData(){const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="grupo-sinergys-"+todayISO()+".json";a.click()}
 window.exportData=exportData;
 function importData(e){const f=e.target.files[0];if(!f) return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!data.users) throw new Error("Formato inválido");if(!confirm("¿Reemplazar datos?")) return;DB.save(data);location.reload()}catch(err){toast("Error: "+err.message)}};r.readAsText(f)}
 window.importData=importData;
@@ -2493,7 +2707,7 @@ function recomputeImportPreview(){
     if(dup) d.duplicates.push({row:idx+2,client,existingId:dup.id,existingName:dup.name+" "+(dup.surname||"")});
     else d.valid.push({row:idx+2,client});
   });
-  document.getElementById("importStats").innerHTML=`<div class="box ok"><div class="n">${d.valid.length}</div><div class="l">✅ Válidos</div></div><div class="box warn"><div class="n">${d.duplicates.length}</div><div class="l">⚠️ Duplicados</div></div><div class="box err"><div class="n">${d.errors.length}</div><div class="l">❌ Errores</div></div><div class="box info"><div class="n">${d.rows.length}</div><div class="l">📊 Total</div></div>`;
+  document.getElementById("importStats").innerHTML=`<div class="box ok"><div class="n">${d.valid.length}</div><div class="l">✅ Válidos</div></div><div class="box warn"><div class="n">${d.duplicates.length}</div><div class="l">⚠️ Duplicados</div></div><div class="box err"><div class="n">${d.errors.length}</div><div class="l"> Errores</div></div><div class="box info"><div class="n">${d.rows.length}</div><div class="l">📊 Total</div></div>`;
   const preview=document.getElementById("importPreview");
   const all=[...d.valid.slice(0,20).map(x=>({...x,status:"ok",label:"✅ Nuevo"})),...d.duplicates.slice(0,10).map(x=>({...x,status:"dup",label:"⚠️ Duplicado"})),...d.errors.slice(0,10).map(x=>({...x,status:"err",label:"❌ "+x.errors.join(", ")}))];
   preview.innerHTML=`<table><thead><tr><th>Fila</th><th>Estado</th><th>Nombre</th><th>Teléfono</th><th>Email</th></tr></thead><tbody>${all.map(x=>`<tr class="${x.status}"><td>${x.row}</td><td style="font-size:11px">${x.label}</td><td>${esc(x.client.name)} ${esc(x.client.surname||"")}</td><td>${esc(x.client.phone||"—")}</td><td>${esc(x.client.email||"—")}</td></tr>`).join("")}</tbody></table>`;
@@ -2509,7 +2723,7 @@ function importNextStep(){
   const s1=document.getElementById("step1");const s2=document.getElementById("step2");const s3=document.getElementById("step3");
   const n1=document.getElementById("step1nav");const n2=document.getElementById("step2nav");const n3=document.getElementById("step3nav");
   const btn=document.getElementById("importNextBtn");
-  if(s1.classList.contains("active")){if(!window._importData.rows?.length){toast("⚠️ Sube un archivo");return}s1.classList.remove("active");s2.classList.add("active");n1.classList.remove("active");n1.classList.add("done");n2.classList.add("active");btn.textContent="Siguiente →";renderStep2()}
+  if(s1.classList.contains("active")){if(!window._importData.rows?.length){toast("️ Sube un archivo");return}s1.classList.remove("active");s2.classList.add("active");n1.classList.remove("active");n1.classList.add("done");n2.classList.add("active");btn.textContent="Siguiente →";renderStep2()}
   else if(s2.classList.contains("active")){if(!window._importData.mapping.name){toast("⚠️ Asigna columna 'Nombre'");return}s2.classList.remove("active");s3.classList.add("active");n2.classList.remove("active");n2.classList.add("done");n3.classList.add("active");btn.textContent="✅ Importar ahora";btn.onclick=executeImport;renderStep3()}
 }
 window.importNextStep=importNextStep;
@@ -2519,14 +2733,14 @@ function executeImport(){
   d.valid.forEach(item=>{const c=item.client;if(defaultCity&&!c.city) c.city=defaultCity;db.clients.push({id:uid(),userId:session.userId,name:c.name,surname:c.surname||"",phone:c.phone||"",email:c.email||"",address:c.address||"",city:c.city||"",notes:c.notes||"",lastContact:todayISO(),createdAt:todayISO()});created++});
   d.duplicates.forEach(item=>{const c=item.client;if(strategy==="skip") skippedDup++;else if(strategy==="overwrite"){const ex=db.clients.find(x=>x.id===item.existingId);if(ex){if(c.name) ex.name=c.name;if(c.phone) ex.phone=c.phone;if(c.email) ex.email=c.email;updated++}}else if(strategy==="create"){db.clients.push({id:uid(),userId:session.userId,name:c.name,surname:c.surname||"",phone:c.phone||"",email:c.email||"",address:c.address||"",city:c.city||"",notes:"Importado (posible duplicado)",lastContact:todayISO(),createdAt:todayISO()});created++}});
   DB.save(db);
-  let summary=`✅ <b>${created}</b> creados`;if(updated) summary+=` · 🔄 <b>${updated}</b> actualizados`;if(skippedDup) summary+=` · ⚠️ <b>${skippedDup}</b> omitidos`;if(d.errors.length) summary+=` · ❌ <b>${d.errors.length}</b> errores`;
+  let summary=`✅ <b>${created}</b> creados`;if(updated) summary+=` ·  <b>${updated}</b> actualizados`;if(skippedDup) summary+=` · ⚠️ <b>${skippedDup}</b> omitidos`;if(d.errors.length) summary+=` · ❌ <b>${d.errors.length}</b> errores`;
   const body=`<div style="background:#f0fdf4;padding:20px;border-radius:12px;text-align:center;margin-bottom:12px"><div style="font-size:48px">🎉</div><div style="font-size:16px;font-weight:600;margin-top:8px">Importación completada</div><div style="margin-top:8px;font-size:14px">${summary}</div></div>`;
   document.querySelector(".modal-body").innerHTML=body;
   document.querySelector(".modal-foot").innerHTML=`<button class="btn btn-primary" style="width:auto" onclick="closeModal();navigate('clientes')">Ver clientes</button>`;
 }
 window.executeImport=executeImport;
 function downloadImportTemplate(){
-  if(!window.XLSX){toast("⏳ Cargando...");return}
+  if(!window.XLSX){toast(" Cargando...");return}
   const example=[{Nombre:"Juan",Apellidos:"Pérez",Teléfono:"600123456",Email:"juan@email.com",Dirección:"Calle Mayor 1",Ciudad:"Madrid",Notas:"Cliente referido"},{Nombre:"María",Apellidos:"López",Teléfono:"611222333",Email:"maria@email.com",Dirección:"Av. Constitución 5",Ciudad:"Valencia",Notas:""}];
   const ws=window.XLSX.utils.json_to_sheet(example);const wb=window.XLSX.utils.book_new();window.XLSX.utils.book_append_sheet(wb,ws,"Clientes");window.XLSX.writeFile(wb,"plantilla-clientes.xlsx");toast("Plantilla descargada");
 }
@@ -2574,7 +2788,6 @@ window.showAlerts=showAlerts;
 
 function emptyHTML(msg){return `<div class="empty"><div class="ic">📭</div>${esc(msg)}</div>`}
 
-// ✅ FUNCIÓN SHOWAPP CON VERIFICACIÓN
 function boot(){
   if(session) showApp();
   else document.getElementById("loginScreen").style.display="flex";
