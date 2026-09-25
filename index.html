@@ -238,7 +238,7 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
     </form>
     <div class="login-demo">¿No tienes cuenta? <button id="btnDemoAccess">Entrar en modo DEMO</button></div>
     <div class="login-reset"><button id="btnEmergencyReset">🔧 Reset de emergencia</button></div>
-    <div class="text-muted" style="text-align:center;margin-top:14px;font-size:11px">v2.0 · 14 sectores · Admin Global</div>
+    <div class="text-muted" style="text-align:center;margin-top:14px;font-size:11px">v2.1 · 14 sectores · Admin Global</div>
   </div>
 </div>
 
@@ -280,9 +280,6 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
 <div id="toastRoot"></div>
 
 <script>
-/* =========================================================
-   CONFIGURACIÓN DE SECTORES
-   ========================================================= */
 const SECTORS = {
   energia: {id:"energia",name:"Energía",icon:"⚡",color:"#f59e0b",group:"Energía",fields:["supplyType","cups","company","tariff","power","consumption","contractDate","startDate","renewalDate"]},
   telefonia: {id:"telefonia",name:"Telefonía",icon:"📞",color:"#3b82f6",group:"Telecom",fields:["lineType","phoneNumber","operator","dataAllowance","minutesAllowance","startDate","renewalDate"]},
@@ -356,35 +353,25 @@ function getSession(){try{return JSON.parse(sessionStorage.getItem(SESSION_KEY))
 function setSession(s){sessionStorage.setItem(SESSION_KEY,JSON.stringify(s))}
 function clearSession(){sessionStorage.removeItem(SESSION_KEY)}
 
-/* =========================================================
-   DEMO DATA (14 sectores)
-   ========================================================= */
 function seedDemo(){
-  // Empresas por sector
   const companies = [
-    // Energía
     {id:uid(),name:"Iberdrola",sectors:["energia","fotovoltaica"],billing:{businessName:"Iberdrola S.A.",taxId:"A48010612",address:"Plaza Euskadi 5, Bilbao",email:"agentes@iberdrola.es",phone:"900171171",supplierCode:"IB-001",paymentTerms:"30 días",contact:"Dpto. Agentes"}},
     {id:uid(),name:"Endesa",sectors:["energia","fotovoltaica","cargadores"],billing:{businessName:"Endesa S.A.",taxId:"A08000727",address:"Carrer Arnau de Vilanova 1, Barcelona",email:"agentes@endesa.es",phone:"900102103",supplierCode:"EN-001",paymentTerms:"30 días",contact:"Dpto. Agentes"}},
     {id:uid(),name:"Naturgy",sectors:["energia"],billing:{businessName:"Naturgy Energy Group S.A.",taxId:"A28036188",address:"Calle Menéndez Pidal 9, Madrid",email:"agentes@naturgy.com",phone:"900100251",supplierCode:"NA-001",paymentTerms:"30 días",contact:"Dpto. Agentes"}},
     {id:uid(),name:"Repsol",sectors:["energia"],billing:{businessName:"Repsol S.A.",taxId:"A78926772",address:"Av. de Carlos III 16, Madrid",email:"agentes@repsol.com",phone:"900111333",supplierCode:"RE-001",paymentTerms:"30 días",contact:"Dpto. Agentes"}},
-    // Telecom
     {id:uid(),name:"Movistar",sectors:["telefonia","internet"],billing:{businessName:"Telefónica de España S.A.",taxId:"A83046865",address:"Gran Vía 28, Madrid",email:"agentes@movistar.es",phone:"900111333",supplierCode:"MV-001",paymentTerms:"30 días",contact:"Canal Indirecto"}},
     {id:uid(),name:"Vodafone",sectors:["telefonia","internet"],billing:{businessName:"Vodafone España S.A.",taxId:"A80992540",address:"Av. de América 115, Madrid",email:"agentes@vodafone.es",phone:"900123456",supplierCode:"VD-001",paymentTerms:"30 días",contact:"Canal Indirecto"}},
     {id:uid(),name:"Orange",sectors:["telefonia","internet"],billing:{businessName:"Orange España S.A.",taxId:"A82330868",address:"Calle Manuel Tovar 36, Madrid",email:"agentes@orange.es",phone:"900123456",supplierCode:"OR-001",paymentTerms:"30 días",contact:"Canal Indirecto"}},
     {id:uid(),name:"Securitas Direct",sectors:["alarmas"],billing:{businessName:"Securitas Direct España S.A.",taxId:"A58834490",address:"Sevilla",email:"agentes@securitasdirect.es",phone:"900123456",supplierCode:"SD-001",paymentTerms:"30 días",contact:"Dpto. Comercial"}},
-    // Servicios
     {id:uid(),name:"Mapfre",sectors:["seguros"],billing:{businessName:"Mapfre España S.A.",taxId:"A28440658",address:"Av. de los Poblados 1, Madrid",email:"agentes@mapfre.es",phone:"900123456",supplierCode:"MF-001",paymentTerms:"30 días",contact:"Red de Mediadores"}},
     {id:uid(),name:"Allianz",sectors:["seguros"],billing:{businessName:"Allianz Seguros S.A.",taxId:"A28012375",address:"Av. de Burgos 109, Madrid",email:"agentes@allianz.es",phone:"900123456",supplierCode:"AL-001",paymentTerms:"30 días",contact:"Red de Mediadores"}},
     {id:uid(),name:"Fremap",sectors:["prl"],billing:{businessName:"Fremap S.A.",taxId:"A28139840",address:"Av. de los Madroños 2, Majadahonda",email:"empresas@fremap.es",phone:"900123456",supplierCode:"FM-001",paymentTerms:"30 días",contact:"Dpto. Empresas"}},
     {id:uid(),name:"CleanPro Servicios",sectors:["limpieza"],billing:{businessName:"CleanPro Servicios S.L.",taxId:"B12345678",address:"Calle Limpieza 1, Madrid",email:"info@cleanpro.es",phone:"910123456",supplierCode:"CP-001",paymentTerms:"15 días",contact:"Gerencia"}},
-    // Logística
     {id:uid(),name:"MRW",sectors:["paqueteria"],billing:{businessName:"MRW S.A.",taxId:"A46429404",address:"Valencia",email:"empresas@mrw.es",phone:"900123456",supplierCode:"MR-001",paymentTerms:"30 días",contact:"Dpto. Empresas"}},
     {id:uid(),name:"SEUR",sectors:["paqueteria"],billing:{businessName:"SEUR S.A.",taxId:"A28172914",address:"Madrid",email:"empresas@seur.es",phone:"900123456",supplierCode:"SR-001",paymentTerms:"30 días",contact:"Dpto. Empresas"}},
     {id:uid(),name:"DHL Express",sectors:["paqueteria"],billing:{businessName:"DHL Express España S.A.",taxId:"A79229450",address:"Madrid",email:"empresas@dhl.es",phone:"900123456",supplierCode:"DH-001",paymentTerms:"30 días",contact:"Dpto. Empresas"}},
-    // Tecnología
     {id:uid(),name:"OpenAI Partner",sectors:["asesoria_ia"],billing:{businessName:"AI Solutions S.L.",taxId:"B87654321",address:"Madrid",email:"info@ai-solutions.es",phone:"910123456",supplierCode:"AI-001",paymentTerms:"30 días",contact:"Dirección"}},
     {id:uid(),name:"CyberShield",sectors:["ciberseguridad"],billing:{businessName:"CyberShield S.L.",taxId:"B11223344",address:"Barcelona",email:"info@cybershield.es",phone:"930123456",supplierCode:"CS-001",paymentTerms:"30 días",contact:"Dirección"}},
-    // Asesoría
     {id:uid(),name:"Asesoría Integral",sectors:["asesoria"],billing:{businessName:"Asesoría Integral S.L.",taxId:"B55667788",address:"Madrid",email:"info@asesoriaintegral.es",phone:"910123456",supplierCode:"AI-002",paymentTerms:"30 días",contact:"Dirección"}}
   ];
 
@@ -401,7 +388,6 @@ function seedDemo(){
   const cities = ["Madrid","Barcelona","Valencia","Sevilla","Bilbao","Zaragoza","Málaga","Murcia"];
   const clients = [], contracts = [], tasks = [], commissions = [], opportunities = [];
 
-  // 15 clientes con contratos en múltiples sectores
   for(let i=0;i<15;i++){
     const cid = uid();
     const fn = firstNames[i%firstNames.length];
@@ -415,7 +401,6 @@ function seedDemo(){
       createdAt:addDays(todayISO(),-365-Math.floor(Math.random()*200))
     });
 
-    // Contratos multi-sector (2-4 contratos por cliente en sectores diferentes)
     const sectorList = Object.keys(SECTORS);
     const numContratos = 2+Math.floor(Math.random()*3);
     const usedSectors = new Set();
@@ -439,7 +424,6 @@ function seedDemo(){
         commissionEstimated:comPrev,commissionPaid:0,
         status:daysBetween(todayISO(),renewalDate)<=30?"PRÓXIMO A RENOVAR":"ACTIVO",
         notes:"",
-        // Campos específicos por sector (datos demo)
         sectorData: generateSectorData(sector)
       });
       
@@ -452,7 +436,6 @@ function seedDemo(){
     }
   }
 
-  // Tareas demo
   for(let i=0;i<10;i++){
     const c = clients[i%clients.length];
     tasks.push({
@@ -464,7 +447,6 @@ function seedDemo(){
     });
   }
 
-  // Oportunidades
   for(let i=0;i<6;i++){
     const c = clients[i];
     const sector = Object.keys(SECTORS)[i%Object.keys(SECTORS).length];
@@ -477,7 +459,6 @@ function seedDemo(){
     });
   }
 
-  // Facturas demo
   const invoices = [];
   const invCompanies = companies.slice(0,3);
   invCompanies.forEach((comp,i)=>{
@@ -625,17 +606,35 @@ function disableDemo(db){
 let db = initDB();
 let session = getSession();
 let currentPage = "hoy";
-let adminViewMode = false; // true = viendo datos de otro comercial
+let adminViewMode = false;
 let adminViewUserId = null;
 
+// ✅ FUNCIÓN LOGIN CORREGIDA
 function login(username,password){
+  console.log("Intentando login con:", username);
+  console.log("Usuarios en DB:", db.users.map(u=>({username:u.username, status:u.status})));
+  
   const u = db.users.find(x=>(x.username===username||x.email===username)&&x.password===password);
-  if(!u) return {ok:false,error:"Credenciales incorrectas. Usa admin/admin123 o demo/demo123"};
-  if(u.status!=="activo") return {ok:false,error:"Usuario desactivado"};
-  setSession({userId:u.id,role:u.role});
+  
+  if(!u){
+    const userExists = db.users.find(x=>x.username===username||x.email===username);
+    if(userExists){
+      return {ok:false,error:"Contraseña incorrecta para el usuario '"+username+"'"};
+    }
+    return {ok:false,error:"El usuario '"+username+"' no existe. Verifica el nombre de usuario."};
+  }
+  
+  if(u.status!=="activo"){
+    return {ok:false,error:"El usuario '"+username+"' está desactivado. Contacta con el administrador."};
+  }
+  
+  setSession({userId:u.id, role:u.role});
   session = getSession();
-  return {ok:true,user:u};
+  
+  console.log("Login exitoso:", u.username, "Role:", u.role);
+  return {ok:true, user:u};
 }
+
 function logout(){clearSession();session=null;location.reload()}
 
 function toast(msg){
@@ -652,9 +651,6 @@ function closeModal(){document.getElementById("modalRoot").innerHTML=""}
 window.closeModal=closeModal;
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 
-/* =========================================================
-   SCOPE HELPERS (con soporte admin global)
-   ========================================================= */
 function getActiveUserId(){
   if(session.role==="admin" && adminViewMode && adminViewUserId) return adminViewUserId;
   return session.userId;
@@ -702,9 +698,6 @@ function dormantClients(){
   }).filter(c=>c.bucket!=="activo").sort((a,b)=>b.daysSinceContact-a.daysSinceContact);
 }
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
 function navigate(page,opts={}){
   currentPage=page;
   document.querySelectorAll(".side-item,.bn-item").forEach(el=>{
@@ -717,9 +710,6 @@ function navigate(page,opts={}){
   window.scrollTo(0,0);
 }
 
-/* =========================================================
-   SIDEBAR DINÁMICA
-   ========================================================= */
 function renderSidebar(){
   const sb = document.getElementById("sidebar");
   const isAdmin = session.role==="admin";
@@ -749,7 +739,6 @@ function renderSidebar(){
   html += `<div style="margin-top:20px;padding:10px 12px"><div class="text-muted" style="font-size:11px" id="sideUser"></div><button class="btn btn-secondary btn-sm mt" style="width:100%" id="btnLogout">Cerrar sesión</button></div>`;
   sb.innerHTML = html;
   
-  // Re-bind events
   sb.querySelectorAll("[data-nav]").forEach(el=>{
     el.addEventListener("click",()=>navigate(el.dataset.nav));
   });
@@ -758,9 +747,6 @@ function renderSidebar(){
   document.getElementById("sideUser").innerHTML = `<b>${esc(u?.name||"")}</b><br><span style="font-size:10px">@${esc(u?.username||"")} · ${esc(u?.role||"")}</span>`;
 }
 
-/* =========================================================
-   PAGE: HOY
-   ========================================================= */
 function renderHoy(){
   const ren = computeRenewals().filter(c=>c.daysToRenewal<=60);
   const urgentRen = ren.filter(c=>c.daysToRenewal<=15);
@@ -771,7 +757,6 @@ function renderHoy(){
   const total = urgentRen.length+tasksToday.length+pendingCom.length+dormant.length+opps.length;
   const contracts = myContracts();
   
-  // Contratos por sector
   const bySector = {};
   contracts.forEach(c=>{
     if(!bySector[c.sector]) bySector[c.sector] = 0;
@@ -863,9 +848,6 @@ function prepararMiDia(){
 }
 window.prepararMiDia=prepararMiDia;
 
-/* =========================================================
-   PAGE: SECTORES
-   ========================================================= */
 function renderSectores(){
   const contracts = myContracts();
   const bySector = {};
@@ -897,9 +879,6 @@ function renderSectores(){
   main.innerHTML = html;
 }
 
-/* =========================================================
-   PAGE: CLIENTES
-   ========================================================= */
 function renderClientes(){
   const list = myClients();
   const main = document.getElementById("mainContent");
@@ -979,9 +958,6 @@ function deleteClient(id){
 }
 window.deleteClient=deleteClient;
 
-/* =========================================================
-   VISTA 360º DEL CLIENTE
-   ========================================================= */
 function openClient(id){
   const c=clientById(id);if(!c) return;
   const contracts=myContracts().filter(x=>x.clientId===id);
@@ -991,14 +967,12 @@ function openClient(id){
   const totalCom=com.reduce((a,b)=>a+(b.amount||0),0);
   const paidCom=com.filter(x=>x.status==="cobrada").reduce((a,b)=>a+(b.amount||0),0);
   
-  // Agrupar contratos por sector
   const bySector = {};
   contracts.forEach(co=>{
     if(!bySector[co.sector]) bySector[co.sector]=[];
     bySector[co.sector].push(co);
   });
   
-  // Sectores que NO tiene (oportunidades de venta cruzada)
   const missingSectors = Object.keys(SECTORS).filter(s=>!bySector[s]);
   
   const body=`
@@ -1112,9 +1086,6 @@ window.prepararLlamada=prepararLlamada;
 function cerrarLlamada(clientId){closeModal();openTaskForm(null,{clientId,type:"SEGUIMIENTO",description:"Seguimiento post-llamada"})}
 window.cerrarLlamada=cerrarLlamada;
 
-/* =========================================================
-   PAGE: CONTRATOS (con filtro por sector)
-   ========================================================= */
 function renderContratos(opts={}){
   const filterSector = opts.sector||"todos";
   const list = myContracts();
@@ -1226,7 +1197,7 @@ function openContractForm(id,preSector=null,preClient=null){
     <div class="form-group mt"><label>Notas</label><textarea id="f_notes" rows="2">${esc(c?.notes||"")}</textarea></div>
   `;
   openModal(c?"Editar contrato":"Nuevo contrato · "+s.name,body,
-    `${c?`<button class="btn btn-danger" onclick="deleteContract('${c.id}')">Eliminar</button>`:""}
+    `${c?`<button class="btn btn-danger" onclick("deleteContract('${c.id}')">Eliminar</button>`:""}
      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
      <button class="btn btn-primary" style="width:auto" onclick="saveContract('${id||""}','${sector}')">Guardar</button>`);
 }
@@ -1371,7 +1342,6 @@ function renderSectorFields(sector,sd){
   }
 }
 window.changeContractSector=function(sector){
-  const sd = {};
   closeModal();
   openContractForm(null,sector);
 };
@@ -1382,7 +1352,6 @@ function saveContract(id,sector){
   if(!clientId||!companyId){toast("Cliente y empresa obligatorios");return}
   const company=companyById(companyId);
   
-  // Recoger datos específicos del sector
   const sectorData = {};
   const fields = document.querySelectorAll("[id^='sd_']");
   fields.forEach(f=>{
@@ -1451,9 +1420,6 @@ function openContract(id){
 }
 window.openContract=openContract;
 
-/* =========================================================
-   PAGE: RENOVACIONES
-   ========================================================= */
 function renderRenovaciones(){
   const list=computeRenewals();
   const buckets={red:list.filter(c=>c.daysToRenewal<=15),orange:list.filter(c=>c.daysToRenewal>15&&c.daysToRenewal<=30),yellow:list.filter(c=>c.daysToRenewal>30&&c.daysToRenewal<=45),blue:list.filter(c=>c.daysToRenewal>45&&c.daysToRenewal<=60),green:list.filter(c=>c.daysToRenewal>60)};
@@ -1474,9 +1440,6 @@ function renderRenovaciones(){
     </details>`).join("")}`;
 }
 
-/* =========================================================
-   PAGE: TAREAS
-   ========================================================= */
 function renderTareas(){
   const list=myTasks();
   const main=document.getElementById("mainContent");
@@ -1551,9 +1514,6 @@ window.openTask=openTask;
 function completeTask(id){const t=db.tasks.find(x=>x.id===id);if(!t) return;t.status="completada";DB.save(db);closeModal();toast("Completada");navigate(currentPage)}
 window.completeTask=completeTask;
 
-/* =========================================================
-   PAGE: COMISIONES
-   ========================================================= */
 function renderComisiones(){
   const list=myCommissions();
   const pending=list.filter(c=>c.status==="pendiente");
@@ -1608,9 +1568,6 @@ window.openCom=openCom;
 function markComPaid(id){const c=db.commissions.find(x=>x.id===id);if(!c) return;c.status="cobrada";c.paidDate=todayISO();DB.save(db);closeModal();toast("Cobrada");navigate("comisiones")}
 window.markComPaid=markComPaid;
 
-/* =========================================================
-   PAGE: CATÁLOGO DE EMPRESAS
-   ========================================================= */
 function renderCatalogo(){
   const companies = db.companies;
   const main = document.getElementById("mainContent");
@@ -1770,20 +1727,16 @@ window.saveCompanyBilling=function(id){
   DB.save(db);closeModal();toast("Guardado");navigate("catalogo");
 };
 
-/* =========================================================
-   PAGE: VENTA CRUZADA (Matrix cliente-servicio)
-   ========================================================= */
 function renderVentaCruzada(){
   const clients = myClients();
   const contracts = myContracts();
   const main = document.getElementById("mainContent");
   
-  // Clientes con más sectores contratados (mejores para venta cruzada)
   const clientSectorCount = clients.map(c=>{
     const cs = contracts.filter(co=>co.clientId===c.id);
     const sectors = [...new Set(cs.map(co=>co.sector))];
     return {...c,contractCount:cs.length,sectors};
-  }).sort((a,b)=>a.sectors.length-b.sectors.length); // los que tienen menos sectores primero (más oportunidades)
+  }).sort((a,b)=>a.sectors.length-b.sectors.length);
   
   main.innerHTML = `
     <div class="page-title"><div><h2>🎯 Venta Cruzada</h2><div class="sub">Detecta oportunidades para ofrecer más servicios a tus clientes</div></div></div>
@@ -1831,9 +1784,6 @@ function renderVentaCruzada(){
   `;
 }
 
-/* =========================================================
-   PAGE: ADMIN GLOBAL
-   ========================================================= */
 function renderAdminGlobal(){
   if(session.role!=="admin"){
     document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>Solo admin</div>`;
@@ -1984,9 +1934,6 @@ window.viewAsCommercial = function(userId){
   navigate("hoy");
 };
 
-/* =========================================================
-   RESTO DE PÁGINAS (simplificadas)
-   ========================================================= */
 function renderOportunidades(){
   const list=myOpportunities();
   const main=document.getElementById("mainContent");
@@ -2082,9 +2029,6 @@ function saveDoc(){
 }
 window.saveDoc=saveDoc;
 
-/* =========================================================
-   COPILOTO IA
-   ========================================================= */
 function renderCopiloto(){
   const ai=db.settings.aiProvider;
   const main=document.getElementById("mainContent");
@@ -2187,9 +2131,6 @@ function renderDashboard(){
     </div>`;
 }
 
-/* =========================================================
-   FACTURACIÓN (conservado de versión anterior)
-   ========================================================= */
 function getCurrentUser(){return db.users.find(u=>u.id===session.userId)}
 function ensureUserBilling(user){if(!user.billing) user.billing={};const def={businessName:"",taxId:"",address:"",email:"",phone:"",iban:"",regime:"autonomo",defaultTax:"iva",logo:null};Object.keys(def).forEach(k=>{if(user.billing[k]===undefined) user.billing[k]=def[k]})}
 function renderFacturacion(){
@@ -2323,34 +2264,135 @@ function openInvoice(id){
 }
 window.openInvoice=openInvoice;
 
-/* =========================================================
-   ADMIN (mantenimiento)
-   ========================================================= */
+// ✅ FUNCIÓN ADMIN CON DIAGNÓSTICO
 function renderAdmin(){
   if(session.role!=="admin"){document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>Solo admin</div>`;return}
   const main=document.getElementById("mainContent");
   main.innerHTML=`<div class="page-title"><div><h2>⚙️ Administración</h2></div></div>
     <div class="card"><h3>🎭 Modo DEMO</h3><div class="row between"><div>Estado: ${db.settings.demo?"<span class='badge info'>ACTIVO</span>":"<span class='badge muted'>DESACTIVADO</span>"}</div><div>${db.settings.demo?`<button class="btn btn-danger" onclick="toggleDemo(false)">Desactivar</button>`:`<button class="btn btn-accent" onclick="toggleDemo(true)">Activar</button>`}</div></div></div>
-    <div class="card mt2"><h3>👥 Usuarios</h3><button class="btn btn-accent btn-sm mb" onclick="openUserForm()">+ Nuevo</button><div class="list">${db.users.map(u=>`<div class="list-item"><div class="li-main"><div class="li-title">${esc(u.name)} ${esc(u.surname||"")} <span class="badge ${u.role==='admin'?'danger':'info'}">${esc(u.role)}</span></div><div class="li-sub">@${esc(u.username)}</div></div><button class="btn btn-secondary btn-sm" onclick="openUserForm('${u.id}')">Editar</button></div>`).join("")}</div></div>
+    <div class="card mt2"><h3>👥 Usuarios (${db.users.length})</h3><button class="btn btn-accent btn-sm mb" onclick="openUserForm()">+ Nuevo</button><div class="list">${db.users.map(u=>`<div class="list-item"><div class="li-main"><div class="li-title">${esc(u.name)} ${esc(u.surname||"")} <span class="badge ${u.role==='admin'?'danger':'info'}">${esc(u.role)}</span> <span class="badge ${u.status==='activo'?'ok':'muted'}">${esc(u.status)}</span></div><div class="li-sub">@${esc(u.username)} · ${esc(u.email||"—")}</div></div><button class="btn btn-secondary btn-sm" onclick="openUserForm('${u.id}')">Editar</button></div>`).join("")}</div></div>
+    
+    <div class="card mt2">
+      <h3>🔍 Diagnóstico de usuarios</h3>
+      <div class="text-muted mb">Lista de todos los usuarios en el sistema:</div>
+      <div style="background:#f9fafb;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;max-height:300px;overflow:auto">
+        ${db.users.map(u=>`<div>✅ <b>${esc(u.username)}</b> · Role: ${esc(u.role)} · Status: ${esc(u.status)} · Password: ${u.password?'***'+u.password.slice(-2):'SIN PASSWORD'}</div>`).join("")}
+      </div>
+      <div class="mt">
+        <button class="btn btn-secondary btn-sm" onclick="testAllUsers()">🧪 Probar todos los usuarios</button>
+        <button class="btn btn-secondary btn-sm" onclick="forceLogout()">🚪 Forzar logout global</button>
+      </div>
+    </div>
+    
     <div class="card mt2"><h3>🧨 Zona peligrosa</h3><button class="btn btn-danger" onclick="resetAll()">Borrar TODO</button></div>`;
 }
+
+function testAllUsers(){
+  console.log("=== PROBANDO TODOS LOS USUARIOS ===");
+  db.users.forEach(u=>{
+    console.log(`Usuario: ${u.username} | Password: ${u.password} | Role: ${u.role} | Status: ${u.status}`);
+    const testLogin = db.users.find(x=>x.username===u.username && x.password===u.password);
+    if(testLogin){
+      console.log(`  ✅ Login OK para ${u.username}`);
+    } else {
+      console.log(`  ❌ Login FALLIDO para ${u.username}`);
+    }
+  });
+  toast("✅ Revisa la consola (F12) para ver los resultados");
+}
+window.testAllUsers=testAllUsers;
+
+function forceLogout(){
+  if(!confirm("¿Cerrar sesión de todos los usuarios?")) return;
+  clearSession();
+  toast("Sesión cerrada. Recarga la página para entrar de nuevo.");
+  setTimeout(()=>location.reload(), 1000);
+}
+window.forceLogout=forceLogout;
+
 function toggleDemo(on){if(on){enableDemo(db);toast("DEMO activado")}else{if(!confirm("¿Desactivar DEMO?")) return;disableDemo(db);toast("DEMO desactivado")}navigate("admin")}
 window.toggleDemo=toggleDemo;
+
+// ✅ FUNCIÓN SAVEUSER CORREGIDA
 function openUserForm(id){
   const u=id?db.users.find(x=>x.id===id):null;
   const body=`<div class="two-col"><div class="form-group"><label>Nombre *</label><input id="f_name" value="${esc(u?.name||"")}" /></div><div class="form-group"><label>Apellidos</label><input id="f_surname" value="${esc(u?.surname||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Email</label><input id="f_email" value="${esc(u?.email||"")}" /></div><div class="form-group"><label>Teléfono</label><input id="f_phone" value="${esc(u?.phone||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Usuario *</label><input id="f_user" value="${esc(u?.username||"")}" /></div><div class="form-group"><label>Contraseña ${u?"(vacío=no cambiar)":"*"}</label><input type="password" id="f_pass" /></div></div><div class="two-col"><div class="form-group"><label>Rol</label><select id="f_role"><option value="comercial" ${u?.role==="comercial"?"selected":""}>Comercial</option><option value="admin" ${u?.role==="admin"?"selected":""}>Admin</option></select></div><div class="form-group"><label>Estado</label><select id="f_status"><option ${u?.status==="activo"?"selected":""}>activo</option><option ${u?.status==="desactivado"?"selected":""}>desactivado</option></select></div></div>`;
   openModal(u?"Editar usuario":"Nuevo usuario",body,`${u&&u.username!=="admin"?`<button class="btn btn-danger" onclick="deleteUser('${u.id}')">Eliminar</button>`:""}<button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" style="width:auto" onclick="saveUser('${id||""}')">Guardar</button>`);
 }
 window.openUserForm=openUserForm;
+
 function saveUser(id){
-  const data={name:document.getElementById("f_name").value.trim(),surname:document.getElementById("f_surname").value.trim(),email:document.getElementById("f_email").value.trim(),phone:document.getElementById("f_phone").value.trim(),username:document.getElementById("f_user").value.trim(),role:document.getElementById("f_role").value,status:document.getElementById("f_status").value};
+  const data={
+    name:document.getElementById("f_name").value.trim(),
+    surname:document.getElementById("f_surname").value.trim(),
+    email:document.getElementById("f_email").value.trim(),
+    phone:document.getElementById("f_phone").value.trim(),
+    username:document.getElementById("f_user").value.trim(),
+    role:document.getElementById("f_role").value,
+    status:document.getElementById("f_status").value
+  };
   const pass=document.getElementById("f_pass").value;
-  if(!data.name||!data.username){toast("Nombre y usuario obligatorios");return}
-  if(id){const u=db.users.find(x=>x.id===id);Object.assign(u,data);if(pass) u.password=pass}
-  else{if(!pass){toast("Contraseña obligatoria");return}db.users.push({id:uid(),...data,password:pass,createdAt:todayISO(),assignedSectors:Object.keys(SECTORS)})}
-  DB.save(db);closeModal();toast("Guardado");navigate("admin");
+  
+  if(!data.name||!data.username){
+    toast("⚠️ Nombre y usuario son obligatorios");
+    return;
+  }
+  
+  const existingUser = db.users.find(u=>u.username===data.username && u.id!==id);
+  if(existingUser){
+    toast("⚠️ El nombre de usuario '"+data.username+"' ya existe");
+    return;
+  }
+  
+  if(id){
+    const u=db.users.find(x=>x.id===id);
+    Object.assign(u,data);
+    if(pass) u.password=pass;
+    DB.save(db);
+    closeModal();
+    toast("✅ Usuario '"+data.username+"' actualizado");
+    navigate("admin");
+  }
+  else{
+    if(!pass){
+      toast("⚠️ La contraseña es obligatoria para nuevos usuarios");
+      return;
+    }
+    if(pass.length<4){
+      toast("⚠️ La contraseña debe tener al menos 4 caracteres");
+      return;
+    }
+    
+    const newUser = {
+      id:uid(),
+      ...data,
+      password:pass,
+      createdAt:todayISO(),
+      assignedSectors:Object.keys(SECTORS),
+      billing:{
+        businessName:data.name+" "+(data.surname||""),
+        taxId:"",
+        address:"",
+        email:data.email,
+        phone:data.phone,
+        iban:"",
+        regime:"autonomo",
+        defaultTax:"iva",
+        logo:null
+      }
+    };
+    
+    db.users.push(newUser);
+    DB.save(db);
+    
+    console.log("Usuario creado:", newUser);
+    closeModal();
+    toast("✅ Usuario '"+data.username+"' creado correctamente. Ya puede entrar con sus credenciales.");
+    navigate("admin");
+  }
 }
 window.saveUser=saveUser;
+
 function deleteUser(id){if(!confirm("¿Eliminar?")) return;db.users=db.users.filter(u=>u.id!==id);DB.save(db);closeModal();navigate("admin")}
 window.deleteUser=deleteUser;
 function resetAll(){if(!confirm("¿BORRAR TODO?")) return;if(!confirm("¿Seguro absoluto?")) return;DB.clear();location.reload()}
@@ -2375,9 +2417,6 @@ window.exportData=exportData;
 function importData(e){const f=e.target.files[0];if(!f) return;const r=new FileReader();r.onload=()=>{try{const data=JSON.parse(r.result);if(!data.users) throw new Error("Formato inválido");if(!confirm("¿Reemplazar datos?")) return;DB.save(data);location.reload()}catch(err){toast("Error: "+err.message)}};r.readAsText(f)}
 window.importData=importData;
 
-/* =========================================================
-   IMPORTACIÓN EXCEL (conservada)
-   ========================================================= */
 const IMPORT_FIELDS=[{key:"name",label:"Nombre",required:true},{key:"surname",label:"Apellidos",required:false},{key:"phone",label:"Teléfono",required:false},{key:"email",label:"Email",required:false},{key:"address",label:"Dirección",required:false},{key:"city",label:"Ciudad",required:false},{key:"notes",label:"Notas",required:false}];
 const COLUMN_ALIASES={name:["nombre","name","first name"],surname:["apellidos","surname","last name"],phone:["teléfono","telefono","tel","movil","móvil","mobile","phone"],email:["email","e-mail","correo","mail"],address:["dirección","direccion","address","domicilio"],city:["ciudad","city","poblacion","localidad"],notes:["notas","notes","observaciones"]};
 
@@ -2496,9 +2535,6 @@ window.downloadImportTemplate=downloadImportTemplate;
 function openImportCompaniesWizard(){toast("📥 Importación de empresas: usa la misma interfaz que clientes (próximamente)")}
 window.openImportCompaniesWizard=openImportCompaniesWizard;
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
 function setupSearch(){
   const input=document.getElementById("globalSearch");const results=document.getElementById("searchResults");
   input.addEventListener("input",()=>{
@@ -2538,9 +2574,7 @@ window.showAlerts=showAlerts;
 
 function emptyHTML(msg){return `<div class="empty"><div class="ic">📭</div>${esc(msg)}</div>`}
 
-/* =========================================================
-   BOOT
-   ========================================================= */
+// ✅ FUNCIÓN SHOWAPP CON VERIFICACIÓN
 function boot(){
   if(session) showApp();
   else document.getElementById("loginScreen").style.display="flex";
@@ -2575,6 +2609,26 @@ function boot(){
 }
 
 function showApp(){
+  if(!session || !session.userId){
+    console.error("No hay sesión válida");
+    clearSession();
+    document.getElementById("loginScreen").style.display="flex";
+    document.getElementById("app").classList.remove("active");
+    return;
+  }
+  
+  const user = db.users.find(x=>x.id===session.userId);
+  if(!user){
+    console.error("Usuario de sesión no encontrado en DB:", session.userId);
+    toast("⚠️ Error: usuario no encontrado. Inicia sesión de nuevo.");
+    clearSession();
+    document.getElementById("loginScreen").style.display="flex";
+    document.getElementById("app").classList.remove("active");
+    return;
+  }
+  
+  console.log("Mostrando app para usuario:", user.username, "Role:", user.role);
+  
   document.getElementById("loginScreen").style.display="none";
   document.getElementById("app").classList.add("active");
   renderSidebar();
