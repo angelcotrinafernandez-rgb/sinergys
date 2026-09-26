@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#ea580c" />
 <title>GRUPO SINERGYS — Superagente Comercial Multimarca con IA</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <style>
 :root{--brand:#ea580c;--brand-2:#f97316;--brand-dark:#c2410c;--brand-light:#fff7ed;--bg:#f4f6fb;--card:#fff;--text:#1a2236;--muted:#6b7280;--border:#e5e7eb;--ok:#16a34a;--warn:#f59e0b;--danger:#dc2626;--info:#2563eb;--shadow:0 4px 14px rgba(234,88,12,.08);--radius:14px;--radius-sm:10px}
@@ -248,7 +247,7 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
     </form>
     <div class="login-demo">¿No tienes cuenta? <button id="btnDemoAccess">Entrar en modo DEMO</button></div>
     <div class="login-reset"><button id="btnEmergencyReset">🔧 Reset de emergencia</button></div>
-    <div class="text-muted" style="text-align:center;margin-top:14px;font-size:11px">v3.0 · 14 sectores · 7 roles · Territorios</div>
+    <div class="text-muted" style="text-align:center;margin-top:14px;font-size:11px">v3.1 · 14 sectores · 7 roles · Territorios</div>
   </div>
 </div>
 
@@ -276,7 +275,7 @@ details summary{cursor:pointer;font-weight:600;font-size:14px}
           <div id="searchResults" class="search-results hidden"></div>
         </div>
         <div class="row" style="gap:6px">
-          <button class="icon-btn" id="btnMicTop" title="Voz">🎙️</button>
+          <button class="icon-btn" id="btnMicTop" title="Voz">️</button>
           <button class="icon-btn" id="btnAlertsTop" title="Alertas">🔔</button>
         </div>
       </div>
@@ -304,11 +303,11 @@ const SECTORS = {
   cursos: {id:"cursos",name:"Cursos Subvencionados",icon:"📚",color:"#8b5cf6",group:"Servicios",fields:["courseName","trainingEntity","hours","modality","startDate","endDate","subsidyAmount"]},
   seguros: {id:"seguros",name:"Seguros",icon:"🛡️",color:"#10b981",group:"Servicios",fields:["insuranceType","insurer","premium","coverages","startDate","renewalDate"]},
   prl: {id:"prl",name:"PRL",icon:"⚠️",color:"#f97316",group:"Servicios",fields:["serviceType","numWorkers","hours","startDate","endDate"]},
-  limpieza: {id:"limpieza",name:"Limpieza",icon:"🧹",color:"#14b8a6",group:"Servicios",fields:["cleaningType","surfaceM2","frequency","schedule","numWorkers","monthlyPrice","serviceAddress"]},
+  limpieza: {id:"limpieza",name:"Limpieza",icon:"",color:"#14b8a6",group:"Servicios",fields:["cleaningType","surfaceM2","frequency","schedule","numWorkers","monthlyPrice","serviceAddress"]},
   paqueteria: {id:"paqueteria",name:"Paquetería",icon:"📦",color:"#a855f7",group:"Logística",fields:["serviceType","carrier","accountCode","monthlyVolume","avgWeight","destinations","pickupFrequency"]},
   fotovoltaica: {id:"fotovoltaica",name:"Fotovoltaica",icon:"☀️",color:"#eab308",group:"Energía Avanzada",fields:["powerKWp","numPanels","installationType","estimatedSaving","installAddress","startDate"]},
   cargadores: {id:"cargadores",name:"Cargadores VE",icon:"🔌",color:"#22c55e",group:"Energía Avanzada",fields:["chargerType","power","numSlots","location","pricePerKwh"]},
-  asesoria_ia: {id:"asesoria_ia",name:"Asesoría IA",icon:"",color:"#6366f1",group:"Tecnología",fields:["serviceType","technology","useCase","numUsers","duration","fees","phase"]},
+  asesoria_ia: {id:"asesoria_ia",name:"Asesoría IA",icon:"🤖",color:"#6366f1",group:"Tecnología",fields:["serviceType","technology","useCase","numUsers","duration","fees","phase"]},
   ciberseguridad: {id:"ciberseguridad",name:"Ciberseguridad",icon:"🔐",color:"#dc2626",group:"Tecnología",fields:["serviceType","scope","numEmployees","numDevices","regulations","criticality","contractPeriod"]},
   asesoria: {id:"asesoria",name:"Asesoría Fiscal/Laboral",icon:"💼",color:"#78716c",group:"Servicios",fields:["advisoryType","services","monthlyFees","numEmployees"]}
 };
@@ -325,13 +324,13 @@ const SECTOR_GROUPS = {
 const PROVINCES = ["Álava","Albacete","Alicante","Almería","Asturias","Ávila","Badajoz","Baleares","Barcelona","Burgos","Cáceres","Cádiz","Cantabria","Castellón","Ciudad Real","Córdoba","Cuenca","Girona","Granada","Guadalajara","Gipuzkoa","Huelva","Huesca","Jaén","La Rioja","Las Palmas","León","Lleida","Lugo","Madrid","Málaga","Murcia","Navarra","Ourense","Palencia","Pontevedra","Salamanca","Santa Cruz de Tenerife","Segovia","Sevilla","Soria","Tarragona","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza","Ceuta","Melilla"];
 
 const ROLES = {
-  admin: {name:"Administrador",icon:"",level:100,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
+  admin: {name:"Administrador",icon:"👑",level:100,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
   director_expansion: {name:"Director de Expansión y Formación",icon:"🎯",level:90,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
   director_comercial: {name:"Director Comercial",icon:"💼",level:90,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
   director_financiero: {name:"Director Financiero",icon:"💰",level:90,canCreateUsers:true,canViewAll:true,canManageTerritory:false},
   director_territorial: {name:"Director Territorial",icon:"🗺️",level:70,canCreateUsers:true,canViewAll:false,canManageTerritory:true},
   backoffice: {name:"Backoffice",icon:"📋",level:50,canCreateUsers:false,canViewAll:false,canManageTerritory:false},
-  comercial: {name:"Comercial",icon:"",level:10,canCreateUsers:false,canViewAll:false,canManageTerritory:false}
+  comercial: {name:"Comercial",icon:"👤",level:10,canCreateUsers:false,canViewAll:false,canManageTerritory:false}
 };
 
 const BRAND = {name:"GRUPO SINERGYS",tagline:"Superagente Comercial Multimarca con IA"};
@@ -380,6 +379,13 @@ function initDB(){
 function getSession(){try{return JSON.parse(sessionStorage.getItem(SESSION_KEY))}catch(e){return null}}
 function setSession(s){sessionStorage.setItem(SESSION_KEY,JSON.stringify(s))}
 function clearSession(){sessionStorage.removeItem(SESSION_KEY)}
+
+// CORRECCIÓN #7: CUPS generado carácter a carácter
+function generateCUPS(){
+  let cups = "ES";
+  for(let i=0;i<18;i++) cups += Math.floor(Math.random()*10);
+  return cups;
+}
 
 function seedDemo(){
   const companies = [
@@ -516,7 +522,7 @@ function generateSectorData(sector){
   switch(sector){
     case "energia":
       data.supplyType = Math.random()<.6?"Luz":"Gas";
-      data.cups = "ES"+String(10000000000000+Math.floor(Math.random()*89999999999999)).slice(0,18);
+      data.cups = generateCUPS();
       data.tariff = "Tarifa Fija";
       data.power = (3+Math.floor(Math.random()*8))+" kW";
       data.consumption = (1500+Math.floor(Math.random()*4000))+" kWh/año";
@@ -683,7 +689,6 @@ function getActiveUserId(){
   return session.userId;
 }
 
-// ✅ SISTEMA DE PERMISOS POR ROL
 function canViewAll(){
   if(!session) return false;
   const role = ROLES[session.role];
@@ -699,6 +704,7 @@ function getMyTerritoryProvinces(){
   return [];
 }
 
+// CORRECCIÓN #4: filtro mejorado para director_territorial
 function my(scope){
   if(!session) return [];
   const uid = getActiveUserId();
@@ -707,17 +713,16 @@ function my(scope){
   const user = db.users.find(u=>u.id===uid);
   if(!user) return [];
   
-  // Director territorial: solo ve su territorio
-  if(user.role==="director_territorial" && user.territory && user.territory.provinces){
-    const territoryProvinces = user.territory.provinces;
-    const commercialIds = db.users.filter(u=>u.role==="comercial" && territoryProvinces.includes(u.province)).map(u=>u.id);
+  if(user.role==="director_territorial"){
+    const provinces = user.territory?.provinces || [];
+    const commercialIds = db.users
+      .filter(u=>u.role==="comercial" && (provinces.includes(u.province) || (u.territory && u.territory.provinces && u.territory.provinces.some(p=>provinces.includes(p)))))
+      .map(u=>u.id);
     return (db[scope]||[]).filter(x=>x.userId===uid || commercialIds.includes(x.userId));
   }
   
-  // Backoffice: solo ve módulos de admin
   if(user.role==="backoffice") return [];
   
-  // Comercial: solo sus datos
   return (db[scope]||[]).filter(x=>x.userId===uid);
 }
 
@@ -758,7 +763,11 @@ function dormantClients(){
   }).filter(c=>c.bucket!=="activo").sort((a,b)=>b.daysSinceContact-a.daysSinceContact);
 }
 
+// CORRECCIÓN #6: salir de adminViewMode al entrar en admin_global/territorios
 function navigate(page,opts={}){
+  if(["admin_global","territorios"].includes(page) && adminViewMode){
+    exitAdminView();
+  }
   currentPage=page;
   document.querySelectorAll(".side-item,.bn-item").forEach(el=>{
     el.classList.toggle("active",el.dataset.nav===page);
@@ -784,9 +793,9 @@ function renderSidebar(){
     html += `<div class="side-item" data-nav="clientes"><span class="ic">👥</span> Clientes</div>`;
     html += `<div class="side-item" data-nav="contratos"><span class="ic">📄</span> Contratos</div>`;
     html += `<div class="side-item" data-nav="renovaciones"><span class="ic">🔄</span> Renovaciones</div>`;
-    html += `<div class="side-item" data-nav="sectores"><span class="ic">📊</span> Sectores</div>`;
-    html += `<div class="side-item" data-nav="catalogo"><span class="ic"></span> Catálogo Empresas</div>`;
-    html += `<div class="side-item" data-nav="venta_cruzada"><span class="ic">🎯</span> Venta Cruzada</div>`;
+    html += `<div class="side-item" data-nav="sectores"><span class="ic"></span> Sectores</div>`;
+    html += `<div class="side-item" data-nav="catalogo"><span class="ic">🏢</span> Catálogo Empresas</div>`;
+    html += `<div class="side-item" data-nav="venta_cruzada"><span class="ic"></span> Venta Cruzada</div>`;
     html += `<div class="side-item" data-nav="tareas"><span class="ic">✅</span> Tareas</div>`;
     html += `<div class="side-item" data-nav="comisiones"><span class="ic">💰</span> Comisiones</div>`;
     html += `<div class="side-item" data-nav="facturacion"><span class="ic">🧾</span> Facturación</div>`;
@@ -798,12 +807,12 @@ function renderSidebar(){
   }
   
   html += `<div class="side-sep">Sistema</div>`;
-  html += `<div class="side-item" data-nav="dashboard"><span class="ic">📊</span> Dashboard</div>`;
+  html += `<div class="side-item" data-nav="dashboard"><span class="ic"></span> Dashboard</div>`;
   
   if(isAdmin){
     html += `<div class="side-item" data-nav="admin_global"><span class="ic">👑</span> Admin Global</div>`;
     html += `<div class="side-item" data-nav="territorios"><span class="ic">🗺️</span> Territorios</div>`;
-    html += `<div class="side-item" data-nav="admin"><span class="ic">⚙️</span> Administración</div>`;
+    html += `<div class="side-item" data-nav="admin"><span class="ic">️</span> Administración</div>`;
   }
   
   if(isBackoffice){
@@ -817,13 +826,13 @@ function renderSidebar(){
   sb.querySelectorAll("[data-nav]").forEach(el=>{
     el.addEventListener("click",()=>navigate(el.dataset.nav));
   });
-  document.getElementById("btnLogout").addEventListener("click",logout);
+  const logoutBtn = document.getElementById("btnLogout");
+  if(logoutBtn) logoutBtn.addEventListener("click",logout);
   const u = db.users.find(x=>x.id===session.userId);
   const roleInfo = ROLES[u?.role];
-  document.getElementById("sideUser").innerHTML = `<b>${esc(u?.name||"")}</b><br><span style="font-size:10px">@${esc(u?.username||"")} · ${roleInfo?.icon||""} ${roleInfo?.name||""}</span>`;
-}
-
-function renderHoy(){
+  const sideUserEl = document.getElementById("sideUser");
+  if(sideUserEl) sideUserEl.innerHTML = `<b>${esc(u?.name||"")}</b><br><span style="font-size:10px">@${esc(u?.username||"")} · ${roleInfo?.icon||""} ${roleInfo?.name||""}</span>`;
+}function renderHoy(){
   const ren = computeRenewals().filter(c=>c.daysToRenewal<=60);
   const urgentRen = ren.filter(c=>c.daysToRenewal<=15);
   const tasksToday = myTasks().filter(t=>t.status!=="completada"&&t.date<=todayISO());
@@ -832,12 +841,8 @@ function renderHoy(){
   const opps = myOpportunities().filter(o=>o.status==="abierta");
   const total = urgentRen.length+tasksToday.length+pendingCom.length+dormant.length+opps.length;
   const contracts = myContracts();
-  
   const bySector = {};
-  contracts.forEach(c=>{
-    if(!bySector[c.sector]) bySector[c.sector] = 0;
-    bySector[c.sector]++;
-  });
+  contracts.forEach(c=>{if(!bySector[c.sector]) bySector[c.sector] = 0; bySector[c.sector]++;});
 
   const main = document.getElementById("mainContent");
   let adminBanner = "";
@@ -859,7 +864,7 @@ function renderHoy(){
       <div class="tile orange" onclick="navigate('tareas')"><div class="n">${tasksToday.length}</div><div class="l">🟠 Tareas pendientes</div></div>
       <div class="tile yellow" onclick="navigate('comisiones')"><div class="n">${pendingCom.length}</div><div class="l">💰 Comisiones pendientes</div></div>
       <div class="tile blue" onclick="navigate('oportunidades')"><div class="n">${opps.length}</div><div class="l">⭐ Oportunidades</div></div>
-      <div class="tile" onclick="navigate('dormidos')" style="border-left-color:#6b7280"><div class="n" style="color:#6b7280">${dormant.length}</div><div class="l">😴 Dormidos</div></div>
+      <div class="tile" onclick="navigate('dormidos')" style="border-left-color:#6b7280"><div class="n" style="color:#6b7280">${dormant.length}</div><div class="l"> Dormidos</div></div>
     </div>
     <div class="card mt2">
       <h3>📊 Mis contratos por sector</h3>
@@ -876,7 +881,7 @@ function renderHoy(){
     </div>
     <div class="grid grid-2 mt2">
       <div class="card">
-        <h3>🔴 Renovaciones urgentes</h3>
+        <h3> Renovaciones urgentes</h3>
         <div class="list">
           ${urgentRen.slice(0,5).map(c=>{
             const cl = clientById(c.clientId);
@@ -908,7 +913,7 @@ function renderHoy(){
   `;
 }
 window.exitAdminView = function(){adminViewMode=false;adminViewUserId=null;navigate("hoy")};
-function prepararMiDia(){
+window.prepararMiDia=function(){
   const ren = computeRenewals().filter(c=>c.daysToRenewal<=30);
   const tasks = myTasks().filter(t=>t.status!=="completada"&&t.date<=todayISO());
   const dormant = dormantClients().slice(0,3);
@@ -917,22 +922,19 @@ function prepararMiDia(){
   if(ren.length){plan+="• Renovaciones próximas:\n";ren.slice(0,5).forEach(c=>{const cl=clientById(c.clientId);const s=SECTORS[c.sector];plan+=`  - ${cl?.name} ${cl?.surname} — ${s?.icon} ${s?.name} · ${c.companyName} (${c.daysToRenewal}d)\n`})}
   plan+="\n2️⃣ TAREAS ABIERTAS\n";
   tasks.slice(0,5).forEach(t=>{const cl=clientById(t.clientId);plan+=`• ${t.type} — ${cl?.name||""} ${cl?.surname||""}\n`});
-  if(dormant.length){plan+="\n3️⃣ CLIENTES DORMIDOS\n";dormant.forEach(c=>{plan+=`• ${c.name} ${c.surname} (${c.daysSinceContact}d)\n`})}
+  if(dormant.length){plan+="\n3️ CLIENTES DORMIDOS\n";dormant.forEach(c=>{plan+=`• ${c.name} ${c.surname} (${c.daysSinceContact}d)\n`})}
   if(com.length){plan+="\n4️⃣ COMISIONES PENDIENTES\n";com.forEach(c=>{const cl=clientById(c.clientId);plan+=`• ${fmtMoney(c.amount)} — ${cl?.name||""}\n`})}
   plan+="\n💡 Consejo: empieza por las renovaciones de los próximos 15 días.";
   openModal("🤖 Plan para hoy",`<div style="white-space:pre-wrap;font-size:14px;line-height:1.6">${esc(plan)}</div>`,`<button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`);
-}
-window.prepararMiDia=prepararMiDia;
+};
 
 function renderSectores(){
   const contracts = myContracts();
   const bySector = {};
   Object.keys(SECTORS).forEach(sk=>bySector[sk]=0);
   contracts.forEach(c=>{if(bySector[c.sector]!==undefined) bySector[c.sector]++});
-  
   const main = document.getElementById("mainContent");
   let html = `<div class="page-title"><div><h2> Mis Sectores</h2><div class="sub">14 sectores comerciales · ${contracts.length} contratos totales</div></div></div>`;
-  
   Object.entries(SECTOR_GROUPS).forEach(([group,sectorIds])=>{
     html += `<h3 style="margin:20px 0 10px;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.5px">${group}</h3>`;
     html += `<div class="grid grid-3">`;
@@ -962,7 +964,7 @@ function renderClientes(){
     <div class="page-title">
       <div><h2>👥 Clientes</h2><div class="sub">${list.length} clientes</div></div>
       <div class="row" style="gap:8px">
-        <button class="btn btn-secondary" onclick="openImportWizard()"> Importar Excel</button>
+        <button class="btn btn-secondary" onclick="openImportWizard()">📥 Importar Excel</button>
         <button class="btn btn-accent" onclick="openClientForm()">+ Nuevo cliente</button>
       </div>
     </div>
@@ -974,9 +976,11 @@ function renderClientes(){
   renderClientList();
 }
 function renderClientList(){
-  const q=(document.getElementById("clientFilter")?.value||"").toLowerCase();
+  const filterEl = document.getElementById("clientFilter");
+  const q = filterEl ? filterEl.value.toLowerCase() : "";
   const list=myClients().filter(c=>!q||(c.name+" "+c.surname+" "+(c.phone||"")+" "+(c.email||"")).toLowerCase().includes(q));
   const cont=document.getElementById("clientList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin clientes");return}
   cont.innerHTML=`<div class="list">${list.map(c=>{
     const contracts=myContracts().filter(x=>x.clientId===c.id);
@@ -1042,15 +1046,9 @@ function openClient(id){
   const opps=myOpportunities().filter(o=>o.clientId===id);
   const totalCom=com.reduce((a,b)=>a+(b.amount||0),0);
   const paidCom=com.filter(x=>x.status==="cobrada").reduce((a,b)=>a+(b.amount||0),0);
-  
   const bySector = {};
-  contracts.forEach(co=>{
-    if(!bySector[co.sector]) bySector[co.sector]=[];
-    bySector[co.sector].push(co);
-  });
-  
+  contracts.forEach(co=>{if(!bySector[co.sector]) bySector[co.sector]=[]; bySector[co.sector].push(co);});
   const missingSectors = Object.keys(SECTORS).filter(s=>!bySector[s]);
-  
   const body=`
     <div class="row between mb">
       <div>
@@ -1066,7 +1064,7 @@ function openClient(id){
       <div class="stat"><div class="v">${Object.keys(bySector).length}</div><div class="l">Sectores activos</div></div>
     </div>
     <div class="divider"></div>
-    <h3>📊 Servicios contratados (vista 360º)</h3>
+    <h3> Servicios contratados (vista 360º)</h3>
     ${Object.keys(bySector).length?Object.entries(bySector).map(([sid,contracts])=>{
       const s = SECTORS[sid];
       return `<details open>
@@ -1085,7 +1083,6 @@ function openClient(id){
         </div>
       </details>`;
     }).join(""):`<div class="empty">Sin servicios contratados</div>`}
-    
     ${missingSectors.length?`
     <div class="divider"></div>
     <h3> Oportunidades de venta cruzada</h3>
@@ -1130,17 +1127,13 @@ function prepararLlamada(clientId){
   const contracts=myContracts().filter(x=>x.clientId===clientId);
   const bySector = {};
   contracts.forEach(co=>{if(!bySector[co.sector])bySector[co.sector]=[];bySector[co.sector].push(co)});
-  
-  let resumen = `👤 CLIENTE: ${c.name} ${c.surname||""}\n📞 ${c.phone||"—"} · ✉️ ${c.email||"—"}\n Último contacto: ${fmtDate(c.lastContact)}\n\n`;
-  resumen += ` SERVICIOS CONTRATADOS (${contracts.length}):\n`;
+  let resumen = ` CLIENTE: ${c.name} ${c.surname||""}\n📞 ${c.phone||"—"} · ✉️ ${c.email||"—"}\n📅 Último contacto: ${fmtDate(c.lastContact)}\n\n`;
+  resumen += `📊 SERVICIOS CONTRATADOS (${contracts.length}):\n`;
   Object.entries(bySector).forEach(([sid,list])=>{
     const s = SECTORS[sid];
     resumen += `\n${s.icon} ${s.name}:\n`;
-    list.forEach(co=>{
-      resumen += `  • ${co.companyName} — ${renderContractSummary(co)}\n`;
-    });
+    list.forEach(co=>{ resumen += `  • ${co.companyName} — ${renderContractSummary(co)}\n`; });
   });
-  
   const missingSectors = Object.keys(SECTORS).filter(s=>!bySector[s]);
   const rec = [];
   if(missingSectors.length) rec.push(`• Venta cruzada: el cliente no tiene ${missingSectors.slice(0,3).map(s=>SECTORS[s].name).join(", ")}. Ofrecer.`);
@@ -1148,8 +1141,7 @@ function prepararLlamada(clientId){
   if(urgentes.length) rec.push("• Renovaciones próximas: confirmar continuidad.");
   if(c.lastContact&&daysBetween(c.lastContact,todayISO())>90) rec.push("• Hace tiempo sin contacto: empezar preguntando cómo le ha ido.");
   if(!rec.length) rec.push("• Llamada de seguimiento general.");
-  
-  openModal("📞 Preparar llamada — "+c.name,
+  openModal(" Preparar llamada — "+c.name,
     `<div style="white-space:pre-wrap;font-size:13px;line-height:1.55;background:#f9fafb;padding:12px;border-radius:10px;border:1px solid var(--border)">${esc(resumen)}</div>
      <div class="divider"></div>
      <h3>🎯 Recomendación</h3>
@@ -1159,21 +1151,18 @@ function prepararLlamada(clientId){
   c.lastContact=todayISO();DB.save(db);
 }
 window.prepararLlamada=prepararLlamada;
-function cerrarLlamada(clientId){closeModal();openTaskForm(null,{clientId,type:"SEGUIMIENTO",description:"Seguimiento post-llamada"})}
-window.cerrarLlamada=cerrarLlamada;
+window.cerrarLlamada=function(clientId){closeModal();openTaskForm(null,{clientId,type:"SEGUIMIENTO",description:"Seguimiento post-llamada"})};
 
 function renderContratos(opts={}){
   const filterSector = opts.sector||"todos";
   const list = myContracts();
   const main = document.getElementById("mainContent");
-  
   let tabsHtml = `<div class="tab ${filterSector==="todos"?"active":""}" data-f="todos">Todos (${list.length})</div>`;
   Object.keys(SECTORS).forEach(sk=>{
     const s = SECTORS[sk];
     const count = list.filter(c=>c.sector===sk).length;
     if(count>0) tabsHtml += `<div class="tab ${filterSector===sk?"active":""}" data-f="${sk}">${s.icon} ${s.name} (${count})</div>`;
   });
-  
   main.innerHTML = `
     <div class="page-title">
       <div><h2>📄 Contratos</h2><div class="sub">${list.length} contratos en ${Object.keys(SECTORS).length} sectores</div></div>
@@ -1197,6 +1186,7 @@ function renderContractList(filter){
   let list = myContracts();
   if(filter!=="todos") list = list.filter(c=>c.sector===filter);
   const cont = document.getElementById("contractList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin contratos");return}
   cont.innerHTML=`<div class="list">${list.map(c=>{
     const cl=clientById(c.clientId);
@@ -1204,7 +1194,7 @@ function renderContractList(filter){
     const b=renewalBucket(days);
     const s=SECTORS[c.sector];
     return `<div class="list-item" onclick="openContract('${c.id}')">
-      <div style="font-size:24px">${s?.icon||""}</div>
+      <div style="font-size:24px">${s?.icon||"📄"}</div>
       <div class="li-main">
         <div class="li-title">${esc(cl?.name||"—")} ${esc(cl?.surname||"")} · ${esc(s?.name||c.sector)} <span class="chip ${b.chip}">${days}d</span></div>
         <div class="li-sub">${esc(c.companyName)} · ${renderContractSummary(c)}</div>
@@ -1238,10 +1228,9 @@ function openContractForm(id,preSector=null,preClient=null){
   const clients=myClients();
   const companies=db.companies.filter(co=>co.sectors.includes(sector));
   const sd = c?.sectorData||{};
-  
   const body=`
     <div class="form-group"><label>Sector</label>
-      <select id="f_sector" onchange="changeContractSector(this.value)">
+      <select id="f_sector" onchange="updateSectorFields(this.value)">
         ${Object.keys(SECTORS).map(sk=>`<option value="${sk}" ${sector===sk?"selected":""}>${SECTORS[sk].icon} ${SECTORS[sk].name}</option>`).join("")}
       </select>
     </div>
@@ -1265,11 +1254,9 @@ function openContractForm(id,preSector=null,preClient=null){
         <select id="f_status">${["ACTIVO","PRÓXIMO A RENOVAR","EN RENOVACIÓN","RENOVADO","PERDIDO","CANCELADO"].map(st=>`<option ${c?.status===st?"selected":""}>${st}</option>`).join("")}</select>
       </div>
     </div>
-    
     <div class="divider"></div>
     <h3>${s.icon} Datos específicos de ${s.name}</h3>
     <div id="sectorSpecificFields">${renderSectorFields(sector,sd)}</div>
-    
     <div class="form-group mt"><label>Notas</label><textarea id="f_notes" rows="2">${esc(c?.notes||"")}</textarea></div>
   `;
   openModal(c?"Editar contrato":"Nuevo contrato · "+s.name,body,
@@ -1279,162 +1266,45 @@ function openContractForm(id,preSector=null,preClient=null){
 }
 window.openContractForm=openContractForm;
 
+// CORRECCIÓN #1: updateSectorFields no cierra el modal
+window.updateSectorFields = function(sector) {
+    const container = document.getElementById("sectorSpecificFields");
+    if (container) {
+        container.innerHTML = renderSectorFields(sector, {});
+    }
+};
+
 function renderSectorFields(sector,sd){
   switch(sector){
-    case "energia": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo suministro</label><select id="sd_supplyType"><option value="Luz" ${sd.supplyType==="Luz"?"selected":""}>Luz</option><option value="Gas" ${sd.supplyType==="Gas"?"selected":""}>Gas</option></select></div>
-        <div class="form-group"><label>CUPS/CAN</label><input id="sd_cups" value="${esc(sd.cups||"")}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Tarifa</label><input id="sd_tariff" value="${esc(sd.tariff||"")}" /></div>
-        <div class="form-group"><label>Potencia</label><input id="sd_power" value="${esc(sd.power||"")}" /></div>
-      </div>
-      <div class="form-group"><label>Consumo anual</label><input id="sd_consumption" value="${esc(sd.consumption||"")}" /></div>`;
-    case "telefonia": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo línea</label><select id="sd_lineType"><option value="Móvil" ${sd.lineType==="Móvil"?"selected":""}>Móvil</option><option value="Fija" ${sd.lineType==="Fija"?"selected":""}>Fija</option></select></div>
-        <div class="form-group"><label>Número</label><input id="sd_phoneNumber" value="${esc(sd.phoneNumber||"")}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Datos</label><input id="sd_dataAllowance" value="${esc(sd.dataAllowance||"")}" /></div>
-        <div class="form-group"><label>Minutos</label><input id="sd_minutesAllowance" value="${esc(sd.minutesAllowance||"")}" /></div>
-      </div>`;
-    case "internet": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo conexión</label><select id="sd_connectionType"><option>Fibra 300Mb</option><option>Fibra 600Mb</option><option>Fibra 1Gb</option></select></div>
-        <div class="form-group"><label>IP fija</label><select id="sd_fixedIP"><option>No</option><option>Sí</option></select></div>
-      </div>
-      <div class="form-group"><label>Dirección instalación</label><input id="sd_installAddress" value="${esc(sd.installAddress||"")}" /></div>`;
-    case "alarmas": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo sistema</label><select id="sd_systemType"><option>Alarma básica</option><option>Alarma con cámaras</option><option>Alarma premium</option></select></div>
-        <div class="form-group"><label>Zonas</label><input type="number" id="sd_zones" value="${sd.zones||1}" /></div>
-      </div>
-      <div class="form-group"><label>Dirección instalación</label><input id="sd_installAddress" value="${esc(sd.installAddress||"")}" /></div>`;
-    case "seguros": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo seguro</label><select id="sd_insuranceType"><option>Hogar</option><option>Salud</option><option>Vida</option><option>Auto</option><option>Empresa</option></select></div>
-        <div class="form-group"><label>Prima anual (€)</label><input type="number" id="sd_premium" value="${sd.premium||0}" /></div>
-      </div>
-      <div class="form-group"><label>Coberturas</label><textarea id="sd_coverages" rows="2">${esc(sd.coverages||"")}</textarea></div>`;
-    case "limpieza": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo limpieza</label><select id="sd_cleaningType"><option>Oficinas</option><option>Comunidad</option><option>Industrial</option><option>Comercial</option><option>Especial</option></select></div>
-        <div class="form-group"><label>Superficie (m²)</label><input type="number" id="sd_surfaceM2" value="${sd.surfaceM2||0}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Frecuencia</label><select id="sd_frequency"><option>Diaria</option><option>3x/semana</option><option>Semanal</option><option>Quincenal</option></select></div>
-        <div class="form-group"><label>Nº operarios</label><input type="number" id="sd_numWorkers" value="${sd.numWorkers||1}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Precio mensual (€)</label><input type="number" id="sd_monthlyPrice" value="${sd.monthlyPrice||0}" /></div>
-        <div class="form-group"><label>Dirección servicio</label><input id="sd_serviceAddress" value="${esc(sd.serviceAddress||"")}" /></div>
-      </div>`;
-    case "paqueteria": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Nacional</option><option>Internacional</option><option>Urgente 24h</option><option>Económico</option></select></div>
-        <div class="form-group"><label>Código cuenta</label><input id="sd_accountCode" value="${esc(sd.accountCode||"")}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Volumen mensual (envíos)</label><input type="number" id="sd_monthlyVolume" value="${sd.monthlyVolume||0}" /></div>
-        <div class="form-group"><label>Peso medio</label><input id="sd_avgWeight" value="${esc(sd.avgWeight||"")}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Destinos principales</label><input id="sd_destinations" value="${esc(sd.destinations||"")}" /></div>
-        <div class="form-group"><label>Frecuencia recogida</label><select id="sd_pickupFrequency"><option>Diaria</option><option>3x/semana</option><option>Semanal</option><option>A demanda</option></select></div>
-      </div>`;
-    case "fotovoltaica": return `
-      <div class="two-col">
-        <div class="form-group"><label>Potencia (kWp)</label><input type="number" id="sd_powerKWp" value="${sd.powerKWp||0}" /></div>
-        <div class="form-group"><label>Nº paneles</label><input type="number" id="sd_numPanels" value="${sd.numPanels||0}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Tipo instalación</label><select id="sd_installationType"><option>Cubierta</option><option>Suelo</option><option>Fachada</option></select></div>
-        <div class="form-group"><label>Ahorro estimado anual (€)</label><input type="number" id="sd_estimatedSaving" value="${sd.estimatedSaving||0}" /></div>
-      </div>
-      <div class="form-group"><label>Dirección instalación</label><input id="sd_installAddress" value="${esc(sd.installAddress||"")}" /></div>`;
-    case "cargadores": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo cargador</label><select id="sd_chargerType"><option>Doméstico 7kW</option><option>Semi-rápido 22kW</option><option>Rápido 50kW</option></select></div>
-        <div class="form-group"><label>Nº plazas</label><input type="number" id="sd_numSlots" value="${sd.numSlots||1}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Ubicación</label><input id="sd_location" value="${esc(sd.location||"")}" /></div>
-        <div class="form-group"><label>Precio/kWh (€)</label><input type="number" step="0.01" id="sd_pricePerKwh" value="${sd.pricePerKwh||0}" /></div>
-      </div>`;
-    case "asesoria_ia": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Consultoría</option><option>Implementación</option><option>Formación</option><option>Auditoría</option></select></div>
-        <div class="form-group"><label>Tecnología IA</label><select id="sd_technology"><option>GPT-4</option><option>Claude</option><option>Gemini</option><option>Personalizado</option></select></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Caso de uso</label><select id="sd_useCase"><option>Automatización</option><option>Análisis datos</option><option>Atención cliente</option><option>Contenido</option></select></div>
-        <div class="form-group"><label>Nº usuarios</label><input type="number" id="sd_numUsers" value="${sd.numUsers||1}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Duración (meses)</label><input type="number" id="sd_duration" value="${sd.duration||1}" /></div>
-        <div class="form-group"><label>Honorarios (€)</label><input type="number" id="sd_fees" value="${sd.fees||0}" /></div>
-      </div>
-      <div class="form-group"><label>Fase del proyecto</label><select id="sd_phase"><option>Diagnóstico</option><option>Implementación</option><option>Seguimiento</option><option>Completado</option></select></div>`;
-    case "ciberseguridad": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Auditoría</option><option>Implementación</option><option>Monitorización</option><option>Formación</option></select></div>
-        <div class="form-group"><label>Alcance</label><select id="sd_scope"><option>Redes</option><option>Aplicaciones</option><option>Datos</option><option>Endpoints</option><option>Cloud</option></select></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Nº empleados</label><input type="number" id="sd_numEmployees" value="${sd.numEmployees||0}" /></div>
-        <div class="form-group"><label>Nº dispositivos</label><input type="number" id="sd_numDevices" value="${sd.numDevices||0}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Nivel criticidad</label><select id="sd_criticality"><option>Bajo</option><option>Medio</option><option>Alto</option><option>Crítico</option></select></div>
-        <div class="form-group"><label>Periodo contrato</label><select id="sd_contractPeriod"><option>Mensual</option><option>Anual</option><option>Puntual</option></select></div>
-      </div>
-      <div class="form-group"><label>Normativa aplicable</label><input id="sd_regulations" value="${esc(sd.regulations||"")}" placeholder="RGPD, ENS, ISO 27001..." /></div>`;
-    case "cursos": return `
-      <div class="two-col">
-        <div class="form-group"><label>Nombre curso</label><input id="sd_courseName" value="${esc(sd.courseName||"")}" /></div>
-        <div class="form-group"><label>Entidad formativa</label><input id="sd_trainingEntity" value="${esc(sd.trainingEntity||"")}" /></div>
-      </div>
-      <div class="two-col">
-        <div class="form-group"><label>Horas</label><input type="number" id="sd_hours" value="${sd.hours||0}" /></div>
-        <div class="form-group"><label>Modalidad</label><select id="sd_modality"><option>Presencial</option><option>Online</option><option>Mixto</option></select></div>
-      </div>
-      <div class="form-group"><label>Importe subvención (€)</label><input type="number" id="sd_subsidyAmount" value="${sd.subsidyAmount||0}" /></div>`;
-    case "prl": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Formación</option><option>Coordinación</option><option>Auditoría</option><option>Plan PRL</option></select></div>
-        <div class="form-group"><label>Nº trabajadores</label><input type="number" id="sd_numWorkers" value="${sd.numWorkers||0}" /></div>
-      </div>
-      <div class="form-group"><label>Horas</label><input type="number" id="sd_hours" value="${sd.hours||0}" /></div>`;
-    case "asesoria": return `
-      <div class="two-col">
-        <div class="form-group"><label>Tipo asesoría</label><select id="sd_advisoryType"><option>Fiscal</option><option>Laboral</option><option>Jurídica</option><option>Integral</option></select></div>
-        <div class="form-group"><label>Nº empleados</label><input type="number" id="sd_numEmployees" value="${sd.numEmployees||0}" /></div>
-      </div>
-      <div class="form-group"><label>Servicios incluidos</label><textarea id="sd_services" rows="2">${esc(sd.services||"")}</textarea></div>
-      <div class="form-group"><label>Honorarios mensuales (€)</label><input type="number" id="sd_monthlyFees" value="${sd.monthlyFees||0}" /></div>`;
+    case "energia": return `<div class="two-col"><div class="form-group"><label>Tipo suministro</label><select id="sd_supplyType"><option value="Luz" ${sd.supplyType==="Luz"?"selected":""}>Luz</option><option value="Gas" ${sd.supplyType==="Gas"?"selected":""}>Gas</option></select></div><div class="form-group"><label>CUPS/CAN</label><input id="sd_cups" value="${esc(sd.cups||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Tarifa</label><input id="sd_tariff" value="${esc(sd.tariff||"")}" /></div><div class="form-group"><label>Potencia</label><input id="sd_power" value="${esc(sd.power||"")}" /></div></div><div class="form-group"><label>Consumo anual</label><input id="sd_consumption" value="${esc(sd.consumption||"")}" /></div>`;
+    case "telefonia": return `<div class="two-col"><div class="form-group"><label>Tipo línea</label><select id="sd_lineType"><option value="Móvil" ${sd.lineType==="Móvil"?"selected":""}>Móvil</option><option value="Fija" ${sd.lineType==="Fija"?"selected":""}>Fija</option></select></div><div class="form-group"><label>Número</label><input id="sd_phoneNumber" value="${esc(sd.phoneNumber||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Datos</label><input id="sd_dataAllowance" value="${esc(sd.dataAllowance||"")}" /></div><div class="form-group"><label>Minutos</label><input id="sd_minutesAllowance" value="${esc(sd.minutesAllowance||"")}" /></div></div>`;
+    case "internet": return `<div class="two-col"><div class="form-group"><label>Tipo conexión</label><select id="sd_connectionType"><option>Fibra 300Mb</option><option>Fibra 600Mb</option><option>Fibra 1Gb</option></select></div><div class="form-group"><label>IP fija</label><select id="sd_fixedIP"><option>No</option><option>Sí</option></select></div></div><div class="form-group"><label>Dirección instalación</label><input id="sd_installAddress" value="${esc(sd.installAddress||"")}" /></div>`;
+    case "alarmas": return `<div class="two-col"><div class="form-group"><label>Tipo sistema</label><select id="sd_systemType"><option>Alarma básica</option><option>Alarma con cámaras</option><option>Alarma premium</option></select></div><div class="form-group"><label>Zonas</label><input type="number" id="sd_zones" value="${sd.zones||1}" /></div></div><div class="form-group"><label>Dirección instalación</label><input id="sd_installAddress" value="${esc(sd.installAddress||"")}" /></div>`;
+    case "seguros": return `<div class="two-col"><div class="form-group"><label>Tipo seguro</label><select id="sd_insuranceType"><option>Hogar</option><option>Salud</option><option>Vida</option><option>Auto</option><option>Empresa</option></select></div><div class="form-group"><label>Prima anual (€)</label><input type="number" id="sd_premium" value="${sd.premium||0}" /></div></div><div class="form-group"><label>Coberturas</label><textarea id="sd_coverages" rows="2">${esc(sd.coverages||"")}</textarea></div>`;
+    case "limpieza": return `<div class="two-col"><div class="form-group"><label>Tipo limpieza</label><select id="sd_cleaningType"><option>Oficinas</option><option>Comunidad</option><option>Industrial</option><option>Comercial</option><option>Especial</option></select></div><div class="form-group"><label>Superficie (m²)</label><input type="number" id="sd_surfaceM2" value="${sd.surfaceM2||0}" /></div></div><div class="two-col"><div class="form-group"><label>Frecuencia</label><select id="sd_frequency"><option>Diaria</option><option>3x/semana</option><option>Semanal</option><option>Quincenal</option></select></div><div class="form-group"><label>Nº operarios</label><input type="number" id="sd_numWorkers" value="${sd.numWorkers||1}" /></div></div><div class="two-col"><div class="form-group"><label>Precio mensual (€)</label><input type="number" id="sd_monthlyPrice" value="${sd.monthlyPrice||0}" /></div><div class="form-group"><label>Dirección servicio</label><input id="sd_serviceAddress" value="${esc(sd.serviceAddress||"")}" /></div></div>`;
+    case "paqueteria": return `<div class="two-col"><div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Nacional</option><option>Internacional</option><option>Urgente 24h</option><option>Económico</option></select></div><div class="form-group"><label>Código cuenta</label><input id="sd_accountCode" value="${esc(sd.accountCode||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Volumen mensual (envíos)</label><input type="number" id="sd_monthlyVolume" value="${sd.monthlyVolume||0}" /></div><div class="form-group"><label>Peso medio</label><input id="sd_avgWeight" value="${esc(sd.avgWeight||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Destinos principales</label><input id="sd_destinations" value="${esc(sd.destinations||"")}" /></div><div class="form-group"><label>Frecuencia recogida</label><select id="sd_pickupFrequency"><option>Diaria</option><option>3x/semana</option><option>Semanal</option><option>A demanda</option></select></div></div>`;
+    case "fotovoltaica": return `<div class="two-col"><div class="form-group"><label>Potencia (kWp)</label><input type="number" id="sd_powerKWp" value="${sd.powerKWp||0}" /></div><div class="form-group"><label>Nº paneles</label><input type="number" id="sd_numPanels" value="${sd.numPanels||0}" /></div></div><div class="two-col"><div class="form-group"><label>Tipo instalación</label><select id="sd_installationType"><option>Cubierta</option><option>Suelo</option><option>Fachada</option></select></div><div class="form-group"><label>Ahorro estimado anual (€)</label><input type="number" id="sd_estimatedSaving" value="${sd.estimatedSaving||0}" /></div></div><div class="form-group"><label>Dirección instalación</label><input id="sd_installAddress" value="${esc(sd.installAddress||"")}" /></div>`;
+    case "cargadores": return `<div class="two-col"><div class="form-group"><label>Tipo cargador</label><select id="sd_chargerType"><option>Doméstico 7kW</option><option>Semi-rápido 22kW</option><option>Rápido 50kW</option></select></div><div class="form-group"><label>Nº plazas</label><input type="number" id="sd_numSlots" value="${sd.numSlots||1}" /></div></div><div class="two-col"><div class="form-group"><label>Ubicación</label><input id="sd_location" value="${esc(sd.location||"")}" /></div><div class="form-group"><label>Precio/kWh (€)</label><input type="number" step="0.01" id="sd_pricePerKwh" value="${sd.pricePerKwh||0}" /></div></div>`;
+    case "asesoria_ia": return `<div class="two-col"><div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Consultoría</option><option>Implementación</option><option>Formación</option><option>Auditoría</option></select></div><div class="form-group"><label>Tecnología IA</label><select id="sd_technology"><option>GPT-4</option><option>Claude</option><option>Gemini</option><option>Personalizado</option></select></div></div><div class="two-col"><div class="form-group"><label>Caso de uso</label><select id="sd_useCase"><option>Automatización</option><option>Análisis datos</option><option>Atención cliente</option><option>Contenido</option></select></div><div class="form-group"><label>Nº usuarios</label><input type="number" id="sd_numUsers" value="${sd.numUsers||1}" /></div></div><div class="two-col"><div class="form-group"><label>Duración (meses)</label><input type="number" id="sd_duration" value="${sd.duration||1}" /></div><div class="form-group"><label>Honorarios (€)</label><input type="number" id="sd_fees" value="${sd.fees||0}" /></div></div><div class="form-group"><label>Fase del proyecto</label><select id="sd_phase"><option>Diagnóstico</option><option>Implementación</option><option>Seguimiento</option><option>Completado</option></select></div>`;
+    case "ciberseguridad": return `<div class="two-col"><div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Auditoría</option><option>Implementación</option><option>Monitorización</option><option>Formación</option></select></div><div class="form-group"><label>Alcance</label><select id="sd_scope"><option>Redes</option><option>Aplicaciones</option><option>Datos</option><option>Endpoints</option><option>Cloud</option></select></div></div><div class="two-col"><div class="form-group"><label>Nº empleados</label><input type="number" id="sd_numEmployees" value="${sd.numEmployees||0}" /></div><div class="form-group"><label>Nº dispositivos</label><input type="number" id="sd_numDevices" value="${sd.numDevices||0}" /></div></div><div class="two-col"><div class="form-group"><label>Nivel criticidad</label><select id="sd_criticality"><option>Bajo</option><option>Medio</option><option>Alto</option><option>Crítico</option></select></div><div class="form-group"><label>Periodo contrato</label><select id="sd_contractPeriod"><option>Mensual</option><option>Anual</option><option>Puntual</option></select></div></div><div class="form-group"><label>Normativa aplicable</label><input id="sd_regulations" value="${esc(sd.regulations||"")}" placeholder="RGPD, ENS, ISO 27001..." /></div>`;
+    case "cursos": return `<div class="two-col"><div class="form-group"><label>Nombre curso</label><input id="sd_courseName" value="${esc(sd.courseName||"")}" /></div><div class="form-group"><label>Entidad formativa</label><input id="sd_trainingEntity" value="${esc(sd.trainingEntity||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Horas</label><input type="number" id="sd_hours" value="${sd.hours||0}" /></div><div class="form-group"><label>Modalidad</label><select id="sd_modality"><option>Presencial</option><option>Online</option><option>Mixto</option></select></div></div><div class="form-group"><label>Importe subvención (€)</label><input type="number" id="sd_subsidyAmount" value="${sd.subsidyAmount||0}" /></div>`;
+    case "prl": return `<div class="two-col"><div class="form-group"><label>Tipo servicio</label><select id="sd_serviceType"><option>Formación</option><option>Coordinación</option><option>Auditoría</option><option>Plan PRL</option></select></div><div class="form-group"><label>Nº trabajadores</label><input type="number" id="sd_numWorkers" value="${sd.numWorkers||0}" /></div></div><div class="form-group"><label>Horas</label><input type="number" id="sd_hours" value="${sd.hours||0}" /></div>`;
+    case "asesoria": return `<div class="two-col"><div class="form-group"><label>Tipo asesoría</label><select id="sd_advisoryType"><option>Fiscal</option><option>Laboral</option><option>Jurídica</option><option>Integral</option></select></div><div class="form-group"><label>Nº empleados</label><input type="number" id="sd_numEmployees" value="${sd.numEmployees||0}" /></div></div><div class="form-group"><label>Servicios incluidos</label><textarea id="sd_services" rows="2">${esc(sd.services||"")}</textarea></div><div class="form-group"><label>Honorarios mensuales (€)</label><input type="number" id="sd_monthlyFees" value="${sd.monthlyFees||0}" /></div>`;
     default: return `<div class="text-muted">Sin campos específicos</div>`;
   }
 }
-window.changeContractSector=function(sector){
-  closeModal();
-  openContractForm(null,sector);
-};
 
 function saveContract(id,sector){
   const clientId=document.getElementById("f_client").value;
   const companyId=document.getElementById("f_company").value;
   if(!clientId||!companyId){toast("Cliente y empresa obligatorios");return}
   const company=companyById(companyId);
-  
   const sectorData = {};
   const fields = document.querySelectorAll("[id^='sd_']");
   fields.forEach(f=>{
     const key = f.id.replace("sd_","");
     sectorData[key] = f.type==="number" ? +f.value : f.value;
   });
-  
   const data = {
     userId:session.userId,clientId,sector,
     companyId,companyName:company?.name||"",
@@ -1466,14 +1336,10 @@ function openContract(id){
   const b=renewalBucket(days);
   const s=SECTORS[c.sector];
   const sd = c.sectorData||{};
-  
   let detailsHtml = "";
   Object.entries(sd).forEach(([k,v])=>{
-    if(v!==""&&v!==null&&v!==undefined){
-      detailsHtml += `<div class="kv"><span class="k">${esc(k)}</span><span class="v">${esc(String(v))}</span></div>`;
-    }
+    if(v!==""&&v!==null&&v!==undefined){ detailsHtml += `<div class="kv"><span class="k">${esc(k)}</span><span class="v">${esc(String(v))}</span></div>`; }
   });
-  
   const body=`
     <div class="row between mb">
       <div>
@@ -1533,6 +1399,7 @@ function renderTaskList(filter){
   if(filter==="completada") list=list.filter(t=>t.status==="completada");
   list.sort((a,b)=>(a.date||"").localeCompare(b.date||""));
   const cont=document.getElementById("taskList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin tareas");return}
   cont.innerHTML=`<div class="list">${list.map(t=>{
     const cl=clientById(t.clientId);const overdue=t.status!=="completada"&&t.date&&t.date<todayISO();
@@ -1621,6 +1488,7 @@ function renderComList(filter){
   let list=myCommissions();
   if(filter!=="todas") list=list.filter(c=>c.status===filter);
   const cont=document.getElementById("comList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin comisiones");return}
   cont.innerHTML=`<div class="list">${list.map(c=>{
     const cl=clientById(c.clientId);const s=SECTORS[c.sector];
@@ -1674,6 +1542,7 @@ function renderCatList(filter){
     list = list.filter(c=>c.sectors.some(s=>sectorIds.includes(s)));
   }
   const cont = document.getElementById("catList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin empresas");return}
   cont.innerHTML=`<div class="list">${list.map(c=>{
     const sectors = (c.sectors||[]).map(s=>SECTORS[s]?.icon+" "+SECTORS[s]?.name).join(", ");
@@ -1713,12 +1582,8 @@ function saveCompany(id){
   const sectors=Array.from(document.querySelectorAll('input[name="f_sectors"]:checked')).map(i=>i.value);
   if(!name){toast("Nombre obligatorio");return}
   if(!sectors.length){toast("Selecciona al menos un sector");return}
-  if(id){
-    const c=db.companies.find(x=>x.id===id);
-    c.name=name;c.sectors=sectors;
-  } else {
-    db.companies.push({id:uid(),name,sectors,billing:{businessName:"",taxId:"",address:"",email:"",phone:"",supplierCode:"",paymentTerms:"",contact:""}});
-  }
+  if(id){ const c=db.companies.find(x=>x.id===id); c.name=name;c.sectors=sectors; } 
+  else { db.companies.push({id:uid(),name,sectors,billing:{businessName:"",taxId:"",address:"",email:"",phone:"",supplierCode:"",paymentTerms:"",contact:""}}); }
   DB.save(db);closeModal();toast("Empresa guardada");navigate("catalogo");
 }
 window.saveCompany=saveCompany;
@@ -1737,7 +1602,6 @@ function openCompanyDetail(id){
   const contracts=db.contracts.filter(co=>co.companyId===id);
   const commissions=db.commissions.filter(co=>co.companyId===id);
   const totalCom=commissions.reduce((a,b)=>a+b.amount,0);
-  
   const body=`
     <div style="font-size:17px;font-weight:700;margin-bottom:4px">${esc(c.name)}</div>
     <div class="text-muted mb">${sectors}</div>
@@ -1807,22 +1671,18 @@ function renderVentaCruzada(){
   const clients = myClients();
   const contracts = myContracts();
   const main = document.getElementById("mainContent");
-  
   const clientSectorCount = clients.map(c=>{
     const cs = contracts.filter(co=>co.clientId===c.id);
     const sectors = [...new Set(cs.map(co=>co.sector))];
     return {...c,contractCount:cs.length,sectors};
   }).sort((a,b)=>a.sectors.length-b.sectors.length);
-  
   main.innerHTML = `
     <div class="page-title"><div><h2>🎯 Venta Cruzada</h2><div class="sub">Detecta oportunidades para ofrecer más servicios a tus clientes</div></div></div>
-    
     <div class="grid grid-3">
       <div class="card stat info"><div class="v">${clients.length}</div><div class="l">Clientes totales</div></div>
       <div class="card stat ok"><div class="v">${contracts.length}</div><div class="l">Contratos totales</div></div>
       <div class="card stat warn"><div class="v">${(contracts.length/clients.length||0).toFixed(1)}</div><div class="l">Media servicios/cliente</div></div>
     </div>
-    
     <div class="card mt2">
       <h3>👥 Clientes con más oportunidades (menos servicios contratados)</h3>
       <div class="list">
@@ -1837,7 +1697,6 @@ function renderVentaCruzada(){
         }).join("")}
       </div>
     </div>
-    
     <div class="card mt2">
       <h3>📊 Matrix cliente-servicio (vista completa)</h3>
       <div class="text-muted mb">Verde = tiene el servicio · Gris = oportunidad</div>
@@ -1870,20 +1729,16 @@ function renderAdminGlobal(){
   const totalContracts = db.contracts.length;
   const totalCommissions = db.commissions.reduce((a,b)=>a+b.amount,0);
   const paidCommissions = db.commissions.filter(c=>c.status==="cobrada").reduce((a,b)=>a+b.amount,0);
-  
   const main = document.getElementById("mainContent");
   main.innerHTML = `
     <div class="admin-mode-banner"><span class="ic">👑</span><div><b>Admin Global</b> — Ves los datos de todos los comerciales</div></div>
-    
     <div class="page-title"><div><h2>👑 Admin Global</h2><div class="sub">${comercials.length} comerciales · ${totalClients} clientes · ${totalContracts} contratos</div></div></div>
-    
     <div class="grid grid-4">
       <div class="card stat info"><div class="v">${comercials.length}</div><div class="l">Comerciales</div></div>
       <div class="card stat"><div class="v">${totalClients}</div><div class="l">Clientes totales</div></div>
       <div class="card stat warn"><div class="v">${totalContracts}</div><div class="l">Contratos totales</div></div>
       <div class="card stat ok"><div class="v">${fmtMoney(paidCommissions)}</div><div class="l">Comisiones cobradas</div></div>
     </div>
-    
     <div class="tabs mt2" id="adminTabs">
       <div class="tab active" data-f="comerciales">👥 Comerciales</div>
       <div class="tab" data-f="sectores">📊 Por sector</div>
@@ -1901,8 +1756,8 @@ function renderAdminGlobal(){
 
 function renderAdminTab(tab){
   const cont = document.getElementById("adminContent");
+  if(!cont) return;
   const comercials = db.users.filter(u=>u.role==="comercial");
-  
   if(tab==="comerciales"){
     cont.innerHTML = `<div class="card"><div class="list">
       ${comercials.map(u=>{
@@ -1946,7 +1801,6 @@ function renderAdminTab(tab){
       const clients = db.clients.filter(c=>c.userId===u.id).length;
       return {user:u,contracts,com,clients};
     }).sort((a,b)=>b.com-a.com);
-    
     cont.innerHTML = `<div class="card">
       <h3>🏆 Ranking por comisiones</h3>
       <div class="list">
@@ -1962,7 +1816,7 @@ function renderAdminTab(tab){
   }
   else if(tab==="clientes"){
     cont.innerHTML = `<div class="card">
-      <h3> Todos los clientes (${db.clients.length})</h3>
+      <h3>👥 Todos los clientes (${db.clients.length})</h3>
       <div class="list">
         ${db.clients.slice(0,50).map(c=>{
           const u = db.users.find(x=>x.id===c.userId);
@@ -2003,18 +1857,14 @@ function renderAdminTab(tab){
     `;
   }
 }
-
-window.viewAsCommercial = function(userId){
-  adminViewMode = true;
-  adminViewUserId = userId;
-  navigate("hoy");
-};
+window.viewAsCommercial = function(userId){ adminViewMode = true; adminViewUserId = userId; navigate("hoy"); };
 
 function renderOportunidades(){
   const list=myOpportunities();
   const main=document.getElementById("mainContent");
   main.innerHTML=`<div class="page-title"><div><h2>⭐ Oportunidades</h2><div class="sub">${list.length}</div></div><button class="btn btn-accent" onclick="openOppForm()">+ Nueva</button></div><div class="card"><div id="oppList"></div></div>`;
   const cont=document.getElementById("oppList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin oportunidades");return}
   cont.innerHTML=`<div class="list">${list.map(o=>{
     const cl=clientById(o.clientId);const s=SECTORS[o.sector];
@@ -2078,6 +1928,7 @@ function renderDormList(filter){
   let list=dormantClients();
   if(filter!=="todos") list=list.filter(c=>c.bucket===filter);
   const cont=document.getElementById("dormList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin dormidos");return}
   cont.innerHTML=`<div class="list">${list.map(c=>`<div class="list-item" onclick="openClient('${c.id}')"><div class="li-main"><div class="li-title">${esc(c.name)} ${esc(c.surname||"")} <span class="chip ${c.bucket==='12m'?'red':c.bucket==='6m'?'orange':'yellow'}">${c.daysSinceContact}d</span></div><div class="li-sub">Último: ${fmtDate(c.lastContact)} · ${c.contracts.length} contratos</div></div></div>`).join("")}</div>`;
 }
@@ -2086,8 +1937,9 @@ window.renderDormList=renderDormList;
 function renderDocumentos(){
   const list=my("documents");
   const main=document.getElementById("mainContent");
-  main.innerHTML=`<div class="page-title"><div><h2>📎 Documentos</h2><div class="sub">${list.length}</div></div><button class="btn btn-accent" onclick="openDocForm()">+ Subir</button></div><div class="card"><div id="docList"></div></div>`;
+  main.innerHTML=`<div class="page-title"><div><h2> Documentos</h2><div class="sub">${list.length}</div></div><button class="btn btn-accent" onclick="openDocForm()">+ Subir</button></div><div class="card"><div id="docList"></div></div>`;
   const cont=document.getElementById("docList");
+  if(!cont) return;
   if(!list.length){cont.innerHTML=emptyHTML("Sin documentos");return}
   cont.innerHTML=`<div class="list">${list.map(d=>{const cl=clientById(d.clientId);return `<div class="list-item"><div style="font-size:22px">📄</div><div class="li-main"><div class="li-title">${esc(d.name)}</div><div class="li-sub">${esc(cl?.name||"—")} · ${esc(d.type||"")}</div></div></div>`}).join("")}</div>`;
 }
@@ -2109,10 +1961,10 @@ function renderCopiloto(){
   const ai=db.settings.aiProvider;
   const main=document.getElementById("mainContent");
   main.innerHTML=`<div class="page-title"><div><h2>🤖 Copiloto IA</h2><div class="sub">${ai?"Conectado":"IA no configurada · Funciona con datos locales"}</div></div></div>${!ai?`<div class="alert-banner">⚠️ IA no configurada. Configúrala en Ajustes. Mientras, usa datos locales.</div>`:""}<div class="card"><div class="chat"><div class="chat-msgs" id="chatMsgs"></div><div class="chat-input"><input type="text" id="chatInput" placeholder="Pregunta..." onkeydown="if(event.key==='Enter')sendChat()" /><button class="mic-btn" onclick="startVoiceChat()">🎙️</button><button class="btn btn-primary" style="width:auto" onclick="sendChat()">Enviar</button></div></div></div>`;
-  addChatMsg("ai","Hola 👋 Soy tu copiloto. Puedo ayudarte con tus 14 sectores: energía, telefonía, internet, alarmas, cursos, seguros, PRL, limpieza, paquetería, fotovoltaica, cargadores VE, asesoría IA, ciberseguridad y asesoría fiscal. ¿En qué te ayudo?");
+  addChatMsg("ai","Hola  Soy tu copiloto. Puedo ayudarte con tus 14 sectores. ¿En qué te ayudo?");
 }
 function addChatMsg(who,text){const cont=document.getElementById("chatMsgs");if(!cont) return;const d=document.createElement("div");d.className="msg "+who;d.textContent=text;cont.appendChild(d);cont.scrollTop=cont.scrollHeight}
-function sendChat(){const input=document.getElementById("chatInput");const q=input.value.trim();if(!q) return;addChatMsg("user",q);input.value="";setTimeout(()=>addChatMsg("ai",localCopilot(q)),300)}
+function sendChat(){const input=document.getElementById("chatInput");if(!input) return;const q=input.value.trim();if(!q) return;addChatMsg("user",q);input.value="";setTimeout(()=>addChatMsg("ai",localCopilot(q)),300)}
 window.sendChat=sendChat;
 function localCopilot(q){
   const ql=q.toLowerCase();
@@ -2120,7 +1972,7 @@ function localCopilot(q){
     const ren=computeRenewals().filter(c=>c.daysToRenewal<=60).length;
     const tasks=myTasks().filter(t=>t.status!=="completada"&&t.date<=todayISO()).length;
     const com=myCommissions().filter(c=>c.status==="pendiente");
-    return ` Hoy: ${ren} renovaciones, ${tasks} tareas, ${com.length} comisiones pendientes (${fmtMoney(com.reduce((a,b)=>a+b.amount,0))})`;
+    return `📋 Hoy: ${ren} renovaciones, ${tasks} tareas, ${com.length} comisiones pendientes (${fmtMoney(com.reduce((a,b)=>a+b.amount,0))})`;
   }
   if(ql.includes("sector")){
     const contracts=myContracts();
@@ -2144,22 +1996,25 @@ function localCopilot(q){
 function renderVoz(){
   const supported='webkitSpeechRecognition' in window||'SpeechRecognition' in window;
   const main=document.getElementById("mainContent");
-  main.innerHTML=`<div class="page-title"><div><h2>🎙️ Asistente de voz</h2></div></div>${!supported?`<div class="alert-banner">️ Navegador no compatible</div>`:""}<div class="card" style="text-align:center;padding:30px"><button id="bigMic" class="mic-btn" style="width:100px;height:100px;font-size:40px;margin:0 auto" ${supported?"":"disabled"}>🎙️</button><div class="mt" id="voiceStatus" style="font-size:14px;color:var(--muted)">Pulsa para hablar</div><div class="mt2" id="voiceTranscript" style="background:#f9fafb;padding:14px;border-radius:10px;min-height:60px;text-align:left;font-size:14px"></div><div class="mt2" id="voiceParsed" style="background:#fffbeb;padding:14px;border-radius:10px;min-height:40px;text-align:left;font-size:13px;color:#92400e"></div><div class="mt2 row" style="justify-content:center"><button class="btn btn-secondary" onclick="confirmVoice()" id="btnConfirmVoice" disabled>✅ Crear tarea</button></div></div>`;
+  main.innerHTML=`<div class="page-title"><div><h2>🎙️ Asistente de voz</h2></div></div>${!supported?`<div class="alert-banner">⚠️ Navegador no compatible</div>`:""}<div class="card" style="text-align:center;padding:30px"><button id="bigMic" class="mic-btn" style="width:100px;height:100px;font-size:40px;margin:0 auto" ${supported?"":"disabled"}>️</button><div class="mt" id="voiceStatus" style="font-size:14px;color:var(--muted)">Pulsa para hablar</div><div class="mt2" id="voiceTranscript" style="background:#f9fafb;padding:14px;border-radius:10px;min-height:60px;text-align:left;font-size:14px"></div><div class="mt2" id="voiceParsed" style="background:#fffbeb;padding:14px;border-radius:10px;min-height:40px;text-align:left;font-size:13px;color:#92400e"></div><div class="mt2 row" style="justify-content:center"><button class="btn btn-secondary" onclick="confirmVoice()" id="btnConfirmVoice" disabled>✅ Crear tarea</button></div></div>`;
   if(!supported) return;
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   const rec=new SR();rec.lang="es-ES";
   const mic=document.getElementById("bigMic");
-  mic.onclick=()=>{try{rec.start()}catch(e){}mic.classList.add("recording")};
+  if(mic) mic.onclick=()=>{try{rec.start()}catch(e){}mic.classList.add("recording")};
   rec.onresult=(e)=>{
     const finalText=e.results[0][0].transcript;
-    document.getElementById("voiceTranscript").textContent=finalText;
-    mic.classList.remove("recording");
+    const vt=document.getElementById("voiceTranscript");
+    if(vt) vt.textContent=finalText;
+    if(mic) mic.classList.remove("recording");
     const parsed=parseVoiceCommand(finalText);
-    document.getElementById("voiceParsed").innerHTML=renderParsed(parsed);
-    document.getElementById("btnConfirmVoice").disabled=!parsed.ok;
+    const vp=document.getElementById("voiceParsed");
+    if(vp) vp.innerHTML=renderParsed(parsed);
+    const btn=document.getElementById("btnConfirmVoice");
+    if(btn) btn.disabled=!parsed.ok;
     window._parsedVoice=parsed;
   };
-  rec.onend=()=>{mic.classList.remove("recording")};
+  rec.onend=()=>{if(mic) mic.classList.remove("recording")};
 }
 function parseVoiceCommand(text){
   const t=text.toLowerCase();
@@ -2174,11 +2029,19 @@ function parseVoiceCommand(text){
   if(t.includes("mañana")) date=addDays(todayISO(),1);
   return {ok:!!client,text,client,type,date};
 }
-function renderParsed(p){if(!p.ok) return "️ No he identificado el cliente.";return ` ${esc(p.client.name)} · 🎯 ${esc(p.type)} · 📅 ${fmtDate(p.date)}`}
+function renderParsed(p){if(!p.ok) return "⚠️ No he identificado el cliente.";return `👤 ${esc(p.client.name)} · 🎯 ${esc(p.type)} · 📅 ${fmtDate(p.date)}`}
 function confirmVoice(){const p=window._parsedVoice;if(!p||!p.ok) return;db.tasks.push({id:uid(),userId:session.userId,clientId:p.client.id,contractId:null,type:p.type,date:p.date,time:"",priority:"media",description:"Por voz: "+p.text,status:"pendiente"});DB.save(db);toast("Tarea creada");navigate("tareas")}
 window.confirmVoice=confirmVoice;
-function startVoiceChat(){navigate("voz");setTimeout(()=>{const m=document.getElementById("bigMic");if(m) m.click()},200)}
-window.startVoiceChat=startVoiceChat;
+// CORRECCIÓN #9: startVoiceChat con try/catch
+window.startVoiceChat=function(){
+  try{
+    navigate("voz");
+    setTimeout(()=>{
+      const m=document.getElementById("bigMic");
+      if(m) m.click();
+    },200);
+  }catch(e){console.error("Error startVoiceChat",e)}
+};
 
 function renderDashboard(){
   const contracts=myContracts();
@@ -2207,24 +2070,20 @@ function renderDashboard(){
     </div>`;
 }
 
-// ✅ NUEVA PÁGINA: TERRITORIOS
 function renderTerritorios(){
   if(!["admin","director_expansion","director_comercial","director_financiero","director_territorial"].includes(session.role)){
-    document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>No tienes acceso</div>`;
+    document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic"></div>No tienes acceso</div>`;
     return;
   }
-  
   const user = db.users.find(u=>u.id===session.userId);
   const isDT = user.role==="director_territorial";
   const myProvinces = isDT ? (user.territory?.provinces||[]) : PROVINCES;
-  
   const main = document.getElementById("mainContent");
   main.innerHTML = `
     <div class="page-title">
       <div><h2>🗺️ Territorios</h2><div class="sub">${myProvinces.length} provincias asignadas</div></div>
       ${!isDT?`<button class="btn btn-accent" onclick="openTerritoryForm()">+ Nuevo Director Territorial</button>`:""}
     </div>
-    
     <div class="card">
       <h3>📍 Mis provincias</h3>
       <div class="grid grid-5">
@@ -2240,7 +2099,6 @@ function renderTerritorios(){
         }).join("")}
       </div>
     </div>
-    
     ${!isDT?`
     <div class="card mt2">
       <h3>👥 Directores Territoriales (${db.users.filter(u=>u.role==="director_territorial").length}/5)</h3>
@@ -2262,6 +2120,7 @@ function renderTerritorios(){
   `;
 }
 
+// CORRECCIÓN #11: Contador de provincias en openTerritoryForm
 function openTerritoryForm(id){
   const u=id?db.users.find(x=>x.id===id):null;
   const body=`
@@ -2279,9 +2138,10 @@ function openTerritoryForm(id){
     </div>
     <div class="form-group">
       <label>Provincias asignadas (máximo 10)</label>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-height:300px;overflow:auto;padding:10px;background:#f9fafb;border-radius:8px">
+      <div id="provinceCounter" style="margin-top:8px;font-weight:600;color:var(--brand)">0/10 provincias seleccionadas</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-height:300px;overflow:auto;padding:10px;background:#f9fafb;border-radius:8px;margin-top:8px">
         ${PROVINCES.map(p=>`<label style="display:flex;gap:6px;align-items:center;padding:6px;background:#fff;border-radius:6px;cursor:pointer;font-size:12px">
-          <input type="checkbox" name="f_provinces" value="${p}" ${(u?.territory?.provinces||[]).includes(p)?"checked":""} />
+          <input type="checkbox" name="f_provinces" value="${p}" ${(u?.territory?.provinces||[]).includes(p)?"checked":""} onchange="updateProvinceCounter()" />
           ${p}
         </label>`).join("")}
       </div>
@@ -2291,8 +2151,24 @@ function openTerritoryForm(id){
     `${u?`<button class="btn btn-danger" onclick="deleteUser('${u.id}')">Eliminar</button>`:""}
      <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
      <button class="btn btn-primary" style="width:auto" onclick="saveTerritory('${id||""}')">Guardar</button>`);
+  // Inicializar contador
+  setTimeout(()=>updateProvinceCounter(), 50);
 }
 window.openTerritoryForm=openTerritoryForm;
+
+window.updateProvinceCounter = function() {
+    const checked = document.querySelectorAll('input[name="f_provinces"]:checked');
+    const counter = document.getElementById("provinceCounter");
+    if (counter) {
+        counter.textContent = `${checked.length}/10 provincias seleccionadas`;
+        if (checked.length > 10) {
+            counter.style.color = "var(--danger)";
+            counter.textContent += " ⚠️ (Máximo 10)";
+        } else {
+            counter.style.color = "var(--brand)";
+        }
+    }
+};
 
 function saveTerritory(id){
   const data={
@@ -2306,13 +2182,10 @@ function saveTerritory(id){
   };
   const pass=document.getElementById("f_pass").value;
   const provinces=Array.from(document.querySelectorAll('input[name="f_provinces"]:checked')).map(i=>i.value);
-  
-  if(!data.name||!data.username){toast("️ Nombre y usuario obligatorios");return}
+  if(!data.name||!data.username){toast("⚠️ Nombre y usuario obligatorios");return}
   if(provinces.length>10){toast("⚠️ Máximo 10 provincias");return}
-  
   const existingUser = db.users.find(u=>u.username===data.username && u.id!==id);
   if(existingUser){toast("⚠️ El usuario ya existe");return}
-  
   if(id){
     const u=db.users.find(x=>x.id===id);
     Object.assign(u,data);
@@ -2323,7 +2196,6 @@ function saveTerritory(id){
     if(!pass){toast("⚠️ Contraseña obligatoria");return}
     db.users.push({id:uid(),...data,password:pass,createdAt:todayISO(),province:null,territory:{provinces}});
   }
-  
   DB.save(db);closeModal();toast("Director Territorial guardado");navigate("territorios");
 }
 window.saveTerritory=saveTerritory;
@@ -2336,19 +2208,20 @@ function renderFacturacion(){
   const totalEmitido=invoices.filter(i=>i.status!=="cancelada").reduce((a,b)=>a+(b.total||0),0);
   const totalPagado=invoices.filter(i=>i.status==="pagada").reduce((a,b)=>a+(b.total||0),0);
   const main=document.getElementById("mainContent");
-  main.innerHTML=`<div class="page-title"><div><h2>🧾 Facturación</h2><div class="sub">${invoices.length} facturas · ${fmtMoney(totalEmitido)} emitido</div></div><button class="btn btn-accent" onclick="openInvoiceForm()">+ Nueva factura</button></div>
+  main.innerHTML=`<div class="page-title"><div><h2> Facturación</h2><div class="sub">${invoices.length} facturas · ${fmtMoney(totalEmitido)} emitido</div></div><button class="btn btn-accent" onclick="openInvoiceForm()">+ Nueva factura</button></div>
     <div class="grid grid-3">
       <div class="card stat info"><div class="v">${fmtMoney(totalEmitido)}</div><div class="l">Total emitido</div></div>
       <div class="card stat ok"><div class="v">${fmtMoney(totalPagado)}</div><div class="l">Cobrado</div></div>
       <div class="card stat warn"><div class="v">${fmtMoney(totalEmitido-totalPagado)}</div><div class="l">Pendiente</div></div>
     </div>
-    <div class="tabs mt2" id="invTabs"><div class="tab active" data-f="facturas">📄 Facturas</div><div class="tab" data-f="misdatos">👤 Mis datos</div><div class="tab" data-f="companias">🏢 Datos compañías</div></div>
+    <div class="tabs mt2" id="invTabs"><div class="tab active" data-f="facturas">📄 Facturas</div><div class="tab" data-f="misdatos">👤 Mis datos</div><div class="tab" data-f="companias"> Datos compañías</div></div>
     <div id="facturacionContent"></div>`;
   document.querySelectorAll("#invTabs .tab").forEach(t=>{t.onclick=()=>{document.querySelectorAll("#invTabs .tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");renderFacturacionTab(t.dataset.f)}});
   renderFacturacionTab("facturas");
 }
 function renderFacturacionTab(tab){
   const cont=document.getElementById("facturacionContent");
+  if(!cont) return;
   if(tab==="facturas") renderInvoicesList(cont);
   else if(tab==="misdatos") renderMyBilling(cont);
   else if(tab==="companias") renderCompaniesBillingTab(cont);
@@ -2359,7 +2232,7 @@ function renderInvoicesList(cont){
   cont.innerHTML=`<div class="card"><div class="list">${invoices.map(inv=>{
     const co=companyById(inv.companyId);
     const statusBadge=inv.status==="pagada"?"ok":inv.status==="emitida"?"warn":inv.status==="cancelada"?"danger":"muted";
-    return `<div class="list-item" onclick="openInvoice('${inv.id}')"><div style="font-size:24px">🧾</div><div class="li-main"><div class="li-title">${esc(inv.number)} · ${esc(co?.name||"—")} <span class="badge ${statusBadge}">${esc(inv.status)}</span></div><div class="li-sub">${fmtDate(inv.date)} · ${fmtMoney(inv.total)}</div></div></div>`;
+    return `<div class="list-item" onclick="openInvoice('${inv.id}')"><div style="font-size:24px"></div><div class="li-main"><div class="li-title">${esc(inv.number)} · ${esc(co?.name||"—")} <span class="badge ${statusBadge}">${esc(inv.status)}</span></div><div class="li-sub">${fmtDate(inv.date)} · ${fmtMoney(inv.total)}</div></div></div>`;
   }).join("")}</div></div>`;
 }
 function renderMyBilling(cont){
@@ -2408,7 +2281,7 @@ function openInvoiceForm(id){
   const body=`
     <div class="two-col"><div class="form-group"><label>Número</label><input id="inv_number" value="${inv?.number||nextInvoiceNumber()}" ${inv?"readonly":""} /></div><div class="form-group"><label>Empresa *</label><select id="inv_company">${companies.map(c=>`<option value="${c.id}" ${inv?.companyId===c.id?"selected":""}>${esc(c.name)}</option>`).join("")}</select></div></div>
     <div class="two-col"><div class="form-group"><label>Fecha</label><input type="date" id="inv_date" value="${inv?.date||todayISO()}" /></div><div class="form-group"><label>Vencimiento</label><input type="date" id="inv_due" value="${inv?.dueDate||addDays(todayISO(),30)}" /></div></div>
-    <div class="two-col"><div class="form-group"><label>Tipo impuesto</label><select id="inv_taxtype"><option value="iva" ${taxType==="iva"?"selected":""}>IVA</option><option value="igic" ${taxType==="igic"?"selected":""}>IGIC</option></select></div><div class="form-group"><label>Tasa</label><select id="inv_taxrate">${taxType==="igic"?`<option value="7" ${taxRate==7?"selected":""}>7%</option><option value="3" ${taxRate==3?"selected":""}>3%</option><option value="0" ${taxRate==0?"selected":""}>0%</option>`:`<option value="21" ${taxRate==21?"selected":""}>21%</option><option value="10" ${taxRate==10?"selected":""}>10%</option><option value="4" ${taxRate==4?"selected":""}>4%</option><option value="0" ${taxRate==0?"selected":""}>0%</option>`}</select></div></div>
+    <div class="two-col"><div class="form-group"><label>Tipo impuesto</label><select id="inv_taxtype" onchange="updateInvoiceTotals()"><option value="iva" ${taxType==="iva"?"selected":""}>IVA</option><option value="igic" ${taxType==="igic"?"selected":""}>IGIC</option></select></div><div class="form-group"><label>Tasa</label><select id="inv_taxrate" onchange="updateInvoiceTotals()">${taxType==="igic"?`<option value="7" ${taxRate==7?"selected":""}>7%</option><option value="3" ${taxRate==3?"selected":""}>3%</option><option value="0" ${taxRate==0?"selected":""}>0%</option>`:`<option value="21" ${taxRate==21?"selected":""}>21%</option><option value="10" ${taxRate==10?"selected":""}>10%</option><option value="4" ${taxRate==4?"selected":""}>4%</option><option value="0" ${taxRate==0?"selected":""}>0%</option>`}</select></div></div>
     <h3 style="margin:14px 0 8px">Conceptos</h3><div id="invoiceLines"></div><button class="btn btn-secondary btn-sm mt" onclick="addInvoiceLine()">+ Añadir línea</button>
     <div class="divider"></div>
     <div style="display:flex;justify-content:flex-end"><table style="width:280px;font-size:14px"><tr><td style="padding:4px 0;color:var(--muted)">Base</td><td style="text-align:right;font-weight:600" id="inv_base">0,00 €</td></tr><tr><td style="padding:4px 0;color:var(--muted)" id="inv_taxlabel">IVA (21%)</td><td style="text-align:right;font-weight:600" id="inv_tax">0,00 €</td></tr><tr><td style="padding:8px 0;font-size:16px;font-weight:700">TOTAL</td><td style="text-align:right;font-size:16px;font-weight:700;color:var(--brand)" id="inv_total">0,00 €</td></tr></table></div>
@@ -2421,15 +2294,20 @@ function openInvoiceForm(id){
 window.openInvoiceForm=openInvoiceForm;
 function renderInvoiceLines(){
   const cont=document.getElementById("invoiceLines");
+  if(!cont) return;
   cont.innerHTML=window._invoiceItems.map((it,i)=>`<div class="line-item"><input type="text" placeholder="Descripción" value="${esc(it.description)}" oninput="updateLine(${i},'description',this.value)" /><input type="number" placeholder="Cant." value="${it.quantity}" min="0" step="0.01" oninput="updateLine(${i},'quantity',+this.value)" /><input type="number" placeholder="Precio" value="${it.unitPrice}" min="0" step="0.01" oninput="updateLine(${i},'unitPrice',+this.value)" /><div style="font-weight:600;text-align:right;padding:8px">${fmtMoney(it.subtotal)}</div><button class="remove" onclick="removeLine(${i})">✕</button></div>`).join("");
 }
-window.updateLine=function(i,field,value){window._invoiceItems[i][field]=value;if(field==="quantity"||field==="unitPrice"){window._invoiceItems[i].subtotal=(window._invoiceItems[i].quantity||0)*(window._invoiceItems[i].unitPrice||0);renderInvoiceLines()}updateInvoiceTotals()};
+window.updateLine=function(i,field,value){if(!window._invoiceItems[i]) return;window._invoiceItems[i][field]=value;if(field==="quantity"||field==="unitPrice"){window._invoiceItems[i].subtotal=(window._invoiceItems[i].quantity||0)*(window._invoiceItems[i].unitPrice||0);renderInvoiceLines()}updateInvoiceTotals()};
 window.removeLine=function(i){window._invoiceItems.splice(i,1);if(!window._invoiceItems.length) window._invoiceItems.push({description:"",quantity:1,unitPrice:0,subtotal:0});renderInvoiceLines();updateInvoiceTotals()};
 window.addInvoiceLine=function(){window._invoiceItems.push({description:"",quantity:1,unitPrice:0,subtotal:0});renderInvoiceLines()};
+// CORRECCIÓN #8: updateInvoiceTotals con comprobaciones de existencia
 window.updateInvoiceTotals=function(){
+  if(!window._invoiceItems) return;
   const base=window._invoiceItems.reduce((a,b)=>a+(b.subtotal||0),0);
-  const taxType=document.getElementById("inv_taxtype")?.value||"iva";
-  const rate=+document.getElementById("inv_taxrate")?.value||21;
+  const taxTypeEl=document.getElementById("inv_taxtype");
+  const taxRateEl=document.getElementById("inv_taxrate");
+  const taxType=taxTypeEl?taxTypeEl.value:"iva";
+  const rate=taxRateEl?+taxRateEl.value:21;
   const tax=base*rate/100;const total=base+tax;
   const el=(id,v)=>{const e=document.getElementById(id);if(e) e.textContent=v};
   el("inv_base",fmtMoney(base));el("inv_tax",fmtMoney(tax));el("inv_total",fmtMoney(total));el("inv_taxlabel",`${taxType.toUpperCase()} (${rate}%)`);
@@ -2461,6 +2339,7 @@ function openInvoice(id){
 }
 window.openInvoice=openInvoice;
 
+// CORRECCIÓN #2: Eliminado u.password del diagnóstico
 function renderAdmin(){
   if(!["admin","director_expansion","director_comercial","director_financiero","backoffice"].includes(session.role)){
     document.getElementById("mainContent").innerHTML=`<div class="card empty"><div class="ic">🔒</div>Solo admin/directivos/backoffice</div>`;
@@ -2468,21 +2347,19 @@ function renderAdmin(){
   }
   const main=document.getElementById("mainContent");
   const canCreateUsers = ["admin","director_expansion","director_comercial","director_financiero","director_territorial"].includes(session.role);
-  
   main.innerHTML=`<div class="page-title"><div><h2>⚙️ Administración</h2></div></div>
     <div class="card"><h3>🎭 Modo DEMO</h3><div class="row between"><div>Estado: ${db.settings.demo?"<span class='badge info'>ACTIVO</span>":"<span class='badge muted'>DESACTIVADO</span>"}</div><div>${db.settings.demo?`<button class="btn btn-danger" onclick="toggleDemo(false)">Desactivar</button>`:`<button class="btn btn-accent" onclick="toggleDemo(true)">Activar</button>`}</div></div></div>
     <div class="card mt2"><h3>👥 Usuarios (${db.users.length})</h3>${canCreateUsers?`<button class="btn btn-accent btn-sm mb" onclick="openUserForm()">+ Nuevo</button>`:""}<div class="list">${db.users.map(u=>{
       const roleInfo = ROLES[u.role];
       return `<div class="list-item"><div class="li-main"><div class="li-title">${esc(u.name)} ${esc(u.surname||"")} <span class="badge ${u.role==='admin'?'danger':'info'}">${roleInfo?.icon||""} ${roleInfo?.name||u.role}</span> <span class="badge ${u.status==='activo'?'ok':'muted'}">${esc(u.status)}</span></div><div class="li-sub">@${esc(u.username)} · ${esc(u.email||"—")}${u.province?` · 📍 ${u.province}`:""}${u.territory?.provinces?` · 🗺️ ${u.territory.provinces.length} prov.`:""}</div></div><button class="btn btn-secondary btn-sm" onclick="openUserForm('${u.id}')">Editar</button></div>`;
     }).join("")}</div></div>
-    
     <div class="card mt2">
       <h3>🔍 Diagnóstico de usuarios</h3>
       <div class="text-muted mb">Lista de todos los usuarios en el sistema:</div>
       <div style="background:#f9fafb;padding:12px;border-radius:8px;font-family:monospace;font-size:12px;max-height:300px;overflow:auto">
         ${db.users.map(u=>{
           const roleInfo = ROLES[u.role];
-          return `<div>✅ <b>${esc(u.username)}</b> · ${roleInfo?.icon||""} ${roleInfo?.name||u.role} · Status: ${esc(u.status)} · Password: ${u.password?'***'+u.password.slice(-2):'SIN PASSWORD'}</div>`;
+          return `<div>✅ <b>${esc(u.username)}</b> · ${roleInfo?.icon||""} ${roleInfo?.name||u.role} · Status: ${esc(u.status)}</div>`;
         }).join("")}
       </div>
       <div class="mt">
@@ -2490,20 +2367,16 @@ function renderAdmin(){
         <button class="btn btn-secondary btn-sm" onclick="forceLogout()">🚪 Forzar logout global</button>
       </div>
     </div>
-    
     <div class="card mt2"><h3>🧨 Zona peligrosa</h3><button class="btn btn-danger" onclick="resetAll()">Borrar TODO</button></div>`;
 }
 
 function testAllUsers(){
   console.log("=== PROBANDO TODOS LOS USUARIOS ===");
   db.users.forEach(u=>{
-    console.log(`Usuario: ${u.username} | Password: ${u.password} | Role: ${u.role} | Status: ${u.status}`);
+    console.log(`Usuario: ${u.username} | Role: ${u.role} | Status: ${u.status}`);
     const testLogin = db.users.find(x=>x.username===u.username && x.password===u.password);
-    if(testLogin){
-      console.log(`  ✅ Login OK para ${u.username}`);
-    } else {
-      console.log(`  ❌ Login FALLIDO para ${u.username}`);
-    }
+    if(testLogin) console.log(`  ✅ Login OK para ${u.username}`);
+    else console.log(`  ❌ Login FALLIDO para ${u.username}`);
   });
   toast("✅ Revisa la consola (F12) para ver los resultados");
 }
@@ -2520,15 +2393,29 @@ window.forceLogout=forceLogout;
 function toggleDemo(on){if(on){enableDemo(db);toast("DEMO activado")}else{if(!confirm("¿Desactivar DEMO?")) return;disableDemo(db);toast("DEMO desactivado")}navigate("admin")}
 window.toggleDemo=toggleDemo;
 
+// CORRECCIÓN #5: Select de provincia dinámico al cambiar rol
 function openUserForm(id){
   const u=id?db.users.find(x=>x.id===id):null;
   const canAssignProvince = ["admin","director_expansion","director_comercial","director_financiero","director_territorial"].includes(session.role);
   const myProvinces = getMyTerritoryProvinces();
-  
-  const body=`<div class="two-col"><div class="form-group"><label>Nombre *</label><input id="f_name" value="${esc(u?.name||"")}" /></div><div class="form-group"><label>Apellidos</label><input id="f_surname" value="${esc(u?.surname||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Email</label><input id="f_email" value="${esc(u?.email||"")}" /></div><div class="form-group"><label>Teléfono</label><input id="f_phone" value="${esc(u?.phone||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Usuario *</label><input id="f_user" value="${esc(u?.username||"")}" /></div><div class="form-group"><label>Contraseña ${u?"(vacío=no cambiar)":"*"}</label><input type="password" id="f_pass" /></div></div><div class="two-col"><div class="form-group"><label>Rol</label><select id="f_role">${Object.keys(ROLES).map(r=>`<option value="${r}" ${u?.role===r?"selected":""}>${ROLES[r].icon} ${ROLES[r].name}</option>`).join("")}</select></div><div class="form-group"><label>Estado</label><select id="f_status"><option ${u?.status==="activo"?"selected":""}>activo</option><option ${u?.status==="desactivado"?"selected":""}>desactivado</option></select></div></div>${canAssignProvince&&u?.role==="comercial"?`<div class="form-group"><label>Provincia</label><select id="f_province"><option value="">— Sin asignar —</option>${myProvinces.map(p=>`<option value="${p}" ${u?.province===p?"selected":""}>${p}</option>`).join("")}</select></div>`:""}`;
+  const body=`<div class="two-col"><div class="form-group"><label>Nombre *</label><input id="f_name" value="${esc(u?.name||"")}" /></div><div class="form-group"><label>Apellidos</label><input id="f_surname" value="${esc(u?.surname||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Email</label><input id="f_email" value="${esc(u?.email||"")}" /></div><div class="form-group"><label>Teléfono</label><input id="f_phone" value="${esc(u?.phone||"")}" /></div></div><div class="two-col"><div class="form-group"><label>Usuario *</label><input id="f_user" value="${esc(u?.username||"")}" /></div><div class="form-group"><label>Contraseña ${u?"(vacío=no cambiar)":"*"}</label><input type="password" id="f_pass" /></div></div><div class="two-col"><div class="form-group"><label>Rol</label><select id="f_role" onchange="toggleProvinceSelect()">${Object.keys(ROLES).map(r=>`<option value="${r}" ${u?.role===r?"selected":""}>${ROLES[r].icon} ${ROLES[r].name}</option>`).join("")}</select></div><div class="form-group"><label>Estado</label><select id="f_status"><option ${u?.status==="activo"?"selected":""}>activo</option><option ${u?.status==="desactivado"?"selected":""}>desactivado</option></select></div></div><div id="provinceWrapper" class="form-group" style="display:none"><label>Provincia</label><select id="f_province"><option value="">— Sin asignar —</option>${myProvinces.map(p=>`<option value="${p}" ${u?.province===p?"selected":""}>${p}</option>`).join("")}</select></div>`;
   openModal(u?"Editar usuario":"Nuevo usuario",body,`${u&&u.username!=="admin"?`<button class="btn btn-danger" onclick="deleteUser('${u.id}')">Eliminar</button>`:""}<button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" style="width:auto" onclick="saveUser('${id||""}')">Guardar</button>`);
+  // Inicializar visibilidad
+  setTimeout(()=>toggleProvinceSelect(), 50);
 }
 window.openUserForm=openUserForm;
+
+window.toggleProvinceSelect = function() {
+    const roleSelect = document.getElementById("f_role");
+    const provinceWrapper = document.getElementById("provinceWrapper");
+    if (roleSelect && provinceWrapper) {
+        if (roleSelect.value === "comercial") {
+            provinceWrapper.style.display = "block";
+        } else {
+            provinceWrapper.style.display = "none";
+        }
+    }
+};
 
 function saveUser(id){
   const data={
@@ -2542,71 +2429,26 @@ function saveUser(id){
   };
   const pass=document.getElementById("f_pass").value;
   const provinceEl = document.getElementById("f_province");
-  const province = provinceEl ? provinceEl.value : null;
-  
-  if(!data.name||!data.username){
-    toast("️ Nombre y usuario son obligatorios");
-    return;
-  }
-  
+  const province = provinceEl && provinceEl.offsetParent !== null ? provinceEl.value : null;
+  if(!data.name||!data.username){toast("️ Nombre y usuario son obligatorios");return}
   const existingUser = db.users.find(u=>u.username===data.username && u.id!==id);
-  if(existingUser){
-    toast("⚠️ El nombre de usuario '"+data.username+"' ya existe");
-    return;
-  }
-  
+  if(existingUser){toast("⚠️ El nombre de usuario '"+data.username+"' ya existe");return}
   if(id){
     const u=db.users.find(x=>x.id===id);
     Object.assign(u,data);
-    if(province!==undefined) u.province=province;
+    if(province!==null) u.province=province;
     if(pass) u.password=pass;
-    DB.save(db);
-    closeModal();
-    toast("✅ Usuario '"+data.username+"' actualizado");
-    navigate("admin");
+    DB.save(db);closeModal();toast("✅ Usuario '"+data.username+"' actualizado");navigate("admin");
   }
   else{
-    if(!pass){
-      toast("⚠️ La contraseña es obligatoria para nuevos usuarios");
-      return;
-    }
-    if(pass.length<4){
-      toast("⚠️ La contraseña debe tener al menos 4 caracteres");
-      return;
-    }
-    
-    const newUser = {
-      id:uid(),
-      ...data,
-      password:pass,
-      createdAt:todayISO(),
-      assignedSectors:Object.keys(SECTORS),
-      province:province||null,
-      territory:null,
-      billing:{
-        businessName:data.name+" "+(data.surname||""),
-        taxId:"",
-        address:"",
-        email:data.email,
-        phone:data.phone,
-        iban:"",
-        regime:"autonomo",
-        defaultTax:"iva",
-        logo:null
-      }
-    };
-    
+    if(!pass){toast("⚠️ La contraseña es obligatoria para nuevos usuarios");return}
+    if(pass.length<4){toast("⚠️ La contraseña debe tener al menos 4 caracteres");return}
+    const newUser = {id:uid(),...data,password:pass,createdAt:todayISO(),assignedSectors:Object.keys(SECTORS),province:province||null,territory:null,billing:{businessName:data.name+" "+(data.surname||""),taxId:"",address:"",email:data.email,phone:data.phone,iban:"",regime:"autonomo",defaultTax:"iva",logo:null}};
     db.users.push(newUser);
-    DB.save(db);
-    
-    console.log("Usuario creado:", newUser);
-    closeModal();
-    toast("✅ Usuario '"+data.username+"' creado correctamente. Ya puede entrar con sus credenciales.");
-    navigate("admin");
+    DB.save(db);console.log("Usuario creado:", newUser);closeModal();toast("✅ Usuario '"+data.username+"' creado correctamente.");navigate("admin");
   }
 }
 window.saveUser=saveUser;
-
 function deleteUser(id){if(!confirm("¿Eliminar?")) return;db.users=db.users.filter(u=>u.id!==id);DB.save(db);closeModal();navigate("admin")}
 window.deleteUser=deleteUser;
 function resetAll(){if(!confirm("¿BORRAR TODO?")) return;if(!confirm("¿Seguro absoluto?")) return;DB.clear();location.reload()}
@@ -2637,7 +2479,7 @@ const COLUMN_ALIASES={name:["nombre","name","first name"],surname:["apellidos","
 function openImportWizard(){
   window._importData={raw:null,headers:[],rows:[],mapping:{},duplicates:[],valid:[],errors:[]};
   const body=`<div class="import-steps-nav"><div class="step active" id="step1nav">1. Subir archivo</div><div class="step" id="step2nav">2. Revisar</div><div class="step" id="step3nav">3. Importar</div></div>
-    <div class="import-step active" id="step1"><div class="drop-zone" id="dropZone" onclick="document.getElementById('importFile').click()"><div class="ic">📊</div><div class="t">Arrastra tu archivo aquí o haz clic</div><div class="s">Formatos: .xlsx, .xls, .csv</div><input type="file" id="importFile" accept=".xlsx,.xls,.csv" style="display:none" /></div><div class="divider"></div><div class="row between"><div class="text-muted" style="font-size:13px">¿No tienes plantilla?</div><button class="btn btn-secondary btn-sm" onclick="downloadImportTemplate()">📥 Descargar plantilla</button></div><div id="fileInfo" class="mt hidden" style="background:#f0fdf4;padding:10px;border-radius:8px;font-size:13px"></div></div>
+    <div class="import-step active" id="step1"><div class="drop-zone" id="dropZone" onclick="document.getElementById('importFile').click()"><div class="ic"></div><div class="t">Arrastra tu archivo aquí o haz clic</div><div class="s">Formatos: .xlsx, .xls, .csv</div><input type="file" id="importFile" accept=".xlsx,.xls,.csv" style="display:none" /></div><div class="divider"></div><div class="row between"><div class="text-muted" style="font-size:13px">¿No tienes plantilla?</div><button class="btn btn-secondary btn-sm" onclick="downloadImportTemplate()">📥 Descargar plantilla</button></div><div id="fileInfo" class="mt hidden" style="background:#f0fdf4;padding:10px;border-radius:8px;font-size:13px"></div></div>
     <div class="import-step" id="step2"><h3 style="margin:0 0 8px">🔗 Mapeo de columnas</h3><div class="column-mapper" id="columnMapper"></div><div class="divider"></div><h3 style="margin:0 0 8px">👀 Vista previa</h3><div class="import-preview" id="importPreview"></div><div class="import-stats" id="importStats"></div></div>
     <div class="import-step" id="step3"><h3 style="margin:0 0 8px">⚙️ Opciones</h3><div class="form-group"><label>¿Qué hacer con duplicados?</label><select id="dupStrategy"><option value="skip" selected>Omitir (recomendado)</option><option value="overwrite">Sobrescribir</option><option value="create">Crear igualmente</option></select></div><div class="form-group"><label>Ciudad por defecto</label><input type="text" id="defaultCity" /></div><div class="divider"></div><div id="importSummary"></div></div>`;
   openModal("📥 Importar clientes",body,`<button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" style="width:auto" id="importNextBtn" onclick="importNextStep()">Siguiente →</button>`);
@@ -2663,8 +2505,7 @@ function handleImportFile(file){
       window._importData.raw=json;window._importData.headers=headers;window._importData.rows=json;
       window._importData.mapping=autoDetectColumns(headers);
       const info=document.getElementById("fileInfo");
-      info.classList.remove("hidden");
-      info.innerHTML=`✅ <b>${file.name}</b> · ${json.length} filas · ${headers.length} columnas`;
+      if(info){info.classList.remove("hidden");info.innerHTML=`✅ <b>${file.name}</b> · ${json.length} filas · ${headers.length} columnas`;}
       setTimeout(()=>importNextStep(),600);
     }catch(err){toast("Error: "+err.message)}
   };
@@ -2685,6 +2526,7 @@ function autoDetectColumns(headers){
 function renderStep2(){
   const d=window._importData;
   const mapper=document.getElementById("columnMapper");
+  if(!mapper) return;
   mapper.innerHTML=IMPORT_FIELDS.map(f=>{
     const opts=[`<option value="">— Sin asignar —</option>`];
     d.headers.forEach(h=>{opts.push(`<option value="${esc(h)}" ${d.mapping[f.key]===h?"selected":""}>${esc(h)}</option>`)});
@@ -2707,8 +2549,10 @@ function recomputeImportPreview(){
     if(dup) d.duplicates.push({row:idx+2,client,existingId:dup.id,existingName:dup.name+" "+(dup.surname||"")});
     else d.valid.push({row:idx+2,client});
   });
-  document.getElementById("importStats").innerHTML=`<div class="box ok"><div class="n">${d.valid.length}</div><div class="l">✅ Válidos</div></div><div class="box warn"><div class="n">${d.duplicates.length}</div><div class="l">⚠️ Duplicados</div></div><div class="box err"><div class="n">${d.errors.length}</div><div class="l"> Errores</div></div><div class="box info"><div class="n">${d.rows.length}</div><div class="l">📊 Total</div></div>`;
+  const stats=document.getElementById("importStats");
+  if(stats) stats.innerHTML=`<div class="box ok"><div class="n">${d.valid.length}</div><div class="l">✅ Válidos</div></div><div class="box warn"><div class="n">${d.duplicates.length}</div><div class="l">⚠️ Duplicados</div></div><div class="box err"><div class="n">${d.errors.length}</div><div class="l">❌ Errores</div></div><div class="box info"><div class="n">${d.rows.length}</div><div class="l"> Total</div></div>`;
   const preview=document.getElementById("importPreview");
+  if(!preview) return;
   const all=[...d.valid.slice(0,20).map(x=>({...x,status:"ok",label:"✅ Nuevo"})),...d.duplicates.slice(0,10).map(x=>({...x,status:"dup",label:"⚠️ Duplicado"})),...d.errors.slice(0,10).map(x=>({...x,status:"err",label:"❌ "+x.errors.join(", ")}))];
   preview.innerHTML=`<table><thead><tr><th>Fila</th><th>Estado</th><th>Nombre</th><th>Teléfono</th><th>Email</th></tr></thead><tbody>${all.map(x=>`<tr class="${x.status}"><td>${x.row}</td><td style="font-size:11px">${x.label}</td><td>${esc(x.client.name)} ${esc(x.client.surname||"")}</td><td>${esc(x.client.phone||"—")}</td><td>${esc(x.client.email||"—")}</td></tr>`).join("")}</tbody></table>`;
 }
@@ -2717,13 +2561,14 @@ function renderStep3(){
   const d=window._importData;const strategy=document.getElementById("dupStrategy")?.value||"skip";
   let toImport=d.valid.length;let dups=d.duplicates.length;
   if(strategy==="overwrite"||strategy==="create"){toImport+=d.duplicates.length;dups=0}
-  document.getElementById("importSummary").innerHTML=`<div class="import-stats"><div class="box ok"><div class="n">${toImport}</div><div class="l">Se importarán</div></div><div class="box warn"><div class="n">${dups}</div><div class="l">Duplicados</div></div><div class="box err"><div class="n">${d.errors.length}</div><div class="l">Con errores</div></div><div class="box info"><div class="n">${d.rows.length}</div><div class="l">Total</div></div></div>`;
+  const sum=document.getElementById("importSummary");
+  if(sum) sum.innerHTML=`<div class="import-stats"><div class="box ok"><div class="n">${toImport}</div><div class="l">Se importarán</div></div><div class="box warn"><div class="n">${dups}</div><div class="l">Duplicados</div></div><div class="box err"><div class="n">${d.errors.length}</div><div class="l">Con errores</div></div><div class="box info"><div class="n">${d.rows.length}</div><div class="l">Total</div></div></div>`;
 }
 function importNextStep(){
   const s1=document.getElementById("step1");const s2=document.getElementById("step2");const s3=document.getElementById("step3");
   const n1=document.getElementById("step1nav");const n2=document.getElementById("step2nav");const n3=document.getElementById("step3nav");
   const btn=document.getElementById("importNextBtn");
-  if(s1.classList.contains("active")){if(!window._importData.rows?.length){toast("️ Sube un archivo");return}s1.classList.remove("active");s2.classList.add("active");n1.classList.remove("active");n1.classList.add("done");n2.classList.add("active");btn.textContent="Siguiente →";renderStep2()}
+  if(s1.classList.contains("active")){if(!window._importData.rows?.length){toast("⚠️ Sube un archivo");return}s1.classList.remove("active");s2.classList.add("active");n1.classList.remove("active");n1.classList.add("done");n2.classList.add("active");btn.textContent="Siguiente →";renderStep2()}
   else if(s2.classList.contains("active")){if(!window._importData.mapping.name){toast("⚠️ Asigna columna 'Nombre'");return}s2.classList.remove("active");s3.classList.add("active");n2.classList.remove("active");n2.classList.add("done");n3.classList.add("active");btn.textContent="✅ Importar ahora";btn.onclick=executeImport;renderStep3()}
 }
 window.importNextStep=importNextStep;
@@ -2733,24 +2578,26 @@ function executeImport(){
   d.valid.forEach(item=>{const c=item.client;if(defaultCity&&!c.city) c.city=defaultCity;db.clients.push({id:uid(),userId:session.userId,name:c.name,surname:c.surname||"",phone:c.phone||"",email:c.email||"",address:c.address||"",city:c.city||"",notes:c.notes||"",lastContact:todayISO(),createdAt:todayISO()});created++});
   d.duplicates.forEach(item=>{const c=item.client;if(strategy==="skip") skippedDup++;else if(strategy==="overwrite"){const ex=db.clients.find(x=>x.id===item.existingId);if(ex){if(c.name) ex.name=c.name;if(c.phone) ex.phone=c.phone;if(c.email) ex.email=c.email;updated++}}else if(strategy==="create"){db.clients.push({id:uid(),userId:session.userId,name:c.name,surname:c.surname||"",phone:c.phone||"",email:c.email||"",address:c.address||"",city:c.city||"",notes:"Importado (posible duplicado)",lastContact:todayISO(),createdAt:todayISO()});created++}});
   DB.save(db);
-  let summary=`✅ <b>${created}</b> creados`;if(updated) summary+=` ·  <b>${updated}</b> actualizados`;if(skippedDup) summary+=` · ⚠️ <b>${skippedDup}</b> omitidos`;if(d.errors.length) summary+=` · ❌ <b>${d.errors.length}</b> errores`;
-  const body=`<div style="background:#f0fdf4;padding:20px;border-radius:12px;text-align:center;margin-bottom:12px"><div style="font-size:48px">🎉</div><div style="font-size:16px;font-weight:600;margin-top:8px">Importación completada</div><div style="margin-top:8px;font-size:14px">${summary}</div></div>`;
-  document.querySelector(".modal-body").innerHTML=body;
-  document.querySelector(".modal-foot").innerHTML=`<button class="btn btn-primary" style="width:auto" onclick="closeModal();navigate('clientes')">Ver clientes</button>`;
+  let summary=`✅ <b>${created}</b> creados`;if(updated) summary+=` · 🔄 <b>${updated}</b> actualizados`;if(skippedDup) summary+=` · ⚠️ <b>${skippedDup}</b> omitidos`;if(d.errors.length) summary+=` · ❌ <b>${d.errors.length}</b> errores`;
+  const body=`<div style="background:#f0fdf4;padding:20px;border-radius:12px;text-align:center;margin-bottom:12px"><div style="font-size:48px"></div><div style="font-size:16px;font-weight:600;margin-top:8px">Importación completada</div><div style="margin-top:8px;font-size:14px">${summary}</div></div>`;
+  const mb=document.querySelector(".modal-body");
+  const mf=document.querySelector(".modal-foot");
+  if(mb) mb.innerHTML=body;
+  if(mf) mf.innerHTML=`<button class="btn btn-primary" style="width:auto" onclick="closeModal();navigate('clientes')">Ver clientes</button>`;
 }
 window.executeImport=executeImport;
 function downloadImportTemplate(){
-  if(!window.XLSX){toast(" Cargando...");return}
+  if(!window.XLSX){toast("⏳ Cargando...");return}
   const example=[{Nombre:"Juan",Apellidos:"Pérez",Teléfono:"600123456",Email:"juan@email.com",Dirección:"Calle Mayor 1",Ciudad:"Madrid",Notas:"Cliente referido"},{Nombre:"María",Apellidos:"López",Teléfono:"611222333",Email:"maria@email.com",Dirección:"Av. Constitución 5",Ciudad:"Valencia",Notas:""}];
   const ws=window.XLSX.utils.json_to_sheet(example);const wb=window.XLSX.utils.book_new();window.XLSX.utils.book_append_sheet(wb,ws,"Clientes");window.XLSX.writeFile(wb,"plantilla-clientes.xlsx");toast("Plantilla descargada");
 }
 window.downloadImportTemplate=downloadImportTemplate;
-
 function openImportCompaniesWizard(){toast("📥 Importación de empresas: usa la misma interfaz que clientes (próximamente)")}
 window.openImportCompaniesWizard=openImportCompaniesWizard;
 
 function setupSearch(){
   const input=document.getElementById("globalSearch");const results=document.getElementById("searchResults");
+  if(!input||!results) return;
   input.addEventListener("input",()=>{
     const q=input.value.trim().toLowerCase();
     if(!q){results.classList.add("hidden");return}
@@ -2785,13 +2632,12 @@ function showAlerts(){
   openModal("🔔 Alertas",`<div class="list">${html}</div>`,`<button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`);
 }
 window.showAlerts=showAlerts;
-
 function emptyHTML(msg){return `<div class="empty"><div class="ic">📭</div>${esc(msg)}</div>`}
 
+// CORRECCIÓN #10: boot con lógica de demo corregida
 function boot(){
   if(session) showApp();
   else document.getElementById("loginScreen").style.display="flex";
-  
   document.getElementById("loginForm").addEventListener("submit",(e)=>{
     e.preventDefault();
     const u=document.getElementById("loginUser").value.trim();
@@ -2801,26 +2647,24 @@ function boot(){
     if(!r.ok){err.textContent=r.error;err.classList.remove("hidden");return}
     err.classList.add("hidden");showApp();
   });
-  
   document.getElementById("btnDemoAccess").addEventListener("click",()=>{
     if(!db.settings.demo) enableDemo(db);
     const demo=db.users.find(u=>u.username==="demo");
     if(!demo){toast("Error: usuario demo no encontrado");return}
     setSession({userId:demo.id,role:demo.role});session=getSession();showApp();
   });
-  
   document.getElementById("btnEmergencyReset").addEventListener("click",()=>{
     if(!confirm("Esto borrará TODO y recreará admin/demo. ¿Continuar?")) return;
     DB.clear();db=initDB();enableDemo(db);toast("Reset. Usa admin/admin123 o demo/demo123");setTimeout(()=>location.reload(),800);
   });
-  
   document.getElementById("btnAlertsTop").addEventListener("click",showAlerts);
   document.getElementById("btnMicTop").addEventListener("click",()=>navigate("voz"));
   setupSearch();
-  
-  if(db.users.length<=1&&!db.settings.demo) enableDemo(db);
+  // Solo activar demo si no hay usuarios reales y la demo no está activa
+  if(db.users.filter(u=>!u.isDemo).length===0 && !db.settings.demo) enableDemo(db);
 }
 
+// CORRECCIÓN #3: showApp comprueba user.status === "activo"
 function showApp(){
   if(!session || !session.userId){
     console.error("No hay sesión válida");
@@ -2829,19 +2673,16 @@ function showApp(){
     document.getElementById("app").classList.remove("active");
     return;
   }
-  
   const user = db.users.find(x=>x.id===session.userId);
-  if(!user){
-    console.error("Usuario de sesión no encontrado en DB:", session.userId);
-    toast("⚠️ Error: usuario no encontrado. Inicia sesión de nuevo.");
+  if(!user || user.status !== "activo"){
+    console.error("Usuario de sesión no encontrado o desactivado:", session.userId);
+    toast("️ Usuario no encontrado o desactivado. Inicia sesión de nuevo.");
     clearSession();
     document.getElementById("loginScreen").style.display="flex";
     document.getElementById("app").classList.remove("active");
     return;
   }
-  
   console.log("Mostrando app para usuario:", user.username, "Role:", user.role);
-  
   document.getElementById("loginScreen").style.display="none";
   document.getElementById("app").classList.add("active");
   renderSidebar();
